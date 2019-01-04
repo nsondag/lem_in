@@ -19,7 +19,7 @@ HEAD = includes/
 LIB = libft/
 FILE = lem-in.h
 H = $(addprefix $(HEAD), $(FILE))
-FILES = parser.o
+FILES = main.o parser.o parser2.o exit.o
 OBJ = $(addprefix $(SRCS), $(FILES))
 SANITIZE = -fsanitize=address
 
@@ -32,11 +32,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIB)
-	@$(CC) $(CFLAGS) -o $@ $^ -L$(LIB) -lft
+	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB) -lft
 	@echo "$(GREEN)$(NAME) compiled$(NC)"
 
 %.o: %.c $(H)
-	@$(CC) $(CFLAGS) -c -o $@ $< -I $(HEAD) -I $(LIB)$(HEAD)
+	$(CC) $(CFLAGS) -c -o $@ $< -I $(HEAD) -I $(LIB)$(HEAD)
 
 clean:
 	@make -C $(LIB) clean

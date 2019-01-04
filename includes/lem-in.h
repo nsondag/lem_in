@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 # define ENDPROG 5
 # define ENDFUNCTION 4
@@ -49,7 +50,8 @@ typedef struct	s_var
 
 int		read_comment(char *line);
 int		read_room(t_a *all);
-void	exit_func(t_a *all, int exit_code);
+int		parser(t_a *ant);
+void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
 
 #endif

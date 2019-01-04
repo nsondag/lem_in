@@ -45,7 +45,7 @@ int		is_digit_str(char *str)
 
 int		end_add_entry(char ***split, int to_return)
 {
-	ft_free_tab(split);
+	ft_free_tab((void***)split);
 	return (to_return);
 }
 
@@ -67,26 +67,26 @@ int		add_entry(t_var *for_this, t_a *all)
 
 	if (!(split = ft_strsplit(all->buf, ' ')))
 		return (MERROR);
-	if (ft_tablen(split) != 3)
-		return (ft_indexof(*line, '-') != -1) ?
+	if (ft_tablen((void**)split) != 3)
+		return (ft_indexof(all->buf, '-') != -1) ?
 end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 	if (!is_digit_str(split[1]) || !is_digit_str(split[2]))
 		return (end_add_entry(&split, INVALID));
-	if (for_this->start && for_this->end)
+	if (for_this->is_start && for_this->is_end)
 		return (end_add_entry(&split, ENDPROG));
-	else if (for_this->start)
-		all->adj[0]->name = ft_strdup(*split);
-	else if (for_this->end)
-		all->adj[1]->name = ft_strdup(*split);
+	else if (for_this->is_start)
+		all->adj[0].name = ft_strdup(*split);
+	else if (for_this->is_end)
+		all->adj[1].name = ft_strdup(*split);
 	else
 	{
 		if (!(all->tab_size % 10) && !(realloc_adj(all->tab_size, all)))
 			return (end_add_entry(&split, MERROR));
-		all->adj[index]->name = ft_strdup(*split);
+		all->adj[all->tab_size].name = ft_strdup(*split);
 		all->tab_size++;
 	}
-	for_this->start = 0;
-	for_this->end = 0;
+	for_this->is_start = 0;
+	for_this->is_end = 0;
 	return (end_add_entry(&split, VALID));
 }
 
@@ -94,7 +94,7 @@ int		read_room(t_a *all)
 {
 	t_var	for_this;
 
-	if (!(all->ajd = ft_memalloc(10 * sizeof(t_adj))))
+	if (!(all->adj = ft_memalloc(10 * sizeof(t_adj))))
 		return (MERROR);
 	bzero(&for_this, sizeof(for_this));
 	all->tab_size = 2;
@@ -105,9 +105,9 @@ int		read_room(t_a *all)
 	{
 		if (read_comment(all->buf) == VALID)
 		{
-			if ((for_this.ret = add_entry(&for_this, all)) == INVALID || for_this.ret == ENDFUNCTION)
+			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)
 				break;
-			else if (for_this.ret == ENDPROG || for_this.ret == MERROR)
+			else if (for_this.ret == ENDPROG || for_this.ret == MERROR || for_this.ret == INVALID)
 				exit_func(for_this.ret, all);
 		}
 		else if (read_comment(all->buf) == START)
@@ -118,5 +118,5 @@ int		read_room(t_a *all)
 			exit_func(INVALID, all);
 		ft_strdel(&(all->buf));
 	}
-	return (ret);
+	return (for_this.ret);
 }

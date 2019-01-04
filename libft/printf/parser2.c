@@ -46,7 +46,7 @@ int		end(char *f, char **fm)
 		f[0] = 0;
 	if (f[3])
 		f[2] = 0;
-	if (f[9] < 1)
-		f[9] = 1;
+//	if (f[9] < 1)
+//		f[9] = 1;
 	return (0);
 }
