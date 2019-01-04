@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   lem-in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 14:15:18 by hvromman         ###   ########.fr       */
+/*   Updated: 2019/01/04 16:10:57 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,23 @@
 # define LEM_IN_H
 
 # include "libft.h"
+# include <stdlib.h>
 
-#define ENDPROG 5
-#define ENDFUNCTION 4
-#define START 3
-#define END 2
-#define COMMENT 1
-#define VALID 0
-#define INVALID -1
-#define MERROR -2
+# define ENDPROG 5
+# define ENDFUNCTION 4
+# define START 3
+# define END 2
+# define COMMENT 1
+# define VALID 0
+# define INVALID -1
+# define MERROR -2
+
+typedef	struct	s_adj
+{
+	int		index;
+	char	*name;
+	int		*tab;
+}				t_adj;
 
 typedef struct	s_a
 {

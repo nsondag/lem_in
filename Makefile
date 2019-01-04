@@ -6,7 +6,7 @@
 #    By: hvromman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/19 11:36:12 by hvromman          #+#    #+#              #
-#    Updated: 2018/12/21 16:59:21 by nallani          ###   ########.fr        #
+#    Updated: 2019/01/04 15:59:40 by nsondag          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ HEAD = includes/
 LIB = libft/
 FILE = lem-in.h
 H = $(addprefix $(HEAD), $(FILE))
-FILES = 
+FILES = parser.o
 OBJ = $(addprefix $(SRCS), $(FILES))
 SANITIZE = -fsanitize=address
 
