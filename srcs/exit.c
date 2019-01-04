@@ -20,13 +20,13 @@ void	free_all(t_a *all)
 	{
 		count = -1;
 		if (all->adj)
-			while (all->adj[++count])
+			while (&(all->adj[++count]))
 			{
-				free(all->adj[count]->name);
-				free(all->adj[count]);
+				free(all->adj[count].name);
+				free(&(all->adj[count]));
 			}
 		free(all->adj);
-		free(buf);
+		free(all->buf);
 		free(all);
 	}
 }
@@ -37,6 +37,6 @@ void	exit_func(int exit_code, t_a *all)
 		write(1, "ERROR\n", 6);
 	else if (exit_code == MERROR)
 		write(1, "malloc error\n", 13);
-	free_all(all)
+	free_all(all);
 	exit(exit_code >= 0 ? 0 : exit_code);
 }

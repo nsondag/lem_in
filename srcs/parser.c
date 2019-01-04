@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 18:13:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 20:01:39 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,15 @@ int	get_tube(t_a *ant)
 	return (0);
 }
 
-int	parser(t_a *ant)
+int	parse(t_a *ant)
 {
+	t_a ant;
+
+	parser(&ant);
 	if (get_tube(ant) < 0)
 		return (INVALID);
 	while (get_next_line(0, &ant->buf) > 0)
 		if (get_tube(ant) < 0)
 			return (INVALID);
-	return (0);
-}
-
-int main()
-{
-	t_a ant;
-
-	parser(&ant);
 	return (0);
 }
