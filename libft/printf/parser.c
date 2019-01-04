@@ -90,7 +90,5 @@ int		parser(va_list ap, char **fm)
 		(*fm)++;
 	}
 	f[9] = w[2];
-	if (end(f, fm))
-		return (0);
-	return (go_to_right_func(ap, f, w));
+	return (end(f, fm) ? 0 : go_to_right_func(ap, f, w));
 }
