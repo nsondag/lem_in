@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 16:10:57 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 18:12:59 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		read_comment(char *line);
 int		read_room(t_a *all);
 void	exit_func(t_a *all, int exit_code);
 void	free_all(t_a *all);
+int		parser(t_a *ant);
 
 #endif
