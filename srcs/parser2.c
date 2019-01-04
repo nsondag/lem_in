@@ -36,11 +36,17 @@ int		read_comment(char *line)
 
 int		is_digit_str(char *str)
 {
-	if (*str == '-'|| *str == '+')
+	int		ok;
+
+	ok = 0;
+	if (*str == '-' || *str == '+')
 		str++;
 	while (ft_isdigit(*str))
+	{
+		ok = 1;
 		str++;
-	return (!(*str));
+	}
+	return (ok && !(*str));
 }
 
 int		end_add_entry(char ***split, int to_return)
@@ -73,14 +79,14 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 	if (!is_digit_str(split[1]) || !is_digit_str(split[2]))
 		return (end_add_entry(&split, INVALID));
 	if (for_this->is_start && for_this->is_end)
-		return (end_add_entry(&split, ENDPROG));
+		return (end_add_entry(&split, INVALID));
 	else if (for_this->is_start)
 		all->adj[0].name = ft_strdup(*split);
 	else if (for_this->is_end)
 		all->adj[1].name = ft_strdup(*split);
 	else
 	{
-		if (!(all->tab_size % 10) && !(realloc_adj(all->tab_size, all)))
+		if (!(all->tab_size % 10) && realloc_adj(all->tab_size, all))
 			return (end_add_entry(&split, MERROR));
 		all->adj[all->tab_size].name = ft_strdup(*split);
 		all->tab_size++;
@@ -106,8 +112,8 @@ int		read_room(t_a *all)
 		if (read_comment(all->buf) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)
-				break;
-			else if (for_this.ret == ENDPROG || for_this.ret == MERROR || for_this.ret == INVALID)
+				break ;
+			else if (for_this.ret == MERROR || for_this.ret == INVALID)
 				exit_func(for_this.ret, all);
 		}
 		else if (read_comment(all->buf) == START)
