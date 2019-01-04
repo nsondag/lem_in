@@ -15,12 +15,33 @@
 
 # include "libft.h"
 
+#define ENDPROG 5
+#define ENDFUNCTION 4
+#define START 3
+#define END 2
+#define COMMENT 1
+#define VALID 0
+#define INVALID -1
+#define MERROR -2
+
 typedef struct	s_a
 {
 	int		nb_ant;
 	int		tab_size;
-	char	*start;
-	char	*end;
+	t_adj	*adj;
+	char	*buf;
 }				t_a;
+
+typedef struct	s_var
+{
+	int		is_start;
+	int		is_end;
+	int		ret;
+}				t_var;
+
+int		read_comment(char *line);
+int		read_room(t_a *all);
+void	exit_func(t_a *all, int exit_code);
+void	free_all(t_a *all);
 
 #endif
