@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 16:10:57 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 18:12:59 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct	s_var
 
 int		read_comment(char *line);
 int		read_room(t_a *all);
-int		parser(t_a *ant);
 void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
+int		parse(t_a *ant);
 
 #endif

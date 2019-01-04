@@ -19,6 +19,13 @@ int main()
 	bzero(&ant, sizeof(ant));
 	read_room(&ant);
 	ft_printf("%d\n", ant.nb_ant);
-	parser(&ant);
+	ft_printf("%s\n", ant.adj[0].name);
+	ft_printf("%s\n", ant.adj[1].name);
+	ft_printf("%s\n", ant.adj[2].name);
+	ft_printf("%ld\n", ant.adj[3]);
+	ft_printf("%d\n", ant.tab_size);
+	ft_printf("%s\n", ant.buf);
+	parse(&ant);
+	ft_printf("%d\n", ant.adj[0].tab[0]);
 	return (0);
 }
