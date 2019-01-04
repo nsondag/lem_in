@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 20:01:39 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 20:15:01 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	get_tube(t_a *ant)
 	while (ft_strcmp(ant->adj[i].name, room1) > 0 && i < ant->tab_size)
 		i++;
 	while (ft_strcmp(ant->adj[j].name, room2) && j < ant->tab_size)
+		i++;
+	while (ft_strcmp(ant->adj[j].name, room2))
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
 	{
