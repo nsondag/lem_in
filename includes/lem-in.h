@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 18:12:59 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/04 20:02:15 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 # define ENDPROG 5
 # define ENDFUNCTION 4
@@ -49,8 +50,8 @@ typedef struct	s_var
 
 int		read_comment(char *line);
 int		read_room(t_a *all);
-void	exit_func(t_a *all, int exit_code);
+void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
-int		parser(t_a *ant);
+int		parse(t_a *ant);
 
 #endif

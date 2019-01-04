@@ -1,6 +1,6 @@
 lem-in
 *.o
 *.a
-*._
+._*
 *.swp
 a.out
