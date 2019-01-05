@@ -6,12 +6,11 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/05 14:38:37 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 14:41:11 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-//#include <stdio.h>
 
 int	get_tube(t_a *ant)
 {
@@ -52,9 +51,6 @@ int	get_tube(t_a *ant)
 
 int	parse(t_a *ant)
 {
-	t_a ant;
-
-	parser(&ant);
 	if (get_tube(ant) < 0)
 		return (INVALID);
 	while (get_next_line(0, &ant->buf) > 0)
