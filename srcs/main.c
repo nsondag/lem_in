@@ -19,13 +19,11 @@ int main()
 	bzero(&ant, sizeof(ant));
 	read_room(&ant);
 	ft_printf("%d\n", ant.nb_ant);
-	ft_printf("%s\n", ant.adj[0].name);
-	ft_printf("%s\n", ant.adj[1].name);
-	ft_printf("%s\n", ant.adj[2].name);
-	ft_printf("%ld\n", ant.adj[3]);
+	for (int count = 0; ant.adj[count].name; count++)
+		ft_printf("%s\n", ant.adj[count].name);
 	ft_printf("%d\n", ant.tab_size);
 	ft_printf("%s\n", ant.buf);
-	parse(&ant);
-	ft_printf("%d\n", ant.adj[0].tab[0]);
+	if (!(ant.adj) || !(ant.adj + 1) || !(ant.buf) || parse(&ant))
+		exit_func(INVALID, &ant);
 	return (0);
 }

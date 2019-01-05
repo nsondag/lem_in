@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 20:15:01 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/05 14:38:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,21 @@ int	get_tube(t_a *ant)
 		room1 = ft_strsub(ant->buf, 0, dash);
 		room2 = ft_strsub(ant->buf, dash + 1, end - dash);	
 	}
-	while (ft_strcmp(ant->adj[i].name, room1) > 0 && i < ant->tab_size)
+	else
+		return (ant->buf[0] == '#' ? VALID : INVALID);
+	while (i < ant->tab_size && ft_strcmp(ant->adj[i].name, room1))
 		i++;
-	while (ft_strcmp(ant->adj[j].name, room2) && j < ant->tab_size)
-		i++;
-	while (ft_strcmp(ant->adj[j].name, room2))
+	while (j < ant->tab_size && ft_strcmp(ant->adj[j].name, room2))
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
-	{
-		free(ant->buf);
 		return (INVALID);
-	}
 	len_tab = ft_tablen((void**)ant->adj[i].tab);
 	ant->adj[i].tab = (int*)malloc(sizeof(int) * len_tab + 1);
 	ant->adj[i].tab[len_tab] = j;
 	len_tab = ft_tablen((void**)ant->adj[j].tab);
 	ant->adj[j].tab = (int*)malloc(sizeof(int) * len_tab + 1);
 	ant->adj[j].tab[len_tab] = i;
-	free(ant->buf);
+	ft_strdel(&(ant->buf));
 	return (0);
 }
 

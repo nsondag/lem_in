@@ -20,14 +20,12 @@ void	free_all(t_a *all)
 	{
 		count = -1;
 		if (all->adj)
-			while (&(all->adj[++count]))
+			while (++count < all->tab_size)
 			{
 				free(all->adj[count].name);
-				free(&(all->adj[count]));
 			}
 		free(all->adj);
 		free(all->buf);
-		free(all);
 	}
 }
 
