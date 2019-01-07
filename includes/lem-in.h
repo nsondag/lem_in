@@ -28,9 +28,11 @@
 
 typedef	struct	s_adj
 {
-	int		index;
+	int		dist;
+	int		len_tab;
 	char	*name;
 	int		*tab;
+	char	is_passed;
 }				t_adj;
 
 typedef struct	s_a
@@ -39,6 +41,7 @@ typedef struct	s_a
 	int		tab_size;
 	t_adj	*adj;
 	char	*buf;
+	int		start_room;
 }				t_a;
 
 typedef struct	s_var
@@ -53,5 +56,6 @@ int		read_room(t_a *all);
 void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
 int		parse(t_a *ant);
+int		smallest(t_a *ant);
 
 #endif
