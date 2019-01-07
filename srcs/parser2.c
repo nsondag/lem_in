@@ -104,11 +104,13 @@ int		read_room(t_a *all)
 		return (MERROR);
 	bzero(&for_this, sizeof(for_this));
 	all->tab_size = 2;
-	if (get_next_line(0, &(all->buf)))
+	if (get_next_line(0, &(all->buf)) > 0)
 		all->nb_ant = ft_atoi(all->buf);
+	ft_printf("%s\n", all->buf); // pas retirer
 	ft_strdel(&(all->buf));
-	while (get_next_line(0, &(all->buf)))
+	while (get_next_line(0, &(all->buf)) > 0)
 	{
+		ft_printf("%s\n", all->buf); // pas retirer
 		if (read_comment(all->buf) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)

@@ -51,7 +51,7 @@ int		get_tube(t_a *ant)
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
 		return (INVALID);
-	ft_printf("i %d | j %d\n", i, j);
+	ft_printf("-- i %d | j %d\n", i, j);
 	realloc_tab(&(ant->adj[i]));
 	ant->adj[i].tab[ant->adj[i].len_tab - 1] = j;
 	realloc_tab(&(ant->adj[j]));
@@ -65,10 +65,13 @@ int	parse(t_a *ant)
 	if (get_tube(ant) < 0)
 		return (INVALID);
 	while (get_next_line(0, &ant->buf) > 0)
+	{
+		ft_printf("%s\n", ant->buf); // pas retirer
 		if (get_tube(ant) < 0)
 			return (INVALID);
+	}
 	for (int m = 0; m < ant->tab_size; m++)
 		for (int l = 0; l < ant->adj[m].len_tab; l++)
-			ft_printf("%d: %d: %d\n", m, l, ant->adj[m].tab[l]);
+			ft_printf("-- %d: %d: %d\n", m, l, ant->adj[m].tab[l]);
 	return (0);
 }
