@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 20:14:02 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/08 14:27:31 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
 int		parse(t_a *ant);
 int		smallest(t_a *ant);
+int		dead_ends(t_a *ant);
 
 #endif
