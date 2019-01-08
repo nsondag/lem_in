@@ -6,34 +6,57 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/05 19:26:59 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/08 12:46:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
 
-int	smallest(t_a *ant)
+int		smallest(t_a *ant)
 {
-	int j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
+	int		dist;
+	int		room_discovered;
 
-	ant->adj[0].dist = 0;
-	while (ant->adj)
+	i = 0;
+	while (i < ant->tab_size)
 	{
-		ant->adj->dist = -1;
-		ant->adj++;
+		ant->adj[i].dist = -1;
+		i++;
 	}
-	while (ant->adj)
+	ant->adj[ant->start_room].dist = 0;
+	dist = -1;
+	room_discovered = 1;
+	while (room_discovered)
 	{
-		j = 0;
-		while (ant->adj->tab[j])
-		{	
-			k = ant->adj->tab[j];
-			if (ant->adj[k].dist < 0)
-				ant->adj[k].dist = ant->adj->dist + 1;
-			j++;
+		dist++;
+		i = 0;
+		room_discovered = 0;
+		while (i < ant->tab_size)
+		{
+			if (ant->adj[i].dist == dist && i != !(ant->start_room))
+			{
+				j = 0;
+				while (j < ant->adj[i].len_tab)
+				{
+					k = ant->adj[i].tab[j];
+					//ant->adj[k].is_passed = 1;
+					if (ant->adj[k].dist < 0)
+					{
+						ant->adj[k].dist = ant->adj[i].dist + 1;
+						room_discovered = 1;
+					}
+					j++;
+				}
+			}
+			i++;
 		}
-		ant->adj++;
 	}
-	return (0);
+	if (ant->adj[!(ant->start_room)].dist == -1)
+		return (INVALID);
+	for (int m = 0; m < ant->tab_size; m++)
+		ft_printf("-- %d: %d\n", m, ant->adj[m].dist);
+	return (VALID);
 }

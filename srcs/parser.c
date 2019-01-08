@@ -6,13 +6,26 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/05 14:41:11 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/08 12:47:08 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
+# include <stdio.h>
 
-int	get_tube(t_a *ant)
+int		realloc_tab(t_adj *adj)
+{
+	int		*tmp;
+
+	tmp = adj->tab;
+	adj->len_tab++;
+	adj->tab = (int*)malloc(sizeof(int) * (adj->len_tab));
+	memcpy(adj->tab, tmp, sizeof(int) * (adj->len_tab - 1));
+	free(tmp);
+	return (0);
+}
+
+int		get_tube(t_a *ant)
 {
 	char	*room1;
 	char	*room2;
@@ -20,7 +33,6 @@ int	get_tube(t_a *ant)
 	int		end;
 	int		i;
 	int		j;
-	int		len_tab;
 
 	i = 0;
 	j = 0;
@@ -39,12 +51,11 @@ int	get_tube(t_a *ant)
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
 		return (INVALID);
-	len_tab = ft_tablen((void**)ant->adj[i].tab);
-	ant->adj[i].tab = (int*)malloc(sizeof(int) * len_tab + 1);
-	ant->adj[i].tab[len_tab] = j;
-	len_tab = ft_tablen((void**)ant->adj[j].tab);
-	ant->adj[j].tab = (int*)malloc(sizeof(int) * len_tab + 1);
-	ant->adj[j].tab[len_tab] = i;
+	ft_printf("-- i %d | j %d\n", i, j);
+	realloc_tab(&(ant->adj[i]));
+	ant->adj[i].tab[ant->adj[i].len_tab - 1] = j;
+	realloc_tab(&(ant->adj[j]));
+	ant->adj[j].tab[ant->adj[j].len_tab - 1] = i;
 	ft_strdel(&(ant->buf));
 	return (0);
 }
@@ -54,7 +65,13 @@ int	parse(t_a *ant)
 	if (get_tube(ant) < 0)
 		return (INVALID);
 	while (get_next_line(0, &ant->buf) > 0)
+	{
+		ft_printf("%s\n", ant->buf); // pas retirer
 		if (get_tube(ant) < 0)
 			return (INVALID);
+	}
+	for (int m = 0; m < ant->tab_size; m++)
+		for (int l = 0; l < ant->adj[m].len_tab; l++)
+			ft_printf("-- %d: %d: %d\n", m, l, ant->adj[m].tab[l]);
 	return (0);
 }
