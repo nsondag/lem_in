@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/08 14:58:32 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/10 14:32:34 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ int		main()
 	ft_printf("-- tab_size %d\n", ant.tab_size);
 	if (!(ant.adj) || !(ant.adj + 1) || !(ant.buf) || parse(&ant))
 		exit_func(INVALID, &ant);
-	dead_ends(&ant);
-	ft_printf("-- tab_size %d\n", ant.tab_size);
-	//--------------------------------------------------------------
-	for (int m = 0; m < ant.tab_size; m++)
-		for (int l = 0; l < ant.adj[m].len_tab; l++)
-			ft_printf("-- %d: %d: %d\n", m, l, ant.adj[m].tab[l]);
-	//--------------------------------------------------------------
 	ant.start_room = ant.adj[0].len_tab < ant.adj[1].len_tab ? 0 : 1;
+	ant.start_room = ant.adj[0].len_tab > ant.adj[1].len_tab ? 1 : 0;
+	search_for_deadend(ant.adj, ant.tab_size);
+	search_for_mult_path(&ant, 2);
 	if (smallest(&ant))
 		exit_func(INVALID, &ant);
+	int m = 0;
+	for (int l = 0; l < ant.tab_size; l++)
+		if (ant.adj[l].dist == -1)
+			m++;
+	ft_printf("nb room(s) not connected : %d / %d\n", m, ant.tab_size);
 	return (0);
 }

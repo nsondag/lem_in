@@ -74,7 +74,7 @@ int		go_to_right_func(va_list ap, char *f, int w[2])
 	int		length;
 	char	ret;
 
-	length = ft_strlen(f + 6);
+	length = ft_strlen(f + 6) > 2 ? 3 : ft_strlen(f + 6);
 	if ((ret = ft_indexof(CONVERTER, f[5 + length])) == -1)
 		return (not_correct_flag(f, w));
 	else if (ret == 0 || ret == 1)

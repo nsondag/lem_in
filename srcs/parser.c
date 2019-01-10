@@ -70,8 +70,13 @@ int	parse(t_a *ant)
 		if (get_tube(ant) < 0)
 			return (INVALID);
 	}
+	ft_printf("\n");
 	for (int m = 0; m < ant->tab_size; m++)
+	{
+		ft_printf("-- len_tab %d : %d --\n", m, ant->adj[m].len_tab);
 		for (int l = 0; l < ant->adj[m].len_tab; l++)
 			ft_printf("-- %d: %d: %d\n", m, l, ant->adj[m].tab[l]);
+		ft_printf("\n");
+	}
 	return (0);
 }
