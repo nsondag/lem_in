@@ -49,25 +49,18 @@ int		supp_2comp_room(t_adj *adj, int index)
 
 int		supp_1comp_room(t_adj *adj, int index)
 {
-	int		to_return;
-
 	ft_printf("-- room deleted with 1 companion : %d\n", index);
-	to_return = adj[index].tab[0];
 	supp_room_from_other(index, &(adj[adj[index].tab[0]]));
 	adj[index].len_tab = 0;
-	return (to_return);
+	return (adj[index].tab[0]);
 }
 
 int		supp_chained(t_adj *adj, int index)
 {
-	int		next;
-
 	if (adj[index].len_tab == 2)
-		next = supp_2comp_room(adj, index);
-	else
-		next = index;
-	while (next > 1 && adj[next].len_tab == 1)
-		next = supp_1comp_room(adj, next);
+		index = supp_2comp_room(adj, index);
+	while (index > 1 && adj[index].len_tab == 1)
+		index = supp_1comp_room(adj, index);
 	return (0);
 }
 
@@ -94,10 +87,7 @@ int		search_for_deadend(t_adj *adj, int tab_size)
 	while (i < tab_size)
 	{
 		if (adj[i].len_tab == 1)
-		{
 			supp_chained(adj, i);
-			i = 1;
-		}
 		i++;
 	}
 	return (0);

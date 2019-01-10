@@ -15,16 +15,18 @@
 int		main()
 {
 	t_a		ant;
+	int		ret;
 
-	bzero(&ant, sizeof(ant));
+	ft_bzero(&ant, sizeof(ant));
 	read_room(&ant);
 	ft_printf("-- nb_ant %d\n", ant.nb_ant);
 	for (int count = 0; ant.adj[count].name; count++)
 		ft_printf("-- %s\n", ant.adj[count].name);
 	ft_printf("-- tab_size %d\n", ant.tab_size);
-	if (!(ant.adj) || !(ant.adj + 1) || !(ant.buf) || parse(&ant))
+	if (!(ant.adj) || !(ant.adj + 1) || !(ant.buf))
 		exit_func(INVALID, &ant);
-	ant.start_room = ant.adj[0].len_tab < ant.adj[1].len_tab ? 0 : 1;
+	if ((ret = parse(&ant)))
+		exit_func(ret, &ant);
 	ant.start_room = ant.adj[0].len_tab > ant.adj[1].len_tab ? 1 : 0;
 	search_for_deadend(ant.adj, ant.tab_size);
 	search_for_mult_path(&ant, 2);

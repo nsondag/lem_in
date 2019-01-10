@@ -60,7 +60,7 @@ int		realloc_adj(int index, t_a *all)
 	t_adj	*tmp;
 
 	tmp = all->adj;
-	if (!(all->adj = ft_memalloc((10 + index) * sizeof(t_adj))))
+	if (!(all->adj = ft_memalloc((REALLOC_SIZE + index) * sizeof(t_adj))))
 		return (MERROR);
 	ft_memcpy(all->adj, tmp, index * sizeof(t_adj));
 	free(tmp);
@@ -86,7 +86,7 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 		all->adj[1].name = ft_strdup(*split);
 	else
 	{
-		if (!(all->tab_size % 10) && realloc_adj(all->tab_size, all))
+		if (!(all->tab_size % REALLOC_SIZE) && realloc_adj(all->tab_size, all))
 			return (end_add_entry(&split, MERROR));
 		all->adj[all->tab_size].name = ft_strdup(*split);
 		all->tab_size++;
@@ -100,7 +100,7 @@ int		read_room(t_a *all)
 {
 	t_var	for_this;
 
-	if (!(all->adj = ft_memalloc(10 * sizeof(t_adj))))
+	if (!(all->adj = ft_memalloc(REALLOC_SIZE * sizeof(t_adj))))
 		return (MERROR);
 	bzero(&for_this, sizeof(for_this));
 	all->tab_size = 2;

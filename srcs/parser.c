@@ -19,7 +19,11 @@ int		realloc_tab(t_adj *adj)
 
 	tmp = adj->tab;
 	adj->len_tab++;
-	adj->tab = (int*)malloc(sizeof(int) * (adj->len_tab));
+	if (!(adj->tab = (int*)malloc(sizeof(int) * (adj->len_tab))))
+	{
+		free(tmp);
+		return (MERROR);
+	}
 	memcpy(adj->tab, tmp, sizeof(int) * (adj->len_tab - 1));
 	free(tmp);
 	return (0);
@@ -35,8 +39,6 @@ int		get_tube(t_a *ant)
 	int		j;
 	int		k;
 
-	i = 0;
-	j = 0;
 	dash = ft_indexof(ant->buf, '-');
 	end = ft_indexof(ant->buf, '\0');
 	if (ant->buf[0] != '#' && dash != -1)
@@ -46,38 +48,42 @@ int		get_tube(t_a *ant)
 	}
 	else
 		return (ant->buf[0] == '#' ? VALID : INVALID);
+	i = 0;
 	while (i < ant->tab_size && ft_strcmp(ant->adj[i].name, room1))
 		i++;
+	j = 0;
 	while (j < ant->tab_size && ft_strcmp(ant->adj[j].name, room2))
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
 		return (INVALID);
 	ft_printf("-- i %d | j %d\n", i, j);
-	k = -1;
 	if (i == j)
 		return (0);
+	k = -1;
 	while (++k < ant->adj[i].len_tab)
-	{
 		if (j == ant->adj[i].tab[k])
 			return (0);
-	}
-	realloc_tab(&(ant->adj[i]));
+	if (realloc_tab(&(ant->adj[i])))
+		return (MERROR);
 	ant->adj[i].tab[ant->adj[i].len_tab - 1] = j;
-	realloc_tab(&(ant->adj[j]));
+	if (realloc_tab(&(ant->adj[j])))
+		return (MERROR);
 	ant->adj[j].tab[ant->adj[j].len_tab - 1] = i;
-	ft_strdel(&(ant->buf));
 	return (0);
 }
 
-int	parse(t_a *ant)
+int		parse(t_a *ant)
 {
+	int		ret;
+
 	if (get_tube(ant) < 0)
 		return (INVALID);
-	while (get_next_line(0, &ant->buf) > 0)
+	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
 		ft_printf("%s\n", ant->buf); // pas retirer
-		if (get_tube(ant) < 0)
-			return (INVALID);
+		if ((ret = get_tube(ant)) < 0)
+			return (ret);
+		ft_strdel(&(ant->buf));
 	}
 	ft_printf("\n");
 	for (int m = 0; m < ant->tab_size; m++)
@@ -87,5 +93,5 @@ int	parse(t_a *ant)
 			ft_printf("-- %d: %d: %d\n", m, l, ant->adj[m].tab[l]);
 		ft_printf("\n");
 	}
-	return (0);
+	return (ret == -1 ? MERROR : VALID);
 }
