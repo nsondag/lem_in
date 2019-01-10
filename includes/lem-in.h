@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define NONE_LEFT 6
 # define ENDPROG 5
 # define ENDFUNCTION 4
 # define START 3
@@ -57,5 +58,11 @@ void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
 int		parse(t_a *ant);
 int		smallest(t_a *ant);
+
+int		supp_room_from_other(int index_to_supp, t_adj *other);
+int		free_one_room(t_a *all, int index);
+int		search_for_mult_path(t_a *all, int start);
+int		search_for_deadend(t_adj *adj, int tab_size);
+
 
 #endif

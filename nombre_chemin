@@ -1,5 +1,7 @@
 nbr_chemin * chemin_+_court - Σ(diff_chemin et + court) >= nb_ant (a tester !)
 
+A faire pdt lecture des salles, verifier si un chemin relie la salle courante et si deux chemins sont identiques
+
 A faire apres lecture des salles
 /                                                                 \
  regarder si un element a exactement deux voisins, si c'est le cas
@@ -13,6 +15,9 @@ A faire apres lecture des salles
  }
 \                                                               /
 Supprimer cul-de-sac
+
+
+** resolution **
 
 Commencer a chercher deux chemins qd condition favorable
 Tableau de listes doublementt chainees

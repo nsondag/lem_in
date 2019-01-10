@@ -40,6 +40,7 @@ int		check_prec(char **fm, va_list ap)
 {
 	int		to_return;
 
+	(*fm)++;
 	if (**fm == '*')
 	{
 		to_return = va_arg(ap, int);
@@ -68,7 +69,7 @@ void	check_convert(char fm, char *f)
 int		parser(va_list ap, char **fm)
 {
 	char	*f;
-	int		w[3];
+	int		w[2];
 	int		ret;
 
 	if (start(&f, w, fm, ap))
@@ -77,8 +78,9 @@ int		parser(va_list ap, char **fm)
 	{
 		if ((ret = ft_indexof(FLAG, **fm)) != -1)
 			f[ret] = 1;
-		else if ((**fm == '.' || **fm == '/') && ((*fm)++ || 1))
-			w[(*(*fm - 1) == '.') ? 1 : 2] = check_prec(fm, ap);
+		else if (**fm == '.' || **fm == '/')
+			**fm == '.' ? (w[1] = check_prec(fm, ap)) :
+			(f[9] = check_prec(fm, ap));
 		else if (ft_isdigit(**fm))
 			w[0] = check_width2(fm);
 		else if (**fm == '*')
@@ -89,6 +91,5 @@ int		parser(va_list ap, char **fm)
 			break ;
 		(*fm)++;
 	}
-	f[9] = w[2];
 	return (end(f, fm) ? 0 : go_to_right_func(ap, f, w));
 }

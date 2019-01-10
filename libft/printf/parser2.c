@@ -20,7 +20,6 @@ int		start(char **f, int w[2], char **fm, va_list ap)
 		return (-1);
 	w[0] = -1;
 	w[1] = -1;
-	w[2] = 1;
 	return (0);
 }
 
@@ -46,7 +45,7 @@ int		end(char *f, char **fm)
 		f[0] = 0;
 	if (f[3])
 		f[2] = 0;
-//	if (f[9] < 1)
-//		f[9] = 1;
+	if (f[9] < 1)
+		f[9] = 1;
 	return (0);
 }
