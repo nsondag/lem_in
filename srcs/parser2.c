@@ -111,18 +111,18 @@ int		read_room(t_a *all)
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
 		ft_printf("%s\n", all->buf); // pas retirer
-		if (read_comment(all->buf) == VALID)
+		if ((for_this.ret = read_comment(all->buf)) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)
 				break ;
-			else if (for_this.ret == MERROR || for_this.ret == INVALID)
+			else if (for_this.ret < 0)
 				exit_func(for_this.ret, all);
 		}
-		else if (read_comment(all->buf) == START)
+		else if (for_this.ret == START)
 			for_this.is_start = 1;
-		else if (read_comment(all->buf) == END)
+		else if (for_this.ret == END)
 			for_this.is_end = 1;
-		else if (read_comment(all->buf) == INVALID)
+		else if (for_this.ret == INVALID)
 			exit_func(INVALID, all);
 		ft_strdel(&(all->buf));
 	}

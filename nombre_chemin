@@ -1,24 +1,14 @@
 nbr_chemin * chemin_+_court - Σ(diff_chemin et + court) >= nb_ant (a tester !)
 
-A faire pdt lecture des salles, verifier si un chemin relie la salle courante et si deux chemins sont identiques (done)
-
-A faire apres lecture des salles
-/                                                                 \
- regarder si un element a exactement deux voisins, si c'est le cas
- {
-	trouver la chaine complete de voisins qui ont deux voisins
-	donc on a trouve les extremites de la chaine
-	si on peut creer une autre chaine entre ces extremites
-	{
-		on peut supprimer la plus longue des deux
-	}
- }
-\                                                               /
-Supprimer cul-de-sac
-
+smallest path dans autre sens ;)
 
 ** resolution **
 
-Commencer a chercher deux chemins qd condition favorable
 Tableau de listes doublementt chainees
 
+Un chemin essaye :
+1. d'eviter les conflicts
+2. de minimiserla distance avec end
+
+En cas de conflicts inevitable :
+Choisir le chemin qui pour l'instant est le plus court
