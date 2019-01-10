@@ -1,6 +1,6 @@
 nbr_chemin * chemin_+_court - Σ(diff_chemin et + court) >= nb_ant (a tester !)
 
-A faire pdt lecture des salles, verifier si un chemin relie la salle courante et si deux chemins sont identiques
+A faire pdt lecture des salles, verifier si un chemin relie la salle courante et si deux chemins sont identiques (done)
 
 A faire apres lecture des salles
 /                                                                 \

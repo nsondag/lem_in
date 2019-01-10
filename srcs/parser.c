@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/10 14:48:08 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/10 14:52:36 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int		get_tube(t_a *ant)
 		return (INVALID);
 	ft_printf("-- i %d | j %d\n", i, j);
 	k = -1;
+	if (i == j)
+		return (0);
 	while (++k < ant->adj[i].len_tab)
 	{
 		if (j == ant->adj[i].tab[k])
