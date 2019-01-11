@@ -34,6 +34,8 @@ int		main()
 	clock_t i = clock();
 	if (smallest(&ant))
 		exit_func(INVALID, &ant);
+	if (smallest2(&ant))
+		exit_func(INVALID, &ant);
 	clock_t j = clock();
 	ft_printf("ici %f\n", ((float)j - i)/CLOCKS_PER_SEC);
 	int c = 0;

@@ -31,6 +31,7 @@
 typedef	struct	s_adj
 {
 	int		dist;
+	int		dist2;
 	int		len_tab;
 	char	*name;
 	int		*tab;
@@ -44,6 +45,9 @@ typedef struct	s_a
 	t_adj	*adj;
 	char	*buf;
 	int		start_room;
+	int		**path;
+	int		*len_path;
+	int		nb_path;
 }				t_a;
 
 typedef struct	s_var
@@ -53,12 +57,19 @@ typedef struct	s_var
 	int		ret;
 }				t_var;
 
+typedef struct	s_path
+{
+	int		i;
+	int		j;
+}				t_path;
+
 int		read_comment(char *line);
 int		read_room(t_a *all);
 void	exit_func(int exit_code, t_a *all);
 void	free_all(t_a *all);
 int		parse(t_a *ant);
 int		smallest(t_a *ant);
+int		smallest2(t_a *ant);
 int		dead_ends(t_a *ant);
 
 int		supp_room_from_other(int index_to_supp, t_adj *other);
