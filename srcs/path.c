@@ -39,8 +39,8 @@ int		search_path(t_a *ant, int **path)
 		i = 0;
 		while (i < ant->nb_path)
 		{
-			min = 0;
-			if (path[i][ant->len_path[i]] == 1)
+			min = -1;
+			if (path[i][ant->len_path[i]] == !(ant->start_room))
 			{
 				i++;
 				continue;
@@ -49,18 +49,21 @@ int		search_path(t_a *ant, int **path)
 			ft_printf("%d %d\n", i, path[i][0]);
 			while (j < ant->adj[path[i][ant->len_path[i]]].len_tab)
 			{
-				if (!(ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].is_passed) && (found = 1) && ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[min]].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2)
+				if (!(ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].is_passed))
 				{
-					min = j;
+					if (min == -1 || ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[min]].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2)
+						min = j;
 				}
 				j++;
 			}
-			if (!found)
+			if (min == -1)
 			{
 				
 			}
+			if (min != -1)
+				found = 1;
 			ft_printf("--%d %d\n", i, ant->adj[path[i][ant->len_path[i]]].tab[min]);
-			if (ant->adj[path[i][ant->len_path[i]]].tab[min] != 1)
+			if (ant->adj[path[i][ant->len_path[i]]].tab[min] != !(ant->start_room))
 				ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[min]].is_passed = 1;
 			path[i][ant->len_path[i] + 1] = ant->adj[path[i][ant->len_path[i]]].tab[min];
 			ant->len_path[i]++;

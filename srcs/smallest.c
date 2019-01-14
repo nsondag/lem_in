@@ -103,8 +103,6 @@ int		smallest2(t_a *ant)
 			i++;
 		}
 	}
-	if (ant->adj[ant->start_room].dist2 == -1)
-		return (INVALID);
 	for (int m = 0; m < ant->tab_size; m++)
 		ft_printf("-- d2 %d: %d\n", m, ant->adj[m].dist2);
 	return (VALID);
