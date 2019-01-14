@@ -75,7 +75,7 @@ int		smallest2(t_a *ant)
 		ant->adj[i].dist2 = -1;
 		i++;
 	}
-	ant->adj[!(ant->start_room)].dist = 0;
+	ant->adj[!(ant->start_room)].dist2 = 0;
 	dist = -1;
 	room_discovered = 1;
 	while (room_discovered)
@@ -103,7 +103,7 @@ int		smallest2(t_a *ant)
 			i++;
 		}
 	}
-	if (ant->adj[ant->start_room].dist == -1)
+	if (ant->adj[ant->start_room].dist2 == -1)
 		return (INVALID);
 	for (int m = 0; m < ant->tab_size; m++)
 		ft_printf("-- d2 %d: %d\n", m, ant->adj[m].dist2);

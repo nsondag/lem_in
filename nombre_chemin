@@ -9,4 +9,5 @@ Un chemin essaye :
 2. de minimiserla distance avec end
 
 En cas de conflicts inevitable :
-Choisir le chemin qui pour l'instant est le plus court
+1. Choisir chemin sans autre issue
+2. Choisir le chemin qui pour l'instant est le plus court

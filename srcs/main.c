@@ -55,5 +55,14 @@ int		main()
 	ft_printf("nb start_room connection(s) : %d\n", ant.adj[ant.start_room].len_tab);
 	ft_printf("nb not tube room(s) : %d\n", c);
 	ft_printf("nb room(s) not connected : %d / %d\n", m, ant.tab_size);
+	path(&ant);
+//	for (int l = 0; l < ant.nb_path; l++)
+//	{
+//		for (int m = 0; m < ant.len_path[l]; m++)
+//		{
+//			ft_printf ("%d : %d : %d\n", l, m, ant.path[l][m]);
+//		}
+//	}
+
 	return (0);
 }

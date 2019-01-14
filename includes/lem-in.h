@@ -76,6 +76,7 @@ int		supp_room_from_other(int index_to_supp, t_adj *other);
 int		free_one_room(t_a *all, int index);
 int		search_for_mult_path(t_a *all, int start);
 int		search_for_deadend(t_adj *adj, int tab_size);
+int		path(t_a *ant);
 
 
 #endif
