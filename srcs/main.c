@@ -59,7 +59,7 @@ int		main()
 	for (int l = 0; l < ant.nb_path; l++)
 	{
 		ft_printf("%d %d\n", l, ant.len_path[l]);
-		for (int m = 0; m < ant.len_path[l]; m++)
+		for (int m = 0; m <= ant.len_path[l]; m++)
 		{
 			ft_printf ("%d : %d\n", m, ant.path[l][m]);
 		}

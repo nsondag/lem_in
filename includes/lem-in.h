@@ -35,7 +35,7 @@ typedef	struct	s_adj
 	int		len_tab;
 	char	*name;
 	int		*tab;
-	char	is_passed;
+	int		is_passed;
 }				t_adj;
 
 typedef struct	s_a
@@ -48,6 +48,7 @@ typedef struct	s_a
 	int		**path;
 	int		*len_path;
 	int		nb_path;
+	int		longest_path;
 }				t_a;
 
 typedef struct	s_var

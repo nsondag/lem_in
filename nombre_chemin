@@ -2,8 +2,6 @@ nbr_chemin * chemin_+_court - Σ(diff_chemin et + court) >= nb_ant (a tester !)
 
 ** resolution **
 
-Tableau de listes doublementt chainees
-
 Un chemin essaye :
 1. d'eviter les conflicts
 2. de minimiserla distance avec end
@@ -12,7 +10,9 @@ En cas de conflicts inevitable :
 1. Choisir chemin sans autre issue -> regarder dans touts les salles precedentes tous les voisins et si un est !is_passed c'est qu'il y e une issue
 2. Choisir le chemin qui pour l'instant est le plus court
 
+Checker cycles
 
+Raccourcir longueur chemin (triangle par ex)
 
 ** impression **
 Par tous les chemins jusqu'a ce que le nombre de fourmis < Σ(diff et + long) -> supprimer un chemin

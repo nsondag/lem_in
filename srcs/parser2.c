@@ -89,6 +89,7 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 		if (!(all->tab_size % REALLOC_SIZE) && realloc_adj(all->tab_size, all))
 			return (end_add_entry(&split, MERROR));
 		all->adj[all->tab_size].name = ft_strdup(*split);
+		all->adj[all->tab_size].is_passed = -1;
 		all->tab_size++;
 	}
 	for_this->is_start = 0;

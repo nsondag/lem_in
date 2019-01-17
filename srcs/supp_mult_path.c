@@ -117,6 +117,11 @@ int		search_for_mult_path(t_a *all, int start)
 	first_side = search_for_side(all->adj, i, &adj_first_side, &size_of_path);
 	if (first_side + second_side == 1)
 		return (search_for_mult_path(all, i + 1));
+	if (first_side == second_side)
+	{
+		supp_chained(all->adj, adj_first_side);
+		return (search_for_mult_path(all, i + 1));
+	}
 	j = 0;
 	while (j < all->adj[first_side].len_tab)
 	{
@@ -133,7 +138,7 @@ int		search_for_mult_path(t_a *all, int start)
 			if (search_for_side(all->adj, k, &l, &tmp_path_size) == second_side)
 			{
 				supp_chained(all->adj, size_of_path < tmp_path_size ? k : adj_first_side);
-
+				return (search_for_mult_path(all, 2));
 			}
 		}
 		j++;

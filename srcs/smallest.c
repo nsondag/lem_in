@@ -42,7 +42,6 @@ int		smallest(t_a *ant)
 				while (j < ant->adj[i].len_tab)
 				{
 					k = ant->adj[i].tab[j];
-					//ant->adj[k].is_passed = 1;
 					if (ant->adj[k].dist < 0)
 					{
 						ant->adj[k].dist = ant->adj[i].dist + 1;
@@ -91,7 +90,6 @@ int		smallest2(t_a *ant)
 				while (j < ant->adj[i].len_tab)
 				{
 					k = ant->adj[i].tab[j];
-					//ant->adj[k].is_passed = 1;
 					if (ant->adj[k].dist2 < 0)
 					{
 						ant->adj[k].dist2 = ant->adj[i].dist2 + 1;

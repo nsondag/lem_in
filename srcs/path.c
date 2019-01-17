@@ -16,13 +16,22 @@ int		chained_path(t_a *ant, int  i, int j)
 {
 	int		next;
 
+	next = -1;
 	while (ant->path[i][j] > 1 && ant->adj[ant->path[i][j]].len_tab == 2)
 	{
-		next = ant->adj[ant->adj[ant->path[i][j]].tab[0]].dist2 < ant->adj[ant->adj[ant->path[i][j]].tab[1]].dist2 ? ant->adj[ant->path[i][j]].tab[0] : ant->adj[ant->path[i][j]].tab[1];
+		if (next != -1)
+			ant->adj[next].is_passed = i;
+		if (ant->adj[ant->path[i][j]].tab[0] == ant->start_room)
+			next = ant->adj[ant->path[i][j]].tab[1];
+		else if (ant->adj[ant->path[i][j]].tab[1] == ant->start_room)
+			next = ant->adj[ant->path[i][j]].tab[0];
+		else
+			next = ant->adj[ant->adj[ant->path[i][j]].tab[0]].dist2 < ant->adj[ant->adj[ant->path[i][j]].tab[1]].dist2 ? ant->adj[ant->path[i][j]].tab[0] : ant->adj[ant->path[i][j]].tab[1];
 		ant->path[i][++j] = next;
+		ft_printf("path %d next %d\n", ant->path[i][0], next);
 		ant->len_path[i]++;
 	}
-	return (0);
+	return (next);
 }
 
 int		search_path(t_a *ant, int **path)
@@ -45,28 +54,85 @@ int		search_path(t_a *ant, int **path)
 				i++;
 				continue;
 			}
-			j = 1;
-			ft_printf("%d %d\n", i, path[i][0]);
+			j = 0;
+			//ft_printf("%d %d\n", i, path[i][0]);
 			while (j < ant->adj[path[i][ant->len_path[i]]].len_tab)
 			{
-				if (!(ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].is_passed))
+				if (ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].is_passed == -1)
 				{
-					if (min == -1 || ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[min]].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2)
-						min = j;
+					if (min == -1 || ant->adj[min].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2)
+						min = ant->adj[path[i][ant->len_path[i]]].tab[j];
 				}
 				j++;
 			}
+			ft_printf("min %d\n", min);
 			if (min == -1)
 			{
-				
+				j = 0;
+				while (j < ant->adj[path[i][ant->len_path[i]]].len_tab)
+				{
+					if (ant->adj[path[i][ant->len_path[i]]].tab[j] != ant->start_room && (min == -1 || ant->adj[min].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2))
+						min = ant->adj[path[i][ant->len_path[i]]].tab[j];
+					j++;
+				}
 			}
-			if (min != -1)
-				found = 1;
-			ft_printf("--%d %d\n", i, ant->adj[path[i][ant->len_path[i]]].tab[min]);
-			if (ant->adj[path[i][ant->len_path[i]]].tab[min] != !(ant->start_room))
-				ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[min]].is_passed = 1;
-			path[i][ant->len_path[i] + 1] = ant->adj[path[i][ant->len_path[i]]].tab[min];
 			ant->len_path[i]++;
+			path[i][ant->len_path[i]] = min;
+			//min = chained_path(ant, i, ant->len_path[i]);
+			ft_printf("==%d %d %d==\n", path[i][0], path[i][1], path[i][2]);
+			ft_printf("%d %d %d\n", path[i][0], path[i][ant->len_path[i] - 1], path[i][ant->len_path[i]]);
+			if (ant->adj[min].is_passed != -1)
+			{
+				ft_printf("ici\n");
+				if (ant->adj[min].is_passed == i)
+				{
+					ft_printf("fuck off %d %d\n", i, min);
+					ant->len_path[i]--;
+					i++;
+					continue;
+				}
+				else
+				{
+					j = 0;
+					while (path[ant->adj[min].is_passed][j] != min)
+						j++;
+					ft_printf("%d %d\n", min, ant->adj[min].is_passed);
+					if (j > ant->len_path[i])
+					{
+						ft_printf("%d deleted, new_size %d\n", ant->adj[min].is_passed, j - 1);
+						ant->adj[ant->adj[min].is_passed].len_tab = j - 1;
+					}
+					else
+					{
+						ft_printf("%d deleted\n", i);
+						path[i][ant->len_path[i]] = -1;
+						ant->len_path[i]--;
+						i++;
+						continue;
+					}
+				}
+			}
+//			int current_room = ant->adj[path[i][ant->len_path[i]]].tab[j];
+//			for (int l = 0; l < ant->nb_path; l++)
+//			{
+//				if (l != i)
+//				{
+//					for (int m = ant->len_path[l] - 1; m >= 0; m--)
+//					{
+//						if (path[l][m] == current_room)
+//						{
+//
+//						}
+//					}
+//				}
+//			}
+			found = 1;
+			//ft_printf("--%d %d\n", i, min);
+			if (min != !(ant->start_room))
+				ant->adj[min].is_passed = i;
+			for (int l = 0; l < ant->tab_size; l++)
+				ft_printf("- %d %d\n", l, ant->adj[l].is_passed);
+			//ant->longest_path = ft_max(ant->longest_path, ant->len_path[i]);
 			i++;
 		}
 	}
@@ -82,16 +148,22 @@ int		path(t_a *ant)
 	if (!(ant->len_path = ft_memalloc(sizeof(int) * ant->adj[ant->start_room].len_tab)))
 		return (MERROR);
 	i = 0;
-	ant->adj[ant->start_room].is_passed = 1;
+	ant->adj[ant->start_room].is_passed = -2;
+	ant->adj[!(ant->start_room)].is_passed = -1;
+	for (int l = 0; l < ant->tab_size; l++)
+		ft_printf("- %d %d\n", l, ant->adj[l].is_passed);
 	while (i < ant->adj[ant->start_room].len_tab)
 	{
-		if (!(ant->path[i] = malloc(sizeof(int) * ant->adj[!(ant->start_room)].dist)))
+		if (!(ant->path[i] = malloc(sizeof(int) * ant->adj[ant->start_room].dist2 * 100))) // a modifier
 			return (MERROR);
 		ant->path[i][ant->len_path[i]] = ant->adj[ant->start_room].tab[i];
-		ant->adj[ant->adj[ant->start_room].tab[i]].is_passed = 1;
-		chained_path(ant, i, ant->len_path[i]);
-		i++;
+		ant->adj[ant->adj[ant->start_room].tab[i]].is_passed = i;
+		int ret = chained_path(ant, i, ant->len_path[i]);
+		if (ret != !(ant->start_room))
+			ant->adj[ret].is_passed = i;
 		ant->nb_path++;
+		//ant->longest_path = ft_max(ant->longest_path, ant->len_path[i]);
+		i++;
 	}
 	search_path(ant, ant->path);
 	return (VALID);
