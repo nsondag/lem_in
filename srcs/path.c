@@ -72,9 +72,21 @@ int		search_path(t_a *ant, int **path)
 				while (j < ant->adj[path[i][ant->len_path[i]]].len_tab)
 				{
 					if (ant->adj[path[i][ant->len_path[i]]].tab[j] != ant->start_room && (min == -1 || ant->adj[min].dist2 > ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].dist2))
-						min = ant->adj[path[i][ant->len_path[i]]].tab[j];
+					{
+						int l = 0;
+						while (path[ant->adj[ant->adj[path[i][ant->len_path[i]]].tab[j]].is_passed][l] != ant->adj[path[i][ant->len_path[i]]].tab[j])
+							l++;
+						if (l > ant->len_path[i])
+							min = ant->adj[path[i][ant->len_path[i]]].tab[j];
+					}
 					j++;
 				}
+			}
+			ft_printf("i %d min %d\n", path[i][ant->len_path[i]], min);
+			if (min == -1)
+			{
+				i++;
+				continue;
 			}
 			ant->len_path[i]++;
 			path[i][ant->len_path[i]] = min;
@@ -99,16 +111,15 @@ int		search_path(t_a *ant, int **path)
 					ft_printf("%d %d\n", min, ant->adj[min].is_passed);
 					if (j > ant->len_path[i])
 					{
+						int tmp = j - 1;
 						ft_printf("%d deleted, new_size %d\n", ant->adj[min].is_passed, j - 1);
-						ant->adj[ant->adj[min].is_passed].len_tab = j - 1;
-					}
-					else
-					{
-						ft_printf("%d deleted\n", i);
-						path[i][ant->len_path[i]] = -1;
-						ant->len_path[i]--;
-						i++;
-						continue;
+						while (++j < ant->len_path[ant->adj[min].is_passed])
+						{
+							ant->len_path[i]++;
+							path[i][ant->len_path[i]] = path[ant->adj[min].is_passed][j];
+						}
+						ft_printf("new_path end %d\n", path[i][ant->len_path[i]]);
+						ant->len_path[ant->adj[min].is_passed] = tmp;
 					}
 				}
 			}
@@ -150,8 +161,6 @@ int		path(t_a *ant)
 	i = 0;
 	ant->adj[ant->start_room].is_passed = -2;
 	ant->adj[!(ant->start_room)].is_passed = -1;
-	for (int l = 0; l < ant->tab_size; l++)
-		ft_printf("- %d %d\n", l, ant->adj[l].is_passed);
 	while (i < ant->adj[ant->start_room].len_tab)
 	{
 		if (!(ant->path[i] = malloc(sizeof(int) * ant->adj[ant->start_room].dist2 * 100))) // a modifier

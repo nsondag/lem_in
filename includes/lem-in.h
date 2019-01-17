@@ -47,6 +47,8 @@ typedef struct	s_a
 	int		start_room;
 	int		**path;
 	int		*len_path;
+	int		*nb_ant_per_path;
+	int		*is_used;
 	int		nb_path;
 	int		longest_path;
 }				t_a;

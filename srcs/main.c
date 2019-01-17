@@ -64,6 +64,60 @@ int		main()
 			ft_printf ("%d : %d\n", m, ant.path[l][m]);
 		}
 	}
-
+	ant.nb_ant_per_path = ft_memalloc(sizeof(int) * ant.nb_path);
+	ant.is_used = ft_memalloc(sizeof(int) * ant.nb_path);
+	for (int l = 0; l < ant.nb_path; l++)
+	{
+		if (ant.path[l][ant.len_path[l]] == !(ant.start_room))
+		{
+			ant.is_used[l] = 1;
+			ant.len_path[l]++;
+		}
+	}
+	while (ant.nb_ant > 0)
+	{
+		int sum_diff = 0;
+		int max = 0;
+		int max_index;
+		for (int l = 0; l < ant.nb_path; l++)
+		{
+			if (ant.is_used[l])
+			{
+				if (ant.len_path[l] > max)
+				{
+					max_index = l;
+					max = ant.len_path[l];
+				}
+			}
+		}
+		for (int l = 0; l < ant.nb_path; l++)
+		{
+			if (ant.is_used[l] && l != max_index)
+			{
+				sum_diff += max - ant.len_path[l];
+			}
+		}
+		ft_printf("%d %d\n", sum_diff, ant.nb_ant);
+		if (ant.nb_ant <= sum_diff)
+			ant.is_used[max_index] = 0;
+		else
+		{
+			for (int l = 0; l < ant.nb_path; l++)
+			{
+				if (ant.is_used[l])
+				{
+					ant.nb_ant_per_path[l]++;
+					ant.nb_ant--;
+				}
+			}
+		}
+	}
+	int max_path = 0;
+	for (int l = 0; l < ant.nb_path; l++)
+	{
+		ft_printf("%d %d %d\n", ant.path[l][0], ant.nb_ant_per_path[l], ant.len_path[l]);
+		max_path = ft_max(max_path, ant.nb_ant_per_path[l] + ant.len_path[l] - 1);
+	}
+	ft_printf("move : %d\n", max_path);
 	return (0);
 }

@@ -10,6 +10,8 @@ En cas de conflicts inevitable :
 1. Choisir chemin sans autre issue -> regarder dans touts les salles precedentes tous les voisins et si un est !is_passed c'est qu'il y e une issue
 2. Choisir le chemin qui pour l'instant est le plus court
 
+Chemin qui coupe un autre peut continuer par ou l'autre a ete coupe ok
+
 Checker cycles
 
 Raccourcir longueur chemin (triangle par ex)
