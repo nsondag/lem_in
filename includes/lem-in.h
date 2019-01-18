@@ -50,7 +50,6 @@ typedef struct	s_a
 	int		*nb_ant_per_path;
 	int		*is_used;
 	int		nb_path;
-	int		longest_path;
 }				t_a;
 
 typedef struct	s_var
