@@ -56,7 +56,6 @@ int		get_tube(t_a *ant)
 		j++;
 	if (i == ant->tab_size || j == ant->tab_size)
 		return (INVALID);
-	ft_printf("-- i %d | j %d\n", i, j);
 	if (i == j)
 		return (0);
 	k = -1;
@@ -80,7 +79,7 @@ int		parse(t_a *ant)
 		return (INVALID);
 	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
-		ft_printf("%s\n", ant->buf); // pas retirer
+		//ft_printf("%s\n", ant->buf); a remettre a la fin
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 		ft_strdel(&(ant->buf));

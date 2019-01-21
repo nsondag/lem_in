@@ -22099,7 +22099,7 @@ Oer1-Tnw5
 -- d2 3146: -1
 -- d2 3147: -1
 -- d2 3148: -1
-ici 0.019418
+ici 0.018757
 -- len_tab 0 : 14 --
 -- 0: 0: 2319
 -- 0: 1: 2354
@@ -32531,9 +32531,9 @@ i 946 min 962
 958 946 962
 i 7 last_index 1114
 min -1
-min -1
-i 1114 min -1
-victim
+min 1175
+i 1114 min 1175
+869 1114 1175
 i 8 last_index 2352
 min 2353
 min 2353
@@ -32574,11 +32574,11 @@ min 2335
 min 2335
 i 2351 min 2335
 2354 2351 2335
-i 2 last_index 2016
-min 1083
-min 1083
-i 2016 min 1083
-2194 2016 1083
+i 2 last_index 1175
+min -1
+min 2016
+i 1175 min 2016
+2194 1175 2016
 i 3 last_index 2098
 min 1084
 min 1084
@@ -32599,11 +32599,11 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 1175
 min -1
-min -1
-i 1114 min -1
-victim
+min 2016
+i 1175 min 2016
+869 1175 2016
 i 8 last_index 2353
 min -1
 min -1
@@ -32644,11 +32644,11 @@ min 937
 min 937
 i 2335 min 937
 2354 2335 937
-i 2 last_index 1083
-min 2117
-min 2117
-i 1083 min 2117
-2194 1083 2117
+i 2 last_index 1156
+min 1014
+min 1014
+i 1156 min 1014
+2194 1156 1014
 i 3 last_index 1084
 min 2158
 min 2158
@@ -32669,11 +32669,11 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
-min -1
-min -1
-i 1114 min -1
-victim
+i 7 last_index 2016
+min 1083
+min 1083
+i 2016 min 1083
+869 2016 1083
 i 8 last_index 2353
 min -1
 min -1
@@ -32695,10 +32695,10 @@ min 2253
 i 936 min 2253
 844 936 2253
 i 12 last_index 2222
-min 2148
-min 2148
-i 2222 min 2148
-851 2222 2148
+min 2117
+min 2117
+i 2222 min 2117
+851 2222 2117
 i 13 last_index 2105
 min 904
 min 904
@@ -32714,11 +32714,11 @@ min 2145
 min 2145
 i 937 min 2145
 2354 937 2145
-i 2 last_index 2117
-min 1401
-min 1401
-i 2117 min 1401
-2194 2117 1401
+i 2 last_index 1014
+min 2107
+min 2107
+i 1014 min 2107
+2194 1014 2107
 i 3 last_index 2158
 min 1218
 min 1218
@@ -32739,11 +32739,11 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 1083
 min -1
-min -1
-i 1114 min -1
-victim
+min 2145
+i 1083 min 2145
+869 1083 2145
 i 8 last_index 2353
 min -1
 min -1
@@ -32764,11 +32764,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 2117
+min 1401
+min 1401
+i 2117 min 1401
+851 2117 1401
 i 13 last_index 904
 min 2040
 min 2040
@@ -32779,16 +32779,16 @@ min 914
 min 914
 i 902 min 914
 2319 902 914
-i 1 last_index 2145
-min -1
-min -1
-i 2145 min -1
-victim
-i 2 last_index 1401
-min 2183
-min 2183
-i 1401 min 2183
-2194 1401 2183
+i 1 last_index 937
+min 2148
+min 2148
+i 937 min 2148
+2354 937 2148
+i 2 last_index 2107
+min 1135
+min 1135
+i 2107 min 1135
+2194 2107 1135
 i 3 last_index 1218
 min 2184
 min 2184
@@ -32809,10 +32809,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -32834,11 +32834,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1401
+min 2183
+min 2183
+i 1401 min 2183
+851 1401 2183
 i 13 last_index 2040
 min 2774
 min 2774
@@ -32849,16 +32849,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 2183
-min 2129
-min 2129
-i 2183 min 2129
-2194 2183 2129
+i 2 last_index 1135
+min 1186
+min 1186
+i 1135 min 1186
+2194 1135 1186
 i 3 last_index 2184
 min 1024
 min 1024
@@ -32879,10 +32879,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -32904,11 +32904,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 2183
+min 2129
+min 2129
+i 2183 min 2129
+851 2183 2129
 i 13 last_index 2774
 min 2773
 min 2773
@@ -32919,16 +32919,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 2129
-min 1956
-min 1956
-i 2129 min 1956
-2194 2129 1956
+i 2 last_index 1186
+min 2174
+min 2174
+i 1186 min 2174
+2194 1186 2174
 i 3 last_index 1024
 min 1006
 min 1006
@@ -32949,10 +32949,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -32974,11 +32974,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 2129
+min 1956
+min 1956
+i 2129 min 1956
+851 2129 1956
 i 13 last_index 2773
 min 2571
 min 2571
@@ -32989,16 +32989,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1956
-min 1718
-min 1718
-i 1956 min 1718
-2194 1956 1718
+i 2 last_index 2174
+min 1136
+min 1136
+i 2174 min 1136
+2194 2174 1136
 i 3 last_index 1006
 min 1005
 min 1005
@@ -33019,10 +33019,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -33044,11 +33044,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1956
+min 1718
+min 1718
+i 1956 min 1718
+851 1956 1718
 i 13 last_index 2571
 min 641
 min 641
@@ -33059,16 +33059,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1718
-min 746
-min 746
-i 1718 min 746
-2194 1718 746
+i 2 last_index 1136
+min 2084
+min 2084
+i 1136 min 2084
+2194 1136 2084
 i 3 last_index 1005
 min 2223
 min 2223
@@ -33089,10 +33089,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -33114,11 +33114,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1718
+min 746
+min 746
+i 1718 min 746
+851 1718 746
 i 13 last_index 641
 min 2458
 min 2458
@@ -33129,16 +33129,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 746
-min 745
-min 745
-i 746 min 745
-2194 746 745
+i 2 last_index 2084
+min 1849
+min 1849
+i 2084 min 1849
+2194 2084 1849
 i 3 last_index 2223
 min 990
 min 990
@@ -33159,10 +33159,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -33184,11 +33184,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 746
+min 745
+min 745
+i 746 min 745
+851 746 745
 i 13 last_index 2458
 min -1
 min -1
@@ -33199,16 +33199,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 745
-min 2474
-min 2474
-i 745 min 2474
-2194 745 2474
+i 2 last_index 1849
+min 1760
+min 1760
+i 1849 min 1760
+2194 1849 1760
 i 3 last_index 990
 min 2191
 min 2191
@@ -33229,10 +33229,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -33254,11 +33254,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 745
+min 2474
+min 2474
+i 745 min 2474
+851 745 2474
 i 13 last_index 2458
 min -1
 min -1
@@ -33269,16 +33269,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 2474
-min 1
-min 1
-i 2474 min 1
-2194 2474 1
+i 2 last_index 1760
+min 838
+min 838
+i 1760 min 838
+2194 1760 838
 i 3 last_index 2191
 min 2190
 min 2190
@@ -33299,10 +33299,10 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
@@ -33310,10 +33310,10 @@ min -1
 i 2353 min -1
 victim
 i 9 last_index 2437
-min 1849
-min 1849
-i 2437 min 1849
-2357 2437 1849
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1833
 min 1832
 min 1832
@@ -33324,11 +33324,11 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 2474
+min 1
+min 1
+i 2474 min 1
+851 2474 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33339,12 +33339,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1
+i 2 last_index 838
+min 418
+min 418
+i 838 min 418
+2194 838 418
 i 3 last_index 2190
 min 2189
 min 2189
@@ -33365,21 +33369,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 1849
-min 1760
-min 1760
-i 1849 min 1760
-2357 1849 1760
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1832
 min 1444
 min 1444
@@ -33390,11 +33394,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33405,12 +33405,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1
+i 2 last_index 418
+min 2570
+min 2570
+i 418 min 2570
+2194 418 2570
 i 3 last_index 2189
 min -1
 min -1
@@ -33431,21 +33435,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 1760
-min 838
-min 838
-i 1760 min 838
-2357 1760 838
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33456,11 +33460,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33471,12 +33471,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1
+i 2 last_index 2570
+min 647
+min 647
+i 2570 min 647
+2194 2570 647
 i 3 last_index 2189
 min -1
 min -1
@@ -33497,21 +33501,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 838
-min 418
-min 418
-i 838 min 418
-2357 838 418
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33522,11 +33526,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33537,12 +33537,16 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
-i 2 last_index 1
+i 2 last_index 647
+min 1
+min 1
+i 647 min 1
+2194 647 1
 i 3 last_index 2189
 min -1
 min -1
@@ -33563,21 +33567,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 418
-min 2570
-min 2570
-i 418 min 2570
-2357 418 2570
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33588,11 +33592,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33603,10 +33603,10 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
 i 2 last_index 1
 i 3 last_index 2189
@@ -33629,21 +33629,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 2570
-min 647
-min 647
-i 2570 min 647
-2357 2570 647
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33654,11 +33654,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33669,10 +33665,10 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
 i 2 last_index 1
 i 3 last_index 2189
@@ -33695,21 +33691,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 647
-min 1
-min 1
-i 647 min 1
-2357 647 1
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33720,11 +33716,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33735,10 +33727,10 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
 i 2 last_index 1
 i 3 last_index 2189
@@ -33761,17 +33753,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 1
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33782,11 +33778,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33797,10 +33789,10 @@ min -1
 min -1
 i 914 min -1
 victim
-i 1 last_index 2145
+i 1 last_index 2148
 min -1
 min -1
-i 2145 min -1
+i 2148 min -1
 victim
 i 2 last_index 1
 i 3 last_index 2189
@@ -33819,17 +33811,21 @@ min -1
 min -1
 i 962 min -1
 victim
-i 7 last_index 1114
+i 7 last_index 2145
 min -1
 min -1
-i 1114 min -1
+i 2145 min -1
 victim
 i 8 last_index 2353
 min -1
 min -1
 i 2353 min -1
 victim
-i 9 last_index 1
+i 9 last_index 2437
+min -1
+min -1
+i 2437 min -1
+victim
 i 10 last_index 1444
 min -1
 min -1
@@ -33840,11 +33836,7 @@ min -1
 min -1
 i 2253 min -1
 victim
-i 12 last_index 2148
-min -1
-min -1
-i 2148 min -1
-victim
+i 12 last_index 1
 i 13 last_index 2458
 min -1
 min -1
@@ -33869,27 +33861,28 @@ dist2 16
 4 : 2351
 5 : 2335
 6 : 937
-7 : 2145
+7 : 2148
 dist2 11
-2 17
+2 18
 0 : 2194
 1 : 919
 2 : 2257
 3 : 1045
 4 : 1156
-5 : 1175
-6 : 2016
-7 : 1083
-8 : 2117
-9 : 1401
-10 : 2183
-11 : 2129
-12 : 1956
-13 : 1718
-14 : 746
-15 : 745
-16 : 2474
-17 : 1
+5 : 1014
+6 : 2107
+7 : 1135
+8 : 1186
+9 : 2174
+10 : 1136
+11 : 2084
+12 : 1849
+13 : 1760
+14 : 838
+15 : 418
+16 : 2570
+17 : 647
+18 : 1
 dist2 0
 3 17
 0 : 880
@@ -33956,12 +33949,16 @@ dist2 0
 4 : 946
 5 : 962
 dist2 14
-7 3
+7 7
 0 : 869
 1 : 2029
 2 : 1137
 3 : 1114
-dist2 13
+4 : 1175
+5 : 2016
+6 : 1083
+7 : 2145
+dist2 11
 8 4
 0 : 856
 1 : 2333
@@ -33969,7 +33966,7 @@ dist2 13
 3 : 2352
 4 : 2353
 dist2 16
-9 21
+9 14
 0 : 2357
 1 : 1032
 2 : 2258
@@ -33985,14 +33982,7 @@ dist2 16
 12 : 2439
 13 : 781
 14 : 2437
-15 : 1849
-16 : 1760
-17 : 838
-18 : 418
-19 : 2570
-20 : 647
-21 : 1
-dist2 0
+dist2 7
 10 17
 0 : 2255
 1 : 1067
@@ -34022,15 +34012,24 @@ dist2 4
 5 : 936
 6 : 2253
 dist2 18
-12 6
+12 15
 0 : 851
 1 : 854
 2 : 2284
 3 : 2213
 4 : 2198
 5 : 2222
-6 : 2148
-dist2 11
+6 : 2117
+7 : 1401
+8 : 2183
+9 : 2129
+10 : 1956
+11 : 1718
+12 : 746
+13 : 745
+14 : 2474
+15 : 1
+dist2 0
 13 14
 0 : 2306
 1 : 2286
@@ -34048,121 +34047,121 @@ dist2 11
 13 : 641
 14 : 2458
 dist2 11
-6 295
-6 292
-6 289
-6 286
-6 283
-6 280
-6 277
-6 274
-6 271
-6 268
-6 265
-6 262
-6 259
-6 256
-6 253
-6 250
-6 247
-6 244
-6 241
-6 238
-6 235
-6 232
-6 229
-6 226
-6 223
-6 220
-6 217
-6 214
-6 211
-6 208
-6 205
-6 202
-6 199
-6 196
-6 193
-6 190
-6 187
-6 184
-6 181
-6 178
-6 175
-6 172
-6 169
-6 166
-6 163
-6 160
-6 157
-6 154
-6 151
-6 148
-6 145
-6 142
-6 139
-6 136
-6 133
-6 130
-6 127
-6 124
-6 121
-6 118
-6 115
-6 112
-6 109
-6 106
-6 103
-6 100
-6 97
-6 94
-6 91
-6 88
-6 85
-6 82
-6 79
-6 76
-6 73
-6 70
-6 67
-6 64
-6 61
-6 58
-6 55
-6 52
-6 49
-6 46
-6 43
-6 40
-6 37
-6 34
-6 31
-6 28
-6 25
-6 22
-6 19
-6 16
-6 13
-6 10
-6 7
-6 4
-4 4
-0 4
-0 3
+11 295
+11 292
+11 289
+11 286
+11 283
+11 280
+11 277
+11 274
+11 271
+11 268
+11 265
+11 262
+11 259
+11 256
+11 253
+11 250
+11 247
+11 244
+11 241
+11 238
+11 235
+11 232
+11 229
+11 226
+11 223
+11 220
+11 217
+11 214
+11 211
+11 208
+11 205
+11 202
+11 199
+11 196
+11 193
+11 190
+11 187
+11 184
+11 181
+11 178
+11 175
+11 172
+11 169
+11 166
+11 163
+11 160
+11 157
+11 154
+11 151
+11 148
+11 145
+11 142
+11 139
+11 136
+11 133
+11 130
+11 127
+11 124
+11 121
+11 118
+11 115
+11 112
+11 109
+11 106
+11 103
+11 100
+11 97
+11 94
+11 91
+11 88
+11 85
+11 82
+11 79
+11 76
+11 73
+11 70
+11 67
+11 64
+11 61
+11 58
+11 55
+11 52
+11 49
+11 46
+11 43
+11 40
+11 37
+11 34
+11 31
+11 28
+11 25
+11 22
+11 19
+11 16
+11 13
+11 10
+3 10
+3 8
+3 6
+3 4
+3 2
 0 2
 0 1
 2319 0 8
 2354 0 7
-2194 101 18
+2194 99 19
 880 0 17
 560 0 9
-840 97 23
+840 95 23
 958 0 5
-869 0 3
+869 0 7
 856 0 4
-2357 97 22
+2357 0 14
 2255 0 17
 844 0 6
-851 0 6
+851 101 16
 2306 0 14
-move : 119
+move : 117
