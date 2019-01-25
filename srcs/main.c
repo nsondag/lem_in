@@ -13,6 +13,15 @@
 #include "lem-in.h"
 #include <time.h>
 
+void	racc_path(t_a *ant, int l, int offset, int len)
+{
+	for (int m = offset + len; m < ant->len_path[l]; m++)
+	{
+		ant->path[l][m - len] = ant->path[l][m];
+	}
+	ant->len_path[l] -= len;
+}
+
 int		main()
 {
 	t_a		ant;
@@ -61,15 +70,103 @@ int		main()
 	ft_printf("nb not tube room(s) : %d\n", c);
 	ft_printf("nb room(s) connected : %d / %d\n", m, ant.tab_size);
 	path(&ant);
+
+
+
+//		for (int l = 0; l < ant.nb_path; l++)
+//		{
+//			ft_printf(">> %d %d\n", l, ant.len_path[l]);
+//			for (int m = 0; m <= ant.len_path[l]; m++)
+//			{
+//				ft_printf ("%d : %d\n", m, ant.path[l][m]);
+//			}
+//			ft_printf("dist2 %d\n", ant.adj[ant.path[l][ant.len_path[l]]].dist2);
+//		}
+
+//	ant.nb_ant_per_path = ft_memalloc(sizeof(int) * ant.nb_path);
+//	ant.is_used = ft_memalloc(sizeof(int) * ant.nb_path);
+//	for (int l = 0; l < ant.nb_path; l++)
+//	{
+//		if (ant.path[l][ant.len_path[l]] == !(ant.start_room))
+//		{
+//			ant.is_used[l] = 1;
+//			ant.len_path[l]++;
+//		}
+//
+//	}
+//	while (ant.nb_ant > 0)
+//	{
+//		int sum_diff = 0;
+//		int max = 0;
+//		int max_index = -1;
+//		for (int l = 0; l < ant.nb_path; l++)
+//		{
+//			if (ant.is_used[l])
+//			{
+//				if (ant.len_path[l] > max)
+//				{
+//					max_index = l;
+//					max = ant.len_path[l];
+//				}
+//			}
+//		}
+//		for (int l = 0; l < ant.nb_path; l++)
+//		{
+//			if (ant.is_used[l] && l != max_index)
+//			{
+//				sum_diff += max - ant.len_path[l];
+//			}
+//		}
+//		if (ant.nb_ant <= sum_diff)
+//			ant.is_used[max_index] = 0;
+//		else
+//		{
+//			for (int l = 0; l < ant.nb_path; l++)
+//			{
+//				if (ant.is_used[l])
+//				{
+//					ant.nb_ant_per_path[l]++;
+//					ant.nb_ant--;
+//				}
+//			}
+//		}
+//	}
+//	int max_path = 0;
+//	for (int l = 0; l < ant.nb_path; l++)
+//	{
+//		ft_printf("%d %d %d\n", ant.path[l][0], ant.nb_ant_per_path[l], ant.len_path[l]);
+//		if (ant.nb_ant_per_path[l])
+//			max_path = ft_max(max_path, ant.nb_ant_per_path[l] + ant.len_path[l] - 1);
+//	}
+//	ft_printf("nb_ant : %d\n", ant.nb_ant);
+//	ft_printf("move : %d\n", max_path);
+
+
 	for (int l = 0; l < ant.nb_path; l++)
 	{
-		ft_printf("%d %d\n", l, ant.len_path[l]);
-		for (int m = 0; m <= ant.len_path[l]; m++)
+		ft_printf("l %d len %3d\n", l, ant.len_path[l]);
+		for (int len = ant.len_path[l]; len > 1; len--)
 		{
-			ft_printf ("%d : %d\n", m, ant.path[l][m]);
+			for (int offset = 0; offset + len <= ant.len_path[l]; offset++)
+			{
+				for (int m = 0; m < ant.adj[ant.path[l][offset]].len_tab; m++)
+				{
+					if (ant.adj[ant.path[l][offset]].tab[m] == ant.path[l][offset + len])
+					{
+						ft_printf("path %3d offset %3d len %3d index_end %3d\n", l, offset, len, len+offset);
+						racc_path(&ant, l, offset, len);
+						offset = -1;
+						len = ant.len_path[l];
+						break;
+					}
+				}
+			}
 		}
-		ft_printf("dist2 %d\n", ant.adj[ant.path[l][ant.len_path[l]]].dist2);
+		ft_printf("l %d len %3d\n", l, ant.len_path[l]);
+		ft_printf("end %d\n", ant.path[l][ant.len_path[l]]);
 	}
+
+
 	ant.nb_ant_per_path = ft_memalloc(sizeof(int) * ant.nb_path);
 	ant.is_used = ft_memalloc(sizeof(int) * ant.nb_path);
 	for (int l = 0; l < ant.nb_path; l++)
@@ -79,7 +176,6 @@ int		main()
 			ant.is_used[l] = 1;
 			ant.len_path[l]++;
 		}
-
 	}
 	while (ant.nb_ant > 0)
 	{
@@ -125,6 +221,9 @@ int		main()
 		if (ant.nb_ant_per_path[l])
 		max_path = ft_max(max_path, ant.nb_ant_per_path[l] + ant.len_path[l] - 1);
 	}
+	ft_printf("nb_ant : %d\n", ant.nb_ant);
 	ft_printf("move : %d\n", max_path);
+
+
 	return (0);
 }
