@@ -79,7 +79,7 @@ int		parse(t_a *ant)
 		return (INVALID);
 	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
-		//ft_printf("%s\n", ant->buf); a remettre a la fin
+		ft_printf("%s\n", ant->buf); //a remettre a la fin
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 		ft_strdel(&(ant->buf));

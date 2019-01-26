@@ -59,12 +59,6 @@ typedef struct	s_var
 	int		ret;
 }				t_var;
 
-typedef struct	s_path
-{
-	int		i;
-	int		j;
-}				t_path;
-
 int		read_comment(char *line);
 int		read_room(t_a *all);
 void	exit_func(int exit_code, t_a *all);

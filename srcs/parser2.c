@@ -107,7 +107,7 @@ int		read_room(t_a *all)
 	all->tab_size = 2;
 	if (get_next_line(0, &(all->buf)) > 0)
 		all->nb_ant = ft_atoi(all->buf);
-	//ft_printf("%s\n", all->buf); a remettre a la fin
+	ft_printf("%s\n", all->buf); //a remettre a la fin
 	ft_strdel(&(all->buf));
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
