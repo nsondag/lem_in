@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/10 14:32:34 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/27 21:10:16 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ int		main()
 	}
 
 // calculer fourmi(s) dans chemin(s)
-	while (ant.nb_ant > 0)
+	int nb_ants;
+
+	nb_ants = ant.nb_ant;
+
+	while (nb_ants > 0)
 	{
 		int sum_diff = 0;
 		int max = 0;
@@ -130,7 +134,7 @@ int		main()
 				if (ant.is_used[l])
 				{
 					ant.nb_ant_per_path[l]++;
-					ant.nb_ant--;
+					nb_ants--;
 				}
 			}
 		}
@@ -144,6 +148,7 @@ int		main()
 	}
 	//ft_printf("nb_ant : %d\n", ant.nb_ant);
 	ft_printf("move : %d\n", max_path);
+	sending_ants(&ant);
 
 
 	return (0);

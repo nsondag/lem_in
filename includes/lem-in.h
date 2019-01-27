@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/10 14:31:47 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/27 21:10:14 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ int		free_one_room(t_a *all, int index);
 int		search_for_mult_path(t_a *all, int start);
 int		search_for_deadend(t_adj *adj, int tab_size);
 int		path(t_a *ant);
-
+int		sending_ants(t_a *ants);
 
 #endif
