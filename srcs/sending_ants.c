@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 14:49:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/29 13:59:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/29 14:06:06 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int sending_ants(t_a *ant)
 				k++;
 				continue ;
 			}
-			ft_printf("L%d-%d", start_ant[i] + k,
-					ant->path[i][nb_move - j - 1]);
+			ft_printf("L%d-%s", start_ant[i] + k,
+					ant->adj[ant->path[i][nb_move - j - 1]].name);
 			j++;
 			k++;
 			(j < nb_move && k <= ant->nb_ant_per_path[i] + 1)
