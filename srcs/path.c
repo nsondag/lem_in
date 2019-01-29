@@ -84,6 +84,48 @@ int		search_path(t_a *ant, int **path)
 	return (VALID);
 }
 
+int		calc_used_path(t_a *ant)
+{
+	int nb_ant;
+	int sum_diff;
+	int max;
+	int max_index;
+	int l;
+
+	nb_ant = ant->nb_ant;
+	while (nb_ant > 0)
+	{
+		sum_diff = 0;
+		max = 0;
+		max_index = -1;
+		l = -1;
+		while (++l < ant->nb_path)
+		{
+			if (ant->is_used[l])
+			{
+				if (ant->len_path[l] > max)
+				{
+					max_index = l;
+					max = ant->len_path[l];
+				}
+			}
+		}
+		l = -1;
+		while (++l < ant->nb_path)
+		{
+			if (ant->is_used[l] && l != max_index)
+			{
+				sum_diff += max - ant->len_path[l];
+			}
+		}
+		if (nb_ant <= sum_diff)
+			ant->is_used[max_index] = 0;
+		else
+			break ;
+	}
+	return (0);
+}
+
 int		clean_room(t_a *ant, int **path)
 {
 	int		i;
@@ -96,17 +138,61 @@ int		clean_room(t_a *ant, int **path)
 	i = -1;
 	while (++i < ant->tab_size)
 		ant->adj[i].is_passed = -1;
+	ant->adj[0].is_passed = -2;
+	ant->adj[1].is_passed = -2;
 	i = -1;
 	while (++i < ant->nb_path)
 		if (path[i][ant->len_path[i]] == !(ant->start_room))
 		{
 			j = -1;
-			while (++j < ant->len_path[i] - 1)
-				ant->adj[path[i][j]].is_passed = i;
 			ant->is_used[i] = 1;
 			ant->len_path[i]++;
 		}
+	calc_used_path(ant);
+	i = -1;
+	while (++i < ant->nb_path)
+		if (ant->is_used[i])
+		{
+			j = -1;
+			while (++j < ant->len_path[i] - 1)
+				ant->adj[path[i][j]].is_passed = i;
+			ft_printf ("path used : %d\n", i);
+		}
 	return (VALID);
+}
+
+int		racc_path2(t_a *ant, int **path)
+{
+	int		offset;
+	int		len;
+	int		i;
+	int		adj_first;
+	int		adj_second;
+
+	len = 3;
+	i = -1;
+	while (++i < ant->nb_path)
+	{
+		offset = -1;
+		if (ant->is_used[i])
+		while (++offset + len < ant->len_path[i])
+		{
+			adj_first = -1;
+			while (++adj_first < ant->adj[path[i][offset]].len_tab)
+			{
+				adj_second = -1;
+				if (ant->adj[adj_first].is_passed == -1)
+				while (++adj_second < ant->adj[ant->adj[path[i][offset]].tab[adj_first]].len_tab)
+				{
+					if (ant->adj[ant->adj[path[i][offset]].tab[adj_first]].tab[adj_second] == path[i][offset + len])
+					{
+						ft_printf("3 to 2 : path %d offset %d start %d end %d inter %d\n", i, offset, path[i][offset], path[i][offset + len], adj_first);
+					}
+				}
+			}
+		}
+	}
+	return (0);
 }
 
 int		path(t_a *ant)
