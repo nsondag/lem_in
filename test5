@@ -1,0 +1,21 @@
+56
+##end
+un 7 9
+##start
+zero 9 3
+deux 5 4
+trois 12 45
+quatre 84 34
+cinq 46 25
+six 56 46
+sept 5 5
+zero-quatre
+zero-deux
+quatre-six
+six-un
+deux-trois
+trois-cinq
+cinq-un
+zero-sept
+sept-un
+zero-un
