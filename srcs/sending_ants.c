@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 14:49:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/29 15:46:32 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/29 15:54:00 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int sending_ants(t_a *ant)
 			k = k - nb_move + 1;
 			while (j < nb_move)
 			{
-				if (k > ant->nb_ant_per_path[i] - 1)
+				if (k >= ant->nb_ant_per_path[i])
 				{
 					j++;
 					k++;
