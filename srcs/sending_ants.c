@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 14:49:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/29 15:54:00 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/30 10:11:44 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int sending_ants(t_a *ant)
 			k = k - nb_move + 1;
 			while (j < nb_move)
 			{
-				if (k >= ant->nb_ant_per_path[i])
+				if (k >= ant->nb_ant_per_path[i] || start_ant[i] + k > ant->nb_ant)
 				{
 					j++;
 					k++;
@@ -55,7 +55,8 @@ int sending_ants(t_a *ant)
 						ant->adj[ant->path[i][nb_move - j - 1]].name);
 				j++;
 				k++;
-				(j < nb_move && k < ant->nb_ant_per_path[i])
+				(j < nb_move && k < ant->nb_ant_per_path[i] &&
+				 start_ant[i] + k <= ant->nb_ant)
 					? ft_printf(" ") : ft_printf("\n");
 			}
 			if (nb_move < ant->len_path[i])
