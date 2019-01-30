@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/27 21:10:16 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/01/30 13:23:11 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,9 @@ int		main()
 		if (ant.nb_ant_per_path[l])
 			max_path = ft_max(max_path, ant.nb_ant_per_path[l] + ant.len_path[l] - 1);
 	}
-	//ft_printf("nb_ant : %d\n", ant.nb_ant);
+	ft_printf("nb_ant : %d\n", ant.nb_ant);
 	ft_printf("move : %d\n", max_path);
-	//sending_ants(&ant);
+	sending_ants(&ant, max_path);
 
 
 	return (0);
