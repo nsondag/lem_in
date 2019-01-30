@@ -69,6 +69,7 @@ int		main()
 	ft_printf("nb start_room connection(s) : %d\n", ant.adj[ant.start_room].len_tab);
 	ft_printf("nb not tube room(s) : %d\n", c);
 	ft_printf("nb room(s) connected : %d / %d\n", m, ant.tab_size);
+
 	path(&ant);
 
 // recourcir chemin
@@ -96,6 +97,7 @@ int		main()
 		ft_printf("l %d len %3d\n", l, ant.len_path[l]- 1);
 		ft_printf("end %d\n", ant.path[l][ant.len_path[l] - 1]);
 	}
+	racc_path2(&ant, ant.path);
 
 // calculer fourmi(s) dans chemin(s)
 	int nb_ants;
@@ -125,7 +127,7 @@ int		main()
 				sum_diff += max - ant.len_path[l];
 			}
 		}
-		if (ant.nb_ant <= sum_diff)
+		if (nb_ants <= sum_diff)
 			ant.is_used[max_index] = 0;
 		else
 		{
@@ -148,7 +150,7 @@ int		main()
 	}
 	//ft_printf("nb_ant : %d\n", ant.nb_ant);
 	ft_printf("move : %d\n", max_path);
-	sending_ants(&ant);
+	//sending_ants(&ant);
 
 
 	return (0);

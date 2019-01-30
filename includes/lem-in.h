@@ -74,5 +74,6 @@ int		search_for_mult_path(t_a *all, int start);
 int		search_for_deadend(t_adj *adj, int tab_size);
 int		path(t_a *ant);
 int		sending_ants(t_a *ants);
+int		racc_path2(t_a *ant, int **path);
 
 #endif
