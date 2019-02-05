@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/27 14:49:18 by nsondag           #+#    #+#             */
-/*   Updated: 2019/02/04 12:54:03 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/02/05 17:07:45 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int sending_ants(t_a *ant, int max_path)
 	start_ant[i] = 1;
 	while (++i < ant->nb_path)
 		start_ant[i] = start_ant[i - 1] + ant->nb_ant_per_path[i - 1];
-	i = -1;
-	while (++i < ant->nb_path)
+	i = 0;
+	while (i < ant->nb_path)
 	{
 		if (!(output[i] = ft_memalloc(sizeof(char***) * max_path)))
 			return (MERROR);
@@ -63,6 +63,7 @@ int sending_ants(t_a *ant, int max_path)
 			nb_move < ant->len_path[i] ? nb_move++ : 0;
 			nb_move == ant->len_path[i] ? nb-- : 0;
 		}
+		i++;
 	}
 	l = 0;
 	while (l < max_path)
@@ -70,6 +71,11 @@ int sending_ants(t_a *ant, int max_path)
 		i = 0;
 		while (i < ant->nb_path)
 		{
+			if (!ant->nb_ant_per_path[i])
+			{
+				i++;
+				continue ;
+			}
 			j = 0;
 			while (output[i][l][j])
 			{
