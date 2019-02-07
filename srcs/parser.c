@@ -13,18 +13,18 @@
 #include "lem-in.h"
 # include <stdio.h>
 
-int		realloc_tab(t_adj *adj)
+int		realloc_tab(t_room *room)
 {
-	int		*tmp;
+	t_tube	*tmp;
 
-	tmp = adj->tab;
-	adj->len_tab++;
-	if (!(adj->tab = (int*)malloc(sizeof(int) * (adj->len_tab))))
+	tmp = room->tubes;
+	room->nb_tubes++;
+	if (!(room->tubes = (t_tube*)malloc(sizeof(t_tube) * (room->nb_tubes))))
 	{
 		free(tmp);
 		return (MERROR);
 	}
-	memcpy(adj->tab, tmp, sizeof(int) * (adj->len_tab - 1));
+	memcpy(room->tubes, tmp, sizeof(t_tube) * (room->nb_tubes - 1));
 	free(tmp);
 	return (0);
 }
@@ -40,7 +40,7 @@ int		get_tube(t_a *ant)
 	int		k;
 
 	dash = ft_indexof(ant->buf, '-');
-	end = ft_indexof(ant->buf, '\0');
+	end = ft_strlen(ant->buf + dash) + dash;
 	if (ant->buf[0] != '#' && dash != -1)
 	{
 		room1 = ft_strsub(ant->buf, 0, dash);
@@ -49,25 +49,27 @@ int		get_tube(t_a *ant)
 	else
 		return (ant->buf[0] == '#' ? VALID : INVALID);
 	i = 0;
-	while (i < ant->tab_size && ft_strcmp(ant->adj[i].name, room1))
+	while (i < ant->nb_room && ft_strcmp(ant->room[i].name, room1))
 		i++;
 	j = 0;
-	while (j < ant->tab_size && ft_strcmp(ant->adj[j].name, room2))
+	while (j < ant->nb_room && ft_strcmp(ant->room[j].name, room2))
 		j++;
-	if (i == ant->tab_size || j == ant->tab_size)
+	if (i == ant->nb_room || j == ant->nb_room)
 		return (INVALID);
 	if (i == j)
 		return (0);
 	k = -1;
-	while (++k < ant->adj[i].len_tab)
-		if (j == ant->adj[i].tab[k])
+	while (++k < ant->room[i].nb_tubes)
+		if (j == ant->room[i].tubes[k].dest)
 			return (0);
-	if (realloc_tab(&(ant->adj[i])))
+	if (realloc_tab(&(ant->room[i])))
 		return (MERROR);
-	ant->adj[i].tab[ant->adj[i].len_tab - 1] = j;
-	if (realloc_tab(&(ant->adj[j])))
+	ant->room[i].tubes[ant->room[i].nb_tubes - 1].dest = j;
+	ant->room[i].tubes[ant->room[i].nb_tubes - 1].len = 1;
+	if (realloc_tab(&(ant->room[j])))
 		return (MERROR);
-	ant->adj[j].tab[ant->adj[j].len_tab - 1] = i;
+	ant->room[j].tubes[ant->room[j].nb_tubes - 1].dest = i;
+	ant->room[j].tubes[ant->room[j].nb_tubes - 1].len = 1;
 	return (0);
 }
 

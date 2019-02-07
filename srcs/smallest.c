@@ -21,12 +21,12 @@ int		smallest(t_a *ant)
 	int		room_discovered;
 
 	i = 0;
-	while (i < ant->tab_size)
+	while (i < ant->nb_room)
 	{
-		ant->adj[i].dist = -1;
+		ant->room[i].dist = -1;
 		i++;
 	}
-	ant->adj[ant->start_room].dist = 0;
+	ant->room[ant->start_room].dist = 0;
 	dist = -1;
 	room_discovered = 1;
 	while (room_discovered)
@@ -34,17 +34,17 @@ int		smallest(t_a *ant)
 		dist++;
 		i = 0;
 		room_discovered = 0;
-		while (i < ant->tab_size)
+		while (i < ant->nb_room)
 		{
-			if (ant->adj[i].dist == dist && i != !(ant->start_room))
+			if (ant->room[i].dist == dist && i != !(ant->start_room))
 			{
 				j = 0;
-				while (j < ant->adj[i].len_tab)
+				while (j < ant->room[i].nb_tubes)
 				{
-					k = ant->adj[i].tab[j];
-					if (ant->adj[k].dist < 0)
+					k = ant->room[i].tubes[j].dest;
+					if (ant->room[k].dist < 0)
 					{
-						ant->adj[k].dist = ant->adj[i].dist + 1;
+						ant->room[k].dist = ant->room[i].dist + 1;
 						room_discovered = 1;
 					}
 					j++;
@@ -53,10 +53,10 @@ int		smallest(t_a *ant)
 			i++;
 		}
 	}
-	if (ant->adj[!(ant->start_room)].dist == -1)
+	if (ant->room[!(ant->start_room)].dist == -1)
 		return (INVALID);
-	for (int m = 0; m < ant->tab_size; m++)
-		ft_printf("-- d1 %d: %d\n", m, ant->adj[m].dist);
+	for (int m = 0; m < ant->nb_room; m++)
+		ft_printf("-- d1 %d: %d\n", m, ant->room[m].dist);
 	return (VALID);
 }
 
@@ -69,12 +69,12 @@ int		smallest2(t_a *ant)
 	int		room_discovered;
 
 	i = 0;
-	while (i < ant->tab_size)
+	while (i < ant->nb_room)
 	{
-		ant->adj[i].dist2 = -1;
+		ant->room[i].dist2 = -1;
 		i++;
 	}
-	ant->adj[!(ant->start_room)].dist2 = 0;
+	ant->room[!(ant->start_room)].dist2 = 0;
 	dist = -1;
 	room_discovered = 1;
 	while (room_discovered)
@@ -82,17 +82,17 @@ int		smallest2(t_a *ant)
 		dist++;
 		i = 0;
 		room_discovered = 0;
-		while (i < ant->tab_size)
+		while (i < ant->nb_room)
 		{
-			if (ant->adj[i].dist2 == dist && i != ant->start_room)
+			if (ant->room[i].dist2 == dist && i != ant->start_room)
 			{
 				j = 0;
-				while (j < ant->adj[i].len_tab)
+				while (j < ant->room[i].nb_tubes)
 				{
-					k = ant->adj[i].tab[j];
-					if (ant->adj[k].dist2 < 0)
+					k = ant->room[i].tubes[j].dest;
+					if (ant->room[k].dist2 < 0)
 					{
-						ant->adj[k].dist2 = ant->adj[i].dist2 + 1;
+						ant->room[k].dist2 = ant->room[i].dist2 + 1;
 						room_discovered = 1;
 					}
 					j++;
@@ -101,7 +101,7 @@ int		smallest2(t_a *ant)
 			i++;
 		}
 	}
-	for (int m = 0; m < ant->tab_size; m++)
-		ft_printf("-- d2 %d: %d\n", m, ant->adj[m].dist2);
+	for (int m = 0; m < ant->nb_room; m++)
+		ft_printf("-- d2 %d: %d\n", m, ant->room[m].dist2);
 	return (VALID);
 }

@@ -28,28 +28,38 @@
 # define INVALID -1
 # define MERROR -2
 
-typedef	struct	s_adj
+typedef	struct	s_tube
+{
+	int		len;
+	int		dest;
+}				t_tube;
+
+typedef	struct	s_room
 {
 	int		dist;
 	int		dist2;
-	int		len_tab;
+	int		nb_tubes;
 	char	*name;
-	int		*tab;
+	t_tube	*tubes;
 	int		is_passed;
-}				t_adj;
+}				t_room;
+
+typedef	struct	s_path
+{
+	int		*chain;
+	int		len_path;
+	int		nb_ant_in_path;
+}				t_path;
 
 typedef struct	s_a
 {
 	int		nb_ant;
-	int		tab_size;
-	t_adj	*adj;
-	char	*buf;
+	int		nb_room;
+	t_room	*room;
 	int		start_room;
-	int		**path;
-	int		*len_path;
-	int		*nb_ant_per_path;
-	int		*is_used;
+	char	*buf;
 	int		nb_path;
+	t_path	*path;
 }				t_a;
 
 typedef struct	s_var
@@ -68,10 +78,10 @@ int		smallest(t_a *ant);
 int		smallest2(t_a *ant);
 int		dead_ends(t_a *ant);
 
-int		supp_room_from_other(int index_to_supp, t_adj *other);
+int		supp_room_from_other(int index_to_supp, t_room *other);
 int		free_one_room(t_a *all, int index);
 int		search_for_mult_path(t_a *all, int start);
-int		search_for_deadend(t_adj *adj, int tab_size);
+int		search_for_deadend(t_room *adj, int tab_size);
 int		path(t_a *ant);
 int		sending_ants(t_a *ants);
 int		racc_path2(t_a *ant, int **path);

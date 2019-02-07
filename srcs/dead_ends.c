@@ -19,26 +19,26 @@ int		dead_ends(t_a *ant)
 	int	k;
 
 	i = 2;
-	while (i < ant->tab_size)
+	while (i < ant->nb_room)
 	{
-		if (ant->adj[i].len_tab < 2)
-			ant->adj[i] = ant->adj[ant->tab_size - 1];
+		if (ant->room[i].nb_tubes < 2)
+			ant->room[i] = ant->room[ant->nb_room - 1];
 		j = 0;
-		while (j < ant->tab_size)
+		while (j < ant->nb_room)
 		{
 			k = 0;
-			while (k < ant->adj[j].len_tab)
+			while (k < ant->room[j].nb_tubes)
 			{
-				if (ant->adj[j].tab[k] == ant->tab_size - 1)
+				if (ant->room[j].tubes[k].dest == ant->nb_room - 1)
 				{
-					ant->adj[j].tab[k] = i;
+					ant->room[j].tubes[k].dest = i;
 				}
 				k++;
 			}
 			j++;
 		}
 		i++;
-		ant->tab_size--;
+		ant->nb_room--;
 	}
 	return (VALID);
 }
