@@ -64,10 +64,12 @@ int		get_tube(t_a *ant)
 			return (0);
 	if (realloc_tab(&(ant->room[i])))
 		return (MERROR);
+	bzero(&ant->room[i].tubes[ant->room[i].nb_tubes - 1], sizeof(t_tube));
 	ant->room[i].tubes[ant->room[i].nb_tubes - 1].dest = j;
 	ant->room[i].tubes[ant->room[i].nb_tubes - 1].len = 1;
 	if (realloc_tab(&(ant->room[j])))
 		return (MERROR);
+	bzero(&ant->room[j].tubes[ant->room[j].nb_tubes - 1], sizeof(t_tube));
 	ant->room[j].tubes[ant->room[j].nb_tubes - 1].dest = i;
 	ant->room[j].tubes[ant->room[j].nb_tubes - 1].len = 1;
 	return (0);

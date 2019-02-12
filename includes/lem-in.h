@@ -31,13 +31,16 @@
 typedef	struct	s_tube
 {
 	int		len;
+	int		tmp_len;
 	int		dest;
+	int		tree;
+	int		tmp_tree;
 }				t_tube;
 
 typedef	struct	s_room
 {
 	int		dist;
-	int		dist2;
+//	int		dist2;
 	int		nb_tubes;
 	char	*name;
 	t_tube	*tubes;
@@ -56,6 +59,7 @@ typedef struct	s_a
 	int		nb_ant;
 	int		nb_room;
 	t_room	*room;
+	t_room	*tmp_room;
 	int		start_room;
 	char	*buf;
 	int		nb_path;
@@ -82,8 +86,11 @@ int		supp_room_from_other(int index_to_supp, t_room *other);
 int		free_one_room(t_a *all, int index);
 int		search_for_mult_path(t_a *all, int start);
 int		search_for_deadend(t_room *adj, int tab_size);
-int		path(t_a *ant);
+//int		path(t_a *ant);
 int		sending_ants(t_a *ants);
 int		racc_path2(t_a *ant, int **path);
+int		modify_tubes_first(t_a *ant);
+int		path(t_room *room, t_path *current, int i);
+t_path	**start_searching(t_a *ant, t_path **previous, int i);
 
 #endif
