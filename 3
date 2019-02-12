@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/02/12 16:29:18 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/02/12 13:51:22 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		smallest(t_a *ant)
 	ant->room[ant->start_room].dist = 0;
 	dist = -1;
 	room_discovered = 1;
-	ant->room[0].previous = -1;
 	while (room_discovered)
 	{
 		dist++;
@@ -45,8 +44,7 @@ int		smallest(t_a *ant)
 					k = ant->room[i].tubes[j].dest;
 					if (ant->room[k].dist < 0)
 					{
-						ant->room[i].tubes[j].len = 0;
-						ant->room[k].previous = i;
+						ant->room[i].previous = k;
 						ant->room[k].dist = ant->room[i].dist + 1;
 						room_discovered = 1;
 					}
@@ -60,10 +58,10 @@ int		smallest(t_a *ant)
 		return (INVALID);
 	for (int m = 0; m < ant->nb_room; m++)
 		ft_printf("-- d1 %d: %d\n", m, ant->room[m].dist);
-	i = 1;
-	while (i >= 0)
+	i--;
+	while (ant->room[i].previous != 0)
 	{
-		ft_printf("i %d\n", i);
+		ft_printf("%d\n", i);
 		i = ant->room[i].previous;
 	}
 	return (VALID);

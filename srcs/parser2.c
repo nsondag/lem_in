@@ -57,12 +57,12 @@ int		end_add_entry(char ***split, int to_return)
 
 int		realloc_adj(int index, t_a *all)
 {
-	t_adj	*tmp;
+	t_room	*tmp;
 
-	tmp = all->adj;
-	if (!(all->adj = ft_memalloc((REALLOC_SIZE + index) * sizeof(t_adj))))
+	tmp = all->room;
+	if (!(all->room = ft_memalloc((REALLOC_SIZE + index) * sizeof(t_room))))
 		return (MERROR);
-	ft_memcpy(all->adj, tmp, index * sizeof(t_adj));
+	ft_memcpy(all->room, tmp, index * sizeof(t_room));
 	free(tmp);
 	return (VALID);
 }
@@ -81,16 +81,16 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 	if (for_this->is_start && for_this->is_end)
 		return (end_add_entry(&split, INVALID));
 	else if (for_this->is_start)
-		all->adj[0].name = ft_strdup(*split);
+		all->room[0].name = ft_strdup(*split);
 	else if (for_this->is_end)
-		all->adj[1].name = ft_strdup(*split);
+		all->room[1].name = ft_strdup(*split);
 	else
 	{
-		if (!(all->tab_size % REALLOC_SIZE) && realloc_adj(all->tab_size, all))
+		if (!(all->nb_room % REALLOC_SIZE) && realloc_adj(all->nb_room, all))
 			return (end_add_entry(&split, MERROR));
-		all->adj[all->tab_size].name = ft_strdup(*split);
-		all->adj[all->tab_size].is_passed = -1;
-		all->tab_size++;
+		all->room[all->nb_room].name = ft_strdup(*split);
+		all->room[all->nb_room].is_passed = -1;
+		all->nb_room++;
 	}
 	for_this->is_start = 0;
 	for_this->is_end = 0;
@@ -101,10 +101,10 @@ int		read_room(t_a *all)
 {
 	t_var	for_this;
 
-	if (!(all->adj = ft_memalloc(REALLOC_SIZE * sizeof(t_adj))))
+	if (!(all->room = ft_memalloc(REALLOC_SIZE * sizeof(t_room))))
 		return (MERROR);
 	bzero(&for_this, sizeof(for_this));
-	all->tab_size = 2;
+	all->nb_room = 2;
 	if (get_next_line(0, &(all->buf)) > 0)
 		all->nb_ant = ft_atoi(all->buf);
 	ft_printf("%s\n", all->buf); //a remettre a la fin

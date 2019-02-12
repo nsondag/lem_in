@@ -19,12 +19,12 @@ void	free_all(t_a *all)
 	if (all)
 	{
 		count = -1;
-		if (all->adj)
-			while (++count < all->tab_size)
+		if (all->room)
+			while (++count < all->nb_room)
 			{
-				free(all->adj[count].name);
+				free(all->room[count].name);
 			}
-		free(all->adj);
+		free(all->room);
 		free(all->buf);
 	}
 }

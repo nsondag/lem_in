@@ -12,82 +12,82 @@
 
 #include "lem-in.h"
 
-int		supp_room_from_other(int index_to_supp, t_adj *other)
+int		supp_room_from_other(int index_to_supp, t_room *other)
 {
 	int		i;
 
 	i = 0;
-	while (other->tab[i] != index_to_supp)
+	while (other->tubes[i].dest != index_to_supp)
 		i++;
-	other->len_tab--;
-	other->tab[i] = other->tab[other->len_tab];
+	other->nb_tubes--;
+	other->tubes[i] = other->tubes[other->nb_tubes];
 	return (0);
 }
 
 int		free_one_room(t_a *all, int index)
 {
-	free(all->adj[index].tab);
-	free(all->adj[index].name);
-	bzero(&(all->adj[index]), sizeof(t_adj) * index);
+	free(all->room[index].tubes);
+	free(all->room[index].name);
+	bzero(&(all->room[index]), sizeof(t_room) * index);
 	return (0);
 }
 
-int		supp_2comp_room(t_adj *adj, int index)
+int		supp_2comp_room(t_room *room, int index)
 {
 	int		to_return;
 
 	//ft_printf("-- room deleted with 2 companions : %d\n", index); si utile
-	if (adj[adj[index].tab[0]].len_tab == 2)
-		to_return = adj[index].tab[0];
+	if (room[room[index].tubes[0].dest].nb_tubes == 2)
+		to_return = room[index].tubes[0].dest;
 	else
-		to_return = adj[index].tab[1];
-	supp_room_from_other(index, &(adj[adj[index].tab[0]]));
-	supp_room_from_other(index, &(adj[adj[index].tab[1]]));
-	adj[index].len_tab = 0;
+		to_return = room[index].tubes[1].dest;
+	supp_room_from_other(index, &(room[room[index].tubes[0].dest]));
+	supp_room_from_other(index, &(room[room[index].tubes[1].dest]));
+	room[index].nb_tubes = 0;
 	return (to_return);
 }
 
-int		supp_1comp_room(t_adj *adj, int index)
+int		supp_1comp_room(t_room *room, int index)
 {
 	//ft_printf("-- room deleted with 1 companion : %d\n", index); si utile
-	supp_room_from_other(index, &(adj[adj[index].tab[0]]));
-	adj[index].len_tab = 0;
-	return (adj[index].tab[0]);
+	supp_room_from_other(index, &(room[room[index].tubes[0].dest]));
+	room[index].nb_tubes = 0;
+	return (room[index].tubes[0].dest);
 }
 
-int		supp_chained(t_adj *adj, int index)
+int		supp_chained(t_room *room, int index)
 {
-	if (adj[index].len_tab == 2)
-		index = supp_2comp_room(adj, index);
-	while (index > 1 && adj[index].len_tab == 1)
-		index = supp_1comp_room(adj, index);
+	if (room[index].nb_tubes == 2)
+		index = supp_2comp_room(room, index);
+	while (index > 1 && room[index].nb_tubes == 1)
+		index = supp_1comp_room(room, index);
 	return (0);
 }
 
-int		search_for_side(t_adj *adj, int index, int *direction, int *size)
+int		search_for_side(t_room *room, int index, int *direction, int *size)
 {
 	int		refer;
 
-	refer = adj[index].tab[*direction];
-	if (refer < 2 || adj[refer].len_tab != 2)
+	refer = room[index].tubes[*direction].dest;
+	if (refer < 2 || room[refer].nb_tubes != 2)
 	{
 		*direction = index;
 		return (refer);
 	}
 	(*size)++;
-	*direction = adj[refer].tab[0] == index;
-	return (search_for_side(adj, refer, direction, size));
+	*direction = room[refer].tubes[0].dest == index;
+	return (search_for_side(room, refer, direction, size));
 }
 
-int		search_for_deadend(t_adj *adj, int tab_size)
+int		search_for_deadend(t_room *room, int nb_room)
 {
 	int		i;
 
 	i = 2;
-	while (i < tab_size)
+	while (i < nb_room)
 	{
-		if (adj[i].len_tab == 1)
-			supp_chained(adj, i);
+		if (room[i].nb_tubes == 1)
+			supp_chained(room, i);
 		i++;
 	}
 	return (0);
@@ -99,45 +99,45 @@ int		search_for_mult_path(t_a *all, int start)
 	int		size_of_path;
 	int		first_side;
 	int		second_side;
-	int		adj_first_side;
+	int		room_first_side;
 	int		j;
 	int		k;
 	int		tmp_path_size;
 	int		l;
 
 	i = start;
-	while (i < all->tab_size && all->adj[i].len_tab != 2)
+	while (i < all->nb_room && all->room[i].nb_tubes != 2)
 		i++;
-	if (i == all->tab_size)
+	if (i == all->nb_room)
 		return (NONE_LEFT);
 	size_of_path = 1;
-	adj_first_side = 0;
-	second_side = search_for_side(all->adj, i, &adj_first_side, &size_of_path);
-	adj_first_side = 1;
-	first_side = search_for_side(all->adj, i, &adj_first_side, &size_of_path);
+	room_first_side = 0;
+	second_side = search_for_side(all->room, i, &room_first_side, &size_of_path);
+	room_first_side = 1;
+	first_side = search_for_side(all->room, i, &room_first_side, &size_of_path);
 	if (first_side + second_side == 1)
 		return (search_for_mult_path(all, i + 1));
 	if (first_side == second_side)
 	{
-		supp_chained(all->adj, adj_first_side);
+		supp_chained(all->room, room_first_side);
 		return (search_for_mult_path(all, i + 1));
 	}
 	j = 0;
-	while (j < all->adj[first_side].len_tab)
+	while (j < all->room[first_side].nb_tubes)
 	{
-		k = all->adj[first_side].tab[j];
+		k = all->room[first_side].tubes[j].dest;
 		if (k == second_side)
 		{
-			supp_chained(all->adj, adj_first_side);
+			supp_chained(all->room, room_first_side);
 			return (search_for_mult_path(all, 2));
 		}
-		else if (k != adj_first_side && all->adj[k].len_tab == 2)
+		else if (k != room_first_side && all->room[k].nb_tubes == 2)
 		{
 			tmp_path_size = 1;
-			l = all->adj[k].tab[0] == j ? 1 : 0;
-			if (search_for_side(all->adj, k, &l, &tmp_path_size) == second_side)
+			l = all->room[k].tubes[0].dest == j;
+			if (search_for_side(all->room, k, &l, &tmp_path_size) == second_side)
 			{
-				supp_chained(all->adj, size_of_path < tmp_path_size ? k : adj_first_side);
+				supp_chained(all->room, size_of_path < tmp_path_size ? k : room_first_side);
 				return (search_for_mult_path(all, 2));
 			}
 		}
