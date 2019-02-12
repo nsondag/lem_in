@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/02/12 16:29:18 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/02/12 23:32:20 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		smallest(t_a *ant)
 					k = ant->room[i].tubes[j].dest;
 					if (ant->room[k].dist < 0)
 					{
-						ant->room[i].tubes[j].len = 0;
 						ant->room[k].previous = i;
 						ant->room[k].dist = ant->room[i].dist + 1;
 						room_discovered = 1;
@@ -65,6 +64,18 @@ int		smallest(t_a *ant)
 	{
 		ft_printf("i %d\n", i);
 		i = ant->room[i].previous;
+	}
+	i = 0;
+	while (i < ant->nb_room)
+	{
+		j = 0;
+		while (j < ant->room[i].nb_tubes)
+		{
+			k = ant->room[i].tubes[j].dest;
+			ant->room[i].tubes[j].len += -ant->room[i].dist + ant->room[k].dist;
+			j++;
+		}
+		i++;
 	}
 	return (VALID);
 }
