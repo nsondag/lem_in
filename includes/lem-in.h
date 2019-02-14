@@ -63,7 +63,7 @@ typedef struct	s_a
 	int		start_room;
 	char	*buf;
 	int		nb_path;
-	t_path	*path;
+	t_path	**path;
 }				t_a;
 
 typedef struct	s_var

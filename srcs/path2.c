@@ -42,7 +42,7 @@ int		path(t_room *room, t_path *current, int i)
 		i = 0;
 	}
 	if (current->chain[i] == 1)
-		return (1);
+		return (current->len_path = i + 1);
 	j = -1;
 	while (++j < room[current->chain[i]].nb_tubes)
 	{
@@ -100,7 +100,5 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 		free(tab);
 		return (NULL);
 	}
-	tab[i]->len_path = ant->room[1].dist;
-	ft_memcpy(tab[i]->chain, tab[i]->chain + 1, tab[i]->len_path * sizeof(int));
 	return (tab);
 }
