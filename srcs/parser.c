@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "lem-in.h"
-# include <stdio.h>
 
 int		realloc_tab(t_room *room)
 {

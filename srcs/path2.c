@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lem-in.h"
+#include  <stdio.h>
 
 int		modify_tubes_first(t_a *ant)
 {
@@ -30,47 +31,69 @@ int		modify_tubes_first(t_a *ant)
 	return (VALID);
 }
 
-int		path(t_room *room, t_path *current, int i)
+int		restore_initial_len(t_a *ant)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < ant->nb_room)
+	{
+		j = -1;
+		while (++j < ant->room[i].nb_tubes)
+		{
+			ant->room[i].tubes[j].len = ant->room[i].tubes[j].tmp_len;
+		}
+	}
+	return (VALID);
+}
+
+int		path(t_room *room, t_path *curr, int i)
 {
 	int		j;
 
-	if (!current->chain)
+	if (!(curr->chain))
 	{
-		if (!(current->chain = malloc(i + 1)))
+		ft_printf("%d\n", i);
+		if (!(curr->chain = malloc(sizeof(int) * i)))
 			return (MERROR);
-		current->chain[0] = 0;
+		curr->chain[0] = 0;
 		i = 0;
 	}
-	if (current->chain[i] == 1)
-		return (current->len_path = i + 1);
+	if (curr->chain[i] == 1)
+		return (curr->len_path = i + 1);
 	j = -1;
-	while (++j < room[current->chain[i]].nb_tubes)
+	while (++j < room[curr->chain[i]].nb_tubes)
 	{
-		if (room[current->chain[i]].tubes[j].tree)
+		if (room[curr->chain[i]].tubes[j].tree)
 		{
-			current->chain[i + 1] = room[current->chain[i]].tubes[j].dest;
-			if (path(room, current, i + 1))
+			curr->chain[i + 1] = room[curr->chain[i]].tubes[j].dest;
+			if (path(room, curr, i + 1))
 				return (1);
 		}
 	}
 	return (0);
 }
 
-t_path	*duplicate(t_path *dup)
+t_path	*duplicate(t_path *dup, t_room *room)
 {
-	t_path	*new;
+	t_path	*new_path;
+	int		i;
 
-	if (!(new = malloc(sizeof(t_path))))
+	if (!(new_path = malloc(sizeof(t_path))))
 		return (NULL);
-	if (!(new->chain = malloc(sizeof(int) * dup->len_path)))
+	if (!(new_path->chain = malloc(sizeof(int) * dup->len_path)))
 	{
-		free(new);
+		free(new_path);
 		return (NULL);
 	}
-	ft_memcpy(new->chain, dup->chain, dup->len_path);
-	new->len_path = dup->len_path;
-	new->nb_ant_in_path = 0;
-	return (new);
+	i = -1;
+	while (++i < dup->len_path)
+		room[dup->chain[i]].is_passed = 0;
+	ft_memcpy(new_path->chain, dup->chain, sizeof(int) * dup->len_path);
+	new_path->len_path = dup->len_path;
+	new_path->nb_ant_in_path = 0;
+	return (new_path);
 }
 
 t_path	**start_searching(t_a *ant, t_path **previous, int i)
@@ -85,7 +108,7 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 	{
 		j = -1;
 		while (++j < i)
-			tab[j] = duplicate(previous[j]);
+			tab[j] = duplicate(previous[j], ant->room);
 	}
 	tab[i + 1] = NULL;
 	if (!(tab[i] = ft_memalloc(sizeof(t_path))))
@@ -93,7 +116,7 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 		free(tab);
 		return (NULL);
 	}
-	if ((ret = path(ant->room, tab[i], ant->room[1].dist)) == 0)
+	if ((ret = path(ant->room, tab[i], ant->escape)) == 0) //a changer
 	{
 		free(tab[i]->chain);
 		free(tab[i]);
@@ -102,3 +125,39 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 	}
 	return (tab);
 }
+
+int		change_len(t_room *room, int start, int dest, int new_path_len)
+{
+	int		i;
+
+	i = -1;
+	while (++i < room[start].nb_tubes)
+	{
+		if (room[start].tubes[i].dest == dest)
+		{
+			room[start].tubes[i].len = new_path_len;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path)
+{
+	int		i;
+
+	restore_initial_len(ant);
+	while (--nb_path > -1)
+	{
+		i = -1;
+		while (++i < path[nb_path]->len_path - 1)
+		{
+			room[path[nb_path]->chain[i]].is_passed = 1;
+			change_len(room, path[nb_path]->chain[i], path[nb_path]->chain[i + 1], 2000000);
+			change_len(room, path[nb_path]->chain[i + 1], path[nb_path]->chain[i], 0);
+		}
+		room[path[nb_path]->chain[i]].is_passed = 1;
+	}
+	return (0);
+}
+

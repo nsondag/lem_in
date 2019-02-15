@@ -89,7 +89,7 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 		if (!(all->nb_room % REALLOC_SIZE) && realloc_adj(all->nb_room, all))
 			return (end_add_entry(&split, MERROR));
 		all->room[all->nb_room].name = ft_strdup(*split);
-		all->room[all->nb_room].is_passed = -1;
+//		all->room[all->nb_room].is_passed = -1;
 		all->nb_room++;
 	}
 	for_this->is_start = 0;

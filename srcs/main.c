@@ -36,7 +36,7 @@ int		main()
 	//ft_printf("nb_ant %d\n", ant.nb_ant);
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);
-	ant.start_room = ant.room[0].nb_tubes > ant.room[1].nb_tubes ? 1 : 0;
+	ant.start_room = 0;
 	clock_t i = clock();
 	if (smallest(&ant))
 		exit_func(INVALID, &ant);
@@ -49,16 +49,16 @@ int		main()
 		if (ant.room[m].nb_tubes > 2)
 			c++;
 		for (int l = 0; l < ant.room[m].nb_tubes; l++)
-			ft_printf("-- %d: %d: %d\n", m, ant.room[m].tubes[l].len, ant.room[m].tubes[l]);
+			ft_printf("-- dest %2d: len %2d\n", ant.room[m].tubes[l].dest, ant.room[m].tubes[l].len);
 		ft_printf("\n");
 	}
 	modify_tubes_first(&ant);
 	ft_printf("---after_modif---\n");
 	for (int m = 0; m < ant.nb_room; m++)
 	{
-		ft_printf("-- nb_tubes %d : %d --\n", m, ant.room[m].nb_tubes);
+		ft_printf("-- %d --\n", m);
 		for (int l = 0; l < ant.room[m].nb_tubes; l++)
-			ft_printf("-- %d: %d: %d: %d\n", m, ant.room[m].tubes[l].tmp_len, ant.room[m].tubes[l].dest, ant.room[m].tubes[l].tree);
+			ft_printf("-- dest %2d: tmp_len %2d: tree %2d\n", ant.room[m].tubes[l].dest, ant.room[m].tubes[l].tmp_len, ant.room[m].tubes[l].tree);
 		ft_printf("\n");
 	}
 	int m = 0;
@@ -69,10 +69,29 @@ int		main()
 	ft_printf("nb not tube room(s) : %d\n", c);
 	ft_printf("nb room(s) connected : %d / %d\n", m, ant.nb_room);
 
-	int f = 1;
-	t_path **s = start_searching(&ant, NULL, 0);
-	for (int j=0;j<f;j++)
-		for (int d=0;d<s[j]->len_path;d++)
-			ft_printf("---- %d\n", s[j]->chain[d]);
+	ant.path = malloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
+	int f = 0;
+	ant.path[f] = start_searching(&ant, NULL, f);
+	for (int j=0;j<f+1;j++)
+		for (int d=0;d<ant.path[f][j]->len_path;d++)
+			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
+	clock_t i1 = clock();
+	change_all_len(&ant, ant.room, ant.path[f], 1);
+	for (int m = 0; m < ant.nb_room; m++)
+	{
+		ft_printf("-- is_passed %d : %d --\n", m, ant.room[m].is_passed);
+		for (int l = 0; l < ant.room[m].nb_tubes; l++)
+			ft_printf("-- %d: %d: %d: %d\n", m, ant.room[m].tubes[l].len, ant.room[m].tubes[l].dest, ant.room[m].tubes[l].tree);
+		ft_printf("\n");
+	}
+	f++;
+	if (smallest2(&ant))
+		exit_func(INVALID, &ant);
+	ant.path[f] = start_searching(&ant, ant.path[f-1], f);
+	for (int j=0;j<f+1&&ft_printf("\n");j++)
+		for (int d=0;d<ant.path[f][j]->len_path;d++)
+			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
+	clock_t j1 = clock();
+	ft_printf("ici %lf\n", ((double)j1 - i1)/CLOCKS_PER_SEC);
 	return (0);
 }
