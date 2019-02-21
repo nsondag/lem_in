@@ -75,6 +75,7 @@ int		main()
 	for (int j=0;j<f+1;j++)
 		for (int d=0;d<ant.path[f][j]->len_path;d++)
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
+	calculate_move(&ant, ant.path[f], 1);
 	calculate_start(&ant, ant.path[f], 1);
 	print_sol(&ant, ant.path[f], 1);
 	clock_t i1 = clock();

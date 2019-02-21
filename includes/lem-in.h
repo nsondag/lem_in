@@ -98,5 +98,6 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i);
 int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path);
 int		print_sol(t_a *all, t_path **path, int nb_path);
 int		calculate_start(t_a *all, t_path **path, int nb_path);
+int		calculate_move(t_a *all, t_path **path, int nb_path);
 
 #endif

@@ -18,15 +18,17 @@ int		calculate_move(t_a *all, t_path **path, int nb_path)
 	int		j;
 	int		max;
 	int		max_index;
+	int		sum_diff;
 
 	i = -1;
 	while (++i < nb_path)
 		path[i]->is_used = 1;
 	j = 0;
-	max = 0;
-	max_index = 0;
 	while (j < all->nb_ant)
 	{
+		max = 0;
+		max_index = 0;
+		sum_diff = 0;
 		i = -1;
 		while (++i < nb_path)
 			if (path[i]->is_used && path[i]->len_path > max)
@@ -34,8 +36,24 @@ int		calculate_move(t_a *all, t_path **path, int nb_path)
 				max = path[i]->len_path;
 				max_index = i;
 			}
-		
+		i = -1;
+		while (++i < nb_path)
+			if (path[i]->is_used && i != max_index)
+				sum_diff += max - path[i]->len_path;
+		if (all->nb_ant - j <= sum_diff)
+			path[max_index]->is_used = 0;
+		else
+		{
+			i = -1;
+			while (++i < nb_path && j < all->nb_ant)
+				if (path[i]->is_used)
+				{
+					path[i]->nb_ant_in_path++;
+					j++;
+				}
+		}
 	}
+	return (0);
 }
 
 int		calculate_start(t_a *all, t_path **path, int nb_path)
