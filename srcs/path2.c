@@ -104,7 +104,7 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 	int		j;
 	int		ret;
 
-	if (!(tab = malloc(sizeof(t_path*) * (i + 2))))
+	if (!(tab = malloc(sizeof(t_path*) * (i + 1))))
 		return (NULL);
 	ft_printf("tab created\n");
 	if (previous)
@@ -114,7 +114,6 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 			tab[j] = duplicate(previous[j], ant->room);
 	}
 	ft_printf("previous copied\n");
-	tab[i + 1] = NULL;
 	if (!(tab[i] = ft_memalloc(sizeof(t_path))))
 	{
 		free(tab);

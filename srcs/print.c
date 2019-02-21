@@ -79,18 +79,21 @@ int		print_sol(t_a *all, t_path **path, int nb_path)
 	int		j;
 	int		first_ant;
 	int		last_ant;
+	int		first;
 
 	i = -1;
 	while (++i < all->nb_move)
 	{
+		first = 1;
 		j = -1;
 		while (++j < nb_path)
 		{
-			first_ant = cut_negative(i - path[j]->nb_ant_in_path);
+			first_ant = cut_negative(i - path[j]->len_path + 1);
 			last_ant = ft_min(i, path[j]->nb_ant_in_path);
 			while (first_ant < last_ant)
 			{
-				ft_printf("L%d-%d ", path[j]->start + first_ant, path[j]->chain[i + first_ant]);
+				ft_printf(first ? "L%d-%d" : " L%d-%d", path[j]->start + first_ant + 1, path[j]->chain[i - first_ant]);
+				first = 0;
 				first_ant++;
 			}
 		}

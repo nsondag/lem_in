@@ -72,12 +72,10 @@ int		main()
 	ant.path = malloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
 	int f = 0;
 	ant.path[f] = start_searching(&ant, NULL, f);
+	ft_printf("%d\n", ant.path[f][0]->len_path);
 	for (int j=0;j<f+1;j++)
 		for (int d=0;d<ant.path[f][j]->len_path;d++)
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
-	calculate_move(&ant, ant.path[f], 1);
-	calculate_start(&ant, ant.path[f], 1);
-	print_sol(&ant, ant.path[f], 1);
 	clock_t i1 = clock();
 	change_all_len(&ant, ant.room, ant.path[f], 1);
 	for (int m = 0; m < ant.nb_room; m++)
@@ -101,5 +99,15 @@ int		main()
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
 	clock_t j1 = clock();
 	ft_printf("ici %lf\n", ((double)j1 - i1)/CLOCKS_PER_SEC);
+	calculate_move(&ant, ant.path[f], 2);
+	for (int r=0;r<f+1;r++)
+	{
+	ft_printf("%d %d %d\n", ant.path[f][r]->chain[r], ant.path[f][r]->nb_ant_in_path, ant.path[f][r]->len_path);
+	if (ant.path[f][r]->nb_ant_in_path)
+		ant.nb_move = ft_max(ant.nb_move, ant.path[f][r]->nb_ant_in_path + ant.path[f][r]->len_path - 1);
+	}
+	ft_printf("move : %d\n", ant.nb_move);
+	calculate_start(&ant, ant.path[f], 2);
+	print_sol(&ant, ant.path[f], 2);
 	return (0);
 }
