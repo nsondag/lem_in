@@ -76,6 +76,8 @@ int		add_entry(t_var *for_this, t_a *all)
 	if (ft_tablen((void**)split) != 3)
 		return (ft_indexof(all->buf, '-') != -1) ?
 end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
+	if (ft_indexof(all->buf, '-') != -1)
+		return (end_add_entry(&split, INVALID));
 	if (!is_digit_str(split[1]) || !is_digit_str(split[2]))
 		return (end_add_entry(&split, INVALID));
 	if (for_this->is_start && for_this->is_end)

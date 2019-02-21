@@ -45,6 +45,7 @@ typedef	struct	s_room
 	char	*name;
 	t_tube	*tubes;
 	int		is_passed;
+	int		coming_from;
 }				t_room;
 
 typedef	struct	s_path
@@ -52,6 +53,8 @@ typedef	struct	s_path
 	int		*chain;
 	int		len_path;
 	int		nb_ant_in_path;
+	int		is_used;
+	int		start;
 }				t_path;
 
 typedef struct	s_a
@@ -64,6 +67,7 @@ typedef struct	s_a
 	int		escape;
 	int		nb_path;
 	t_path	***path;
+	int		nb_move;
 }				t_a;
 
 typedef struct	s_var
@@ -92,5 +96,7 @@ int		modify_tubes_first(t_a *ant);
 int		path(t_room *room, t_path *current, int i);
 t_path	**start_searching(t_a *ant, t_path **previous, int i);
 int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path);
+int		print_sol(t_a *all, t_path **path, int nb_path);
+int		calculate_start(t_a *all, t_path **path, int nb_path);
 
 #endif

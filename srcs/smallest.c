@@ -69,47 +69,64 @@ int		smallest2(t_a *ant)
 	int		k;
 	int		len;
 	int		dist;
+	int		discovered;
+	int		discoverable;
 
 	i = 0;
+//	ft_printf("--is_passed--\n");
 	while (i < ant->nb_room)
 	{
 		j = -1;
 		while (++j < ant->room[i].nb_tubes)
 			ant->room[i].tubes[j].tree = 0;
-		ant->room[i].dist = 2000000;
+//		ft_printf("%d %d\n", i, ant->room[i].is_passed);
+		ant->room[i].dist = -1;
+		ant->room[i].coming_from = -1;
 		i++;
 	}
 	ant->room[ant->start_room].dist = 0;
 	ant->room[ant->start_room].space = 0;
 	dist = -1;
-	while (dist < 1000 && ant->room[!(ant->start_room)].dist == 2000000)
+	discoverable = 1;
+//	ft_printf("--coming--\n");
+	while (discoverable && ant->room[!(ant->start_room)].dist == -1)
 	{
+		discovered = 0;
+		discoverable = 0;
 		dist++;
 		i = 0;
 		while (i < ant->nb_room)
 		{
+//			ft_printf("%d %d dist %d\n", i, ant->room[i].coming_from,dist);
 			j = 0;
-			while (j < ant->room[i].nb_tubes)
-			{
-				len = ant->room[i].tubes[j].len;
-				k = ant->room[i].tubes[j].dest;
-				if (ant->room[i].dist != 2000000 && ant->room[i].dist + len < dist && ant->room[k].dist == 2000000)
+			if (ant->room[i].dist != -1)
+				while (j < ant->room[i].nb_tubes)
 				{
-					ant->room[k].dist = ant->room[i].dist + len;
-					ant->room[k].space = ant->room[i].space + 1;
-					ant->room[i].tubes[j].tree = 1;
-					if (!len)
-						i = -1;
+					len = ant->room[i].tubes[j].len;
+					k = ant->room[i].tubes[j].dest;
+					if (len != 2000000)
+						discoverable = 1;
+					if (ant->room[k].dist == -1 && ant->room[i].dist + len < dist &&
+(ant->room[i].is_passed == ant->room[k].is_passed || ant->room[i].is_passed == ant->room[i].coming_from))
+					{
+//						ft_printf("--%d %d\n", i, k);
+						ant->room[k].dist = ant->room[i].dist + len;
+						ant->room[k].space = ant->room[i].space + 1;
+						ant->room[i].tubes[j].tree = 1;
+						ant->room[k].coming_from = ant->room[i].is_passed;
+						discovered = 1;
+					}
+					j++;
 				}
-				j++;
-			}
 			i++;
 		}
+		if (discovered)
+			dist--;
 	}
-	if (ant->room[!(ant->start_room)].dist == 2000000)
+	if (ant->room[!(ant->start_room)].dist == -1)
 		return (INVALID);
 	ant->escape = ant->room[!(ant->start_room)].space + 1;
-	for (int m = 0; m < ant->nb_room; m++)
-		ft_printf("-- d1 %d: %d: %d\n", m, ant->room[m].dist, ant->room[m].space);
+//	for (int m = 0; m < ant->nb_room; m++)
+//		ft_printf("-- d1 %d: %d: %d\n", m, ant->room[m].dist, ant->room[m].space);
 	return (VALID);
 }

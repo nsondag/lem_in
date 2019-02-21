@@ -75,6 +75,8 @@ int		main()
 	for (int j=0;j<f+1;j++)
 		for (int d=0;d<ant.path[f][j]->len_path;d++)
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
+	calculate_start(&ant, ant.path[f], 1);
+	print_sol(&ant, ant.path[f], 1);
 	clock_t i1 = clock();
 	change_all_len(&ant, ant.room, ant.path[f], 1);
 	for (int m = 0; m < ant.nb_room; m++)
@@ -88,6 +90,11 @@ int		main()
 	if (smallest2(&ant))
 		exit_func(INVALID, &ant);
 	ant.path[f] = start_searching(&ant, ant.path[f-1], f);
+	if (!(ant.path[f]))
+	{
+		ft_printf("path not found\n");
+		return (0);
+	}
 	for (int j=0;j<f+1&&ft_printf("\n");j++)
 		for (int d=0;d<ant.path[f][j]->len_path;d++)
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);

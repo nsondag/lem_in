@@ -41,9 +41,8 @@ int		restore_initial_len(t_a *ant)
 	{
 		j = -1;
 		while (++j < ant->room[i].nb_tubes)
-		{
 			ant->room[i].tubes[j].len = ant->room[i].tubes[j].tmp_len;
-		}
+		ant->room[i].is_passed = -1;
 	}
 	return (VALID);
 }
@@ -54,14 +53,17 @@ int		path(t_room *room, t_path *curr, int i)
 
 	if (!(curr->chain))
 	{
-		ft_printf("%d\n", i);
-		if (!(curr->chain = malloc(sizeof(int) * i)))
+		ft_printf("len_path %d\n", i+1);
+		if (!(curr->chain = malloc(sizeof(int) * (i + 1))))
 			return (MERROR);
+		curr->len_path = i + 1;
 		curr->chain[0] = 0;
 		i = 0;
 	}
 	if (curr->chain[i] == 1)
 		return (curr->len_path = i + 1);
+	if (i >= curr->len_path)
+		return (0);
 	j = -1;
 	while (++j < room[curr->chain[i]].nb_tubes)
 	{
@@ -89,7 +91,7 @@ t_path	*duplicate(t_path *dup, t_room *room)
 	}
 	i = -1;
 	while (++i < dup->len_path)
-		room[dup->chain[i]].is_passed = 0;
+		room[dup->chain[i]].is_passed = -1;
 	ft_memcpy(new_path->chain, dup->chain, sizeof(int) * dup->len_path);
 	new_path->len_path = dup->len_path;
 	new_path->nb_ant_in_path = 0;
@@ -104,25 +106,27 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 
 	if (!(tab = malloc(sizeof(t_path*) * (i + 2))))
 		return (NULL);
+	ft_printf("tab created\n");
 	if (previous)
 	{
 		j = -1;
 		while (++j < i)
 			tab[j] = duplicate(previous[j], ant->room);
 	}
+	ft_printf("previous copied\n");
 	tab[i + 1] = NULL;
 	if (!(tab[i] = ft_memalloc(sizeof(t_path))))
 	{
 		free(tab);
 		return (NULL);
 	}
+	ft_printf("new path allocated\n");
 	if ((ret = path(ant->room, tab[i], ant->escape)) == 0) //a changer
 	{
-		free(tab[i]->chain);
-		free(tab[i]);
-		free(tab);
+		ft_printf("path not found\n");
 		return (NULL);
 	}
+	ft_printf("path found\n");
 	return (tab);
 }
 
@@ -152,11 +156,11 @@ int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path)
 		i = -1;
 		while (++i < path[nb_path]->len_path - 1)
 		{
-			room[path[nb_path]->chain[i]].is_passed = 1;
+			if (i)
+				room[path[nb_path]->chain[i]].is_passed = nb_path;
 			change_len(room, path[nb_path]->chain[i], path[nb_path]->chain[i + 1], 2000000);
 			change_len(room, path[nb_path]->chain[i + 1], path[nb_path]->chain[i], 0);
 		}
-		room[path[nb_path]->chain[i]].is_passed = 1;
 	}
 	return (0);
 }
