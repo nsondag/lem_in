@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:21:23 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/04 14:21:33 by hvromman         ###   ########.fr       */
+/*   Updated: 2019/02/24 15:45:23 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,19 @@ int		read_room(t_a *all)
 	bzero(&for_this, sizeof(for_this));
 	all->nb_room = 2;
 	if (get_next_line(0, &(all->buf)) > 0)
+	{
 		all->nb_ant = ft_atoi(all->buf);
-	ft_printf("%s\n", all->buf); //a remettre a la fin
+		if (all->nb_ant <= 0)
+			return (INVALID);
+	}
+	all->data = ft_strdup(all->buf);
+	//ft_printf("%s\n", all->buf); //a remettre a la fin
 	ft_strdel(&(all->buf));
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
-		ft_printf("%s\n", all->buf);// a remettre a la fin
+		all->data = ft_strjoin(all->data, "\n");
+		all->data = ft_strjoin(all->data, all->buf);
+		//ft_printf("%s\n", all->buf);// a remettre a la fin
 		if ((for_this.ret = read_comment(all->buf)) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)

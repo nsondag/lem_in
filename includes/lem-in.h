@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/27 21:10:14 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/02/24 15:22:21 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct	s_a
 	int		nb_path;
 	t_path	***path;
 	int		nb_move;
+	char	*data;
 }				t_a;
 
 typedef struct	s_var
@@ -99,5 +100,6 @@ int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path);
 int		print_sol(t_a *all, t_path **path, int nb_path);
 int		calculate_start(t_a *all, t_path **path, int nb_path);
 int		calculate_move(t_a *all, t_path **path, int nb_path);
+int		crossing_path(t_path ***path, int f);
 
 #endif

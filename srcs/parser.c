@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/01/10 14:52:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/02/24 15:34:20 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int		parse(t_a *ant)
 		return (INVALID);
 	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
-		ft_printf("%s\n", ant->buf); //a remettre a la fin
+		ant->data = ft_strjoin(ant->data, "\n");
+		ant->data = ft_strjoin(ant->data, ant->buf);
+		//ft_printf("%s\n", ant->buf); //a remettre a la fin
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 		ft_strdel(&(ant->buf));
