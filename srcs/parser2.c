@@ -75,12 +75,9 @@ int		add_entry(t_var *for_this, t_a *all)
 		return (MERROR);
 	if (ft_tablen((void**)split) != 3)
 		return (ft_indexof(all->buf, '-') != -1) ?
-end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
-	if (ft_indexof(all->buf, '-') != -1)
-		return (end_add_entry(&split, INVALID));
-	if (!is_digit_str(split[1]) || !is_digit_str(split[2]))
-		return (end_add_entry(&split, INVALID));
-	if (for_this->is_start && for_this->is_end)
+		end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
+	if (ft_indexof(all->buf, '-') != -1 || !is_digit_str(split[1]) ||
+		!is_digit_str(split[2]) || (for_this->is_start && for_this->is_end))
 		return (end_add_entry(&split, INVALID));
 	else if (for_this->is_start)
 		all->room[0].name = ft_strdup(*split);
@@ -91,12 +88,35 @@ end_add_entry(&split, ENDFUNCTION) : end_add_entry(&split, INVALID);
 		if (!(all->nb_room % REALLOC_SIZE) && realloc_adj(all->nb_room, all))
 			return (end_add_entry(&split, MERROR));
 		all->room[all->nb_room].name = ft_strdup(*split);
-//		all->room[all->nb_room].is_passed = -1;
 		all->nb_room++;
 	}
 	for_this->is_start = 0;
 	for_this->is_end = 0;
 	return (end_add_entry(&split, VALID));
+}
+
+int		read_nb_ant(t_a *all, t_var *for_this)
+{
+	bzero(for_this, sizeof(t_var));
+	all->nb_room = 2;
+	while (get_next_line(0, &(all->buf)) > 0)
+	{
+		if (read_comment(all->buf) != COMMENT)
+		{
+			all->nb_ant = ft_atoi(all->buf);
+			if (all->nb_ant <= 0)
+			{
+				ft_strdel(&(all->buf));
+				return (INVALID);
+			}
+			all->data = ft_strdup(all->buf);
+			break ;
+		}
+		all->data = ft_strdup(all->buf);
+		ft_strdel(&(all->buf));
+	}
+	ft_strdel(&(all->buf));
+	return (VALID);
 }
 
 int		read_room(t_a *all)
@@ -105,22 +125,11 @@ int		read_room(t_a *all)
 
 	if (!(all->room = ft_memalloc(REALLOC_SIZE * sizeof(t_room))))
 		return (MERROR);
-	bzero(&for_this, sizeof(for_this));
-	all->nb_room = 2;
-	if (get_next_line(0, &(all->buf)) > 0)
-	{
-		all->nb_ant = ft_atoi(all->buf);
-		if (all->nb_ant <= 0)
-			return (INVALID);
-	}
-	all->data = ft_strdup(all->buf);
-	//ft_printf("%s\n", all->buf); //a remettre a la fin
-	ft_strdel(&(all->buf));
+	if ((for_this.ret = read_nb_ant(all, &for_this)))
+		return (for_this.ret);
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
-		all->data = rea(all->data, "\n");
 		all->data = rea(all->data, all->buf);
-		//ft_printf("%s\n", all->buf);// a remettre a la fin
 		if ((for_this.ret = read_comment(all->buf)) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)

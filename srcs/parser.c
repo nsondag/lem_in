@@ -14,10 +14,20 @@
 
 char	*rea(char *s1, char *s2)
 {
-	char	*to_return;
+	char		*to_return;
+	char		*tmp;
+	static int	start;
 
-	to_return = ft_strjoin(s1, s2);
+	if (!start)
+	{
+		tmp = ft_strjoin(s1, "\n");
+		to_return = ft_strjoin(tmp, s2);
+		free(tmp);
+	}
+	else
+		to_return = ft_strjoin(s1, s2);
 	free(s1);
+	start++;
 	return (to_return);
 }
 
@@ -42,17 +52,17 @@ int		get_tube(t_a *ant)
 	char	*room1;
 	char	*room2;
 	int		dash;
-	int		end;
 	int		i;
 	int		j;
 	int		k;
 
 	dash = ft_indexof(ant->buf, '-');
-	end = ft_strlen(ant->buf + dash) + dash;
 	if (ant->buf[0] != '#' && dash != -1)
 	{
-		room1 = ft_strsub(ant->buf, 0, dash);
-		room2 = ft_strsub(ant->buf, dash + 1, end - dash);	
+		room1 = ant->buf;
+		room2 = ant->buf + dash + 1;
+		ft_printf ("%s\n%s\n", room1, room2);
+		ant->buf[dash] = 0;
 	}
 	else
 		return (ant->buf[0] == '#' ? VALID : INVALID);
@@ -93,7 +103,6 @@ int		parse(t_a *ant)
 	{
 		ant->data = rea(ant->data, "\n");
 		ant->data = rea(ant->data, ant->buf);
-		//ft_printf("%s\n", ant->buf); //a remettre a la fin
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 		ft_strdel(&(ant->buf));
