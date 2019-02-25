@@ -12,6 +12,15 @@
 
 #include "lem-in.h"
 
+char	*rea(char *s1, char *s2)
+{
+	char	*to_return;
+
+	to_return = ft_strjoin(s1, s2);
+	free(s1);
+	return (to_return);
+}
+
 int		realloc_tab(t_room *room)
 {
 	t_tube	*tmp;
@@ -82,8 +91,8 @@ int		parse(t_a *ant)
 		return (INVALID);
 	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
-		ant->data = ft_strjoin(ant->data, "\n");
-		ant->data = ft_strjoin(ant->data, ant->buf);
+		ant->data = rea(ant->data, "\n");
+		ant->data = rea(ant->data, ant->buf);
 		//ft_printf("%s\n", ant->buf); //a remettre a la fin
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);

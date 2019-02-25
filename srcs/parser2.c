@@ -118,8 +118,8 @@ int		read_room(t_a *all)
 	ft_strdel(&(all->buf));
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
-		all->data = ft_strjoin(all->data, "\n");
-		all->data = ft_strjoin(all->data, all->buf);
+		all->data = rea(all->data, "\n");
+		all->data = rea(all->data, all->buf);
 		//ft_printf("%s\n", all->buf);// a remettre a la fin
 		if ((for_this.ret = read_comment(all->buf)) == VALID)
 		{

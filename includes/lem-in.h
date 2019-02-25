@@ -101,5 +101,6 @@ int		print_sol(t_a *all, t_path **path, int nb_path);
 int		calculate_start(t_a *all, t_path **path, int nb_path);
 int		calculate_move(t_a *all, t_path **path, int nb_path);
 int		crossing_path(t_path ***path, int f);
+char	*rea(char *s1, char *s2);
 
 #endif
