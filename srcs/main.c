@@ -99,6 +99,7 @@ int		main()
 			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
 	clock_t j1 = clock();
 	ft_printf("ici %lf\n", ((double)j1 - i1)/CLOCKS_PER_SEC);
+	crossing_path(ant.path, f);
 	calculate_move(&ant, ant.path[f], 2);
 	for (int r=0;r<f+1;r++)
 	{
