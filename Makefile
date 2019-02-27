@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = srcs/
 HEAD = includes/
 LIB = libft/
-FILE = lem-in.h
+FILE = lem_in.h
 H = $(addprefix $(HEAD), $(FILE))
 FILES = main.o parser.o parser2.o exit.o smallest.o supp_mult_path.o\
 dead_ends.o path2.o print.o crossing_path.o

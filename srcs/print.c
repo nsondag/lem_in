@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		calculate_move(t_a *all, t_path **path, int nb_path)
 {
@@ -23,7 +23,8 @@ int		calculate_move(t_a *all, t_path **path, int nb_path)
 		g[3] = 0;
 		g[4] = 0;
 		while (++g[0] < nb_path)
-			if (path[g[0]]->is_used && path[g[0]]->len_path > g[2] && (g[2] = path[g[0]]->len_path))
+			if (path[g[0]]->is_used && path[g[0]]->len_path > g[2]
+				&& (g[2] = path[g[0]]->len_path))
 				g[3] = g[0];
 		g[0] = -1;
 		while (++g[0] < nb_path)
@@ -43,7 +44,6 @@ int		moves(t_a *all, t_path **path, int nb_path)
 {
 	int		i;
 
-
 	i = -1;
 	while (++i <= nb_path)
 		path[i]->is_used = 1;
@@ -53,7 +53,8 @@ int		moves(t_a *all, t_path **path, int nb_path)
 	{
 		ft_printf("%d %d %d\n", path[i]->chain[1], path[i]->nb_ant_in_path, path[i]->len_path);
 		if (path[i]->nb_ant_in_path)
-			all->nb_move[nb_path] = ft_max(all->nb_move[nb_path], path[i]->nb_ant_in_path + path[i]->len_path - 1);
+			all->nb_move[nb_path] = ft_max(all->nb_move[nb_path],
+			path[i]->nb_ant_in_path + path[i]->len_path - 1);
 	}
 	return (0);
 }

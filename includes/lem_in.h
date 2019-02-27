@@ -39,7 +39,6 @@ typedef	struct	s_tube
 typedef	struct	s_room
 {
 	int		dist;
-//	int		dist2;
 	int		space;
 	int		nb_tubes;
 	char	*name;
@@ -79,30 +78,30 @@ typedef struct	s_var
 	int		ret;
 }				t_var;
 
-int		read_comment(char *line);
-int		read_room(t_a *all);
-void	exit_func(int exit_code, t_a *all);
-void	free_all(t_a *all);
-int		parse(t_a *ant);
-int		smallest(t_a *ant);
-int		smallest2(t_a *ant);
-int		dead_ends(t_a *ant);
+int				read_comment(char *line);
+int				read_room(t_a *all);
+void			exit_func(int exit_code, t_a *all);
+void			free_all(t_a *all);
+int				parse(t_a *ant);
+int				smallest(t_a *ant);
+int				smallest2(t_a *ant);
+int				dead_ends(t_a *ant);
 
-int		supp_room_from_other(int index_to_supp, t_room *other);
-int		free_one_room(t_a *all, int index);
-int		search_for_mult_path(t_a *all, int start);
-int		search_for_deadend(t_room *adj, int tab_size);
-int		sending_ants(t_a *ants);
-int		racc_path2(t_a *ant, int **path);
-int		modify_tubes_first(t_a *ant);
-int		path(t_room *room, t_path *current, int i);
-t_path	**start_searching(t_a *ant, t_path ***previous, int i);
-int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path);
-int		print_sol(t_a *all, t_path **path, int nb_path);
-int		calculate_start(t_a *all, t_path **path, int nb_path);
-int		calculate_move(t_a *all, t_path **path, int nb_path);
-int		crossing_path(t_path ***path, int f);
-char	*rea(char *s1, char *s2);
-int		moves(t_a *all, t_path **path, int nb_path);
+int				supp_room_from_other(int index_to_supp, t_room *other);
+int				free_one_room(t_a *all, int index);
+int				search_for_mult_path(t_a *all, int start);
+int				search_for_deadend(t_room *adj, int tab_size);
+int				sending_ants(t_a *ants);
+int				racc_path2(t_a *ant, int **path);
+int				modify_tubes_first(t_a *ant);
+int				path(t_room *room, t_path *current, int i);
+t_path			**start_searching(t_a *ant, t_path ***previous, int i);
+int				change_all_len(t_a *ant, t_room *room, t_path **path, int nb);
+int				print_sol(t_a *all, t_path **path, int nb_path);
+int				calculate_start(t_a *all, t_path **path, int nb_path);
+int				calculate_move(t_a *all, t_path **path, int nb_path);
+int				crossing_path(t_path ***path, int f);
+char			*rea(char *s1, char *s2);
+int				moves(t_a *all, t_path **path, int nb_path);
 
 #endif

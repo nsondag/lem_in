@@ -10,65 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		smallest(t_a *ant)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		dist;
-	int		room_discovered;
+	int		g[5];
 
-	i = 0;
-	while (i < ant->nb_room)
-	{
-		ant->room[i].dist = -1;
-		i++;
-	}
+	g[0] = -1;
+	while (++g[0] < ant->nb_room)
+		ant->room[g[0]].dist = -1;
 	ant->room[ant->start_room].dist = 0;
-	dist = -1;
-	room_discovered = 1;
-	while (room_discovered)
-	{
-		dist++;
-		i = 0;
-		room_discovered = 0;
-		while (i < ant->nb_room)
-		{
-			if (ant->room[i].dist == dist)
-			{
-				j = 0;
-				while (j < ant->room[i].nb_tubes)
+	g[3] = -1;
+	g[4] = 1;
+	while (g[4] && (g[0] = -1)
+		&& !(g[4] = 0) && (g[3]++ || 1))
+		while (++g[0] < ant->nb_room)
+			if (ant->room[g[0]].dist == g[3] && (g[1] = -1))
+				while (++g[1] < ant->room[g[0]].nb_tubes)
 				{
-					k = ant->room[i].tubes[j].dest;
-					if (ant->room[k].dist < 0)
+					g[2] = ant->room[g[0]].tubes[g[1]].dest;
+					if (ant->room[g[2]].dist < 0)
 					{
-						ant->room[k].dist = ant->room[i].dist + 1;
-						ant->room[i].tubes[j].tree = 1;
-						room_discovered = 1;
+						ant->room[g[2]].dist = ant->room[g[0]].dist + 1;
+						ant->room[g[0]].tubes[g[1]].tree = 1;
+						g[4] = 1;
 					}
-					j++;
 				}
-			}
-			i++;
-		}
-	}
-	if (ant->room[!(ant->start_room)].dist == -1)
-		return (INVALID);
 	ant->escape = ant->room[!(ant->start_room)].dist + 1;
-	return (VALID);
+	return (ant->room[!(ant->start_room)].dist == -1 ? INVALID : VALID);
 }
 
-int		smallest2(t_a *ant)
+int		instanciate_smallest(t_a *ant)
 {
 	int		i;
 	int		j;
-	int		k;
-	int		len;
-	int		dist;
-	int		discovered;
-	int		discoverable;
 
 	i = 0;
 	while (i < ant->nb_room)
@@ -82,42 +57,48 @@ int		smallest2(t_a *ant)
 	}
 	ant->room[ant->start_room].dist = 0;
 	ant->room[ant->start_room].space = 0;
-	dist = -1;
-	discoverable = 1;
-	while (discoverable && ant->room[!(ant->start_room)].dist == -1)
+	return (0);
+}
+
+int		block_central(t_a *ant, int g[8])
+{
+	g[4] = ant->room[g[1]].tubes[g[2]].len;
+	g[3] = ant->room[g[1]].tubes[g[2]].dest;
+	if (g[4] != 2000000)
+		g[7] = 1;
+	if (ant->room[g[3]].dist == -1 && ant->room[g[1]].dist + g[4] < g[5] &&
+		(ant->room[g[1]].is_passed == ant->room[g[3]].is_passed
+	|| ant->room[g[1]].is_passed == ant->room[g[1]].coming_from))
 	{
-		discovered = 0;
-		discoverable = 0;
-		dist++;
-		i = 0;
-		while (i < ant->nb_room)
-		{
-			j = 0;
-			if (ant->room[i].dist != -1)
-				while (j < ant->room[i].nb_tubes)
-				{
-					len = ant->room[i].tubes[j].len;
-					k = ant->room[i].tubes[j].dest;
-					if (len != 2000000)
-						discoverable = 1;
-					if (ant->room[k].dist == -1 && ant->room[i].dist + len < dist &&
-(ant->room[i].is_passed == ant->room[k].is_passed || ant->room[i].is_passed == ant->room[i].coming_from))
-					{
-						ant->room[k].dist = ant->room[i].dist + len;
-						ant->room[k].space = ant->room[i].space + 1;
-						ant->room[i].tubes[j].tree = 1;
-						ant->room[k].coming_from = ant->room[i].is_passed;
-						discovered = 1;
-					}
-					j++;
-				}
-			i++;
-		}
-		if (discovered)
-			dist--;
+		ant->room[g[3]].dist = ant->room[g[1]].dist + g[4];
+		ant->room[g[3]].space = ant->room[g[1]].space + 1;
+		ant->room[g[1]].tubes[g[2]].tree = 1;
+		ant->room[g[3]].coming_from = ant->room[g[1]].is_passed;
+		g[6] = 1;
 	}
-	if (ant->room[!(ant->start_room)].dist == -1)
-		return (INVALID);
+	return (0);
+}
+
+int		smallest2(t_a *ant)
+{
+	int		g[8];
+
+	instanciate_smallest(ant);
+	g[5] = -1;
+	g[7] = 1;
+	while (g[7] && ant->room[!(ant->start_room)].dist == -1)
+	{
+		g[6] = 0;
+		g[7] = 0;
+		g[5]++;
+		g[1] = -1;
+		while (++g[1] < ant->nb_room)
+			if (ant->room[g[1]].dist != -1 && (g[2] = -1))
+				while (++g[2] < ant->room[g[1]].nb_tubes)
+					block_central(ant, g);
+		if (g[6])
+			g[5]--;
+	}
 	ant->escape = ant->room[!(ant->start_room)].space + 1;
 	return (VALID);
 }

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-#include  <stdio.h>
+#include "lem_in.h"
 
 int		modify_tubes_first(t_a *ant)
 {
@@ -53,7 +52,6 @@ int		path(t_room *room, t_path *curr, int i)
 
 	if (!(curr->chain))
 	{
-		ft_printf("len_path %d\n", i+1);
 		if (!(curr->chain = malloc(sizeof(int) * (i + 2))))
 			return (MERROR);
 		curr->len_path = i + 1;
@@ -104,6 +102,8 @@ t_path	**start_searching(t_a *ant, t_path ***previous, int i)
 	int		j;
 	int		ret;
 
+	if (ant->room[1].dist == -1)
+		return (NULL);
 	if (!(tab = malloc(sizeof(t_path*) * (i + 1))))
 		return (NULL);
 	if (i)
@@ -117,8 +117,11 @@ t_path	**start_searching(t_a *ant, t_path ***previous, int i)
 		free(tab);
 		return (NULL);
 	}
-	if ((ret = path(ant->room, tab[i], ant->escape)) == 0) //a changer
+	if ((ret = path(ant->room, tab[i], ant->escape)) == 0)
+	{
+		free(tab);
 		return (NULL);
+	}
 	return (tab);
 }
 
@@ -150,10 +153,11 @@ int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path)
 		{
 			if (i)
 				room[path[nb_path]->chain[i]].is_passed = nb_path;
-			change_len(room, path[nb_path]->chain[i], path[nb_path]->chain[i + 1], 2000000);
-			change_len(room, path[nb_path]->chain[i + 1], path[nb_path]->chain[i], 0);
+			change_len(room, path[nb_path]->chain[i],
+				path[nb_path]->chain[i + 1], 2000000);
+			change_len(room, path[nb_path]->chain[i + 1],
+				path[nb_path]->chain[i], 0);
 		}
 	}
 	return (0);
 }
-

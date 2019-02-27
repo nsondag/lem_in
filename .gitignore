@@ -3,3 +3,4 @@ lem-in
 *.a
 *.swp
 a.out
+._*.c
