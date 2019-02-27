@@ -30,9 +30,7 @@ int		dead_ends(t_a *ant)
 			while (k < ant->room[j].nb_tubes)
 			{
 				if (ant->room[j].tubes[k].dest == ant->nb_room - 1)
-				{
 					ant->room[j].tubes[k].dest = i;
-				}
 				k++;
 			}
 			j++;

@@ -33,6 +33,7 @@ int		main()
 		exit_func(INVALID, &ant);
 	if ((ret = parse(&ant)))
 		exit_func(ret, &ant);
+	ft_printf("-----\n%s\n-----\n", ant.data);
 	//ft_printf("nb_ant %d\n", ant.nb_ant);
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);

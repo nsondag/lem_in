@@ -109,10 +109,10 @@ int		read_nb_ant(t_a *all, t_var *for_this)
 				ft_strdel(&(all->buf));
 				return (INVALID);
 			}
-			all->data = ft_strdup(all->buf);
+			all->data = rea(all->data, all->buf);
 			break ;
 		}
-		all->data = ft_strdup(all->buf);
+		all->data = rea(all->data, all->buf);
 		ft_strdel(&(all->buf));
 	}
 	ft_strdel(&(all->buf));
