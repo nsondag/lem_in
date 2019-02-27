@@ -36,7 +36,6 @@ int		supp_2comp_room(t_room *room, int index)
 {
 	int		to_return;
 
-	//ft_printf("-- room deleted with 2 companions : %d\n", index); si utile
 	if (room[room[index].tubes[0].dest].nb_tubes == 2)
 		to_return = room[index].tubes[0].dest;
 	else
@@ -49,7 +48,6 @@ int		supp_2comp_room(t_room *room, int index)
 
 int		supp_1comp_room(t_room *room, int index)
 {
-	//ft_printf("-- room deleted with 1 companion : %d\n", index); si utile
 	supp_room_from_other(index, &(room[room[index].tubes[0].dest]));
 	room[index].nb_tubes = 0;
 	return (room[index].tubes[0].dest);

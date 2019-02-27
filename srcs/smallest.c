@@ -36,7 +36,7 @@ int		smallest(t_a *ant)
 		room_discovered = 0;
 		while (i < ant->nb_room)
 		{
-			if (ant->room[i].dist == dist)// && i != !(ant->start_room))
+			if (ant->room[i].dist == dist)
 			{
 				j = 0;
 				while (j < ant->room[i].nb_tubes)
@@ -57,8 +57,6 @@ int		smallest(t_a *ant)
 	if (ant->room[!(ant->start_room)].dist == -1)
 		return (INVALID);
 	ant->escape = ant->room[!(ant->start_room)].dist + 1;
-	for (int m = 0; m < ant->nb_room; m++)
-		ft_printf("-- d1 %d: %d\n", m, ant->room[m].dist);
 	return (VALID);
 }
 
@@ -73,13 +71,11 @@ int		smallest2(t_a *ant)
 	int		discoverable;
 
 	i = 0;
-//	ft_printf("--is_passed--\n");
 	while (i < ant->nb_room)
 	{
 		j = -1;
 		while (++j < ant->room[i].nb_tubes)
 			ant->room[i].tubes[j].tree = 0;
-//		ft_printf("%d %d\n", i, ant->room[i].is_passed);
 		ant->room[i].dist = -1;
 		ant->room[i].coming_from = -1;
 		i++;
@@ -88,7 +84,6 @@ int		smallest2(t_a *ant)
 	ant->room[ant->start_room].space = 0;
 	dist = -1;
 	discoverable = 1;
-//	ft_printf("--coming--\n");
 	while (discoverable && ant->room[!(ant->start_room)].dist == -1)
 	{
 		discovered = 0;
@@ -97,7 +92,6 @@ int		smallest2(t_a *ant)
 		i = 0;
 		while (i < ant->nb_room)
 		{
-//			ft_printf("%d %d dist %d\n", i, ant->room[i].coming_from,dist);
 			j = 0;
 			if (ant->room[i].dist != -1)
 				while (j < ant->room[i].nb_tubes)
@@ -109,7 +103,6 @@ int		smallest2(t_a *ant)
 					if (ant->room[k].dist == -1 && ant->room[i].dist + len < dist &&
 (ant->room[i].is_passed == ant->room[k].is_passed || ant->room[i].is_passed == ant->room[i].coming_from))
 					{
-//						ft_printf("--%d %d\n", i, k);
 						ant->room[k].dist = ant->room[i].dist + len;
 						ant->room[k].space = ant->room[i].space + 1;
 						ant->room[i].tubes[j].tree = 1;
@@ -126,7 +119,5 @@ int		smallest2(t_a *ant)
 	if (ant->room[!(ant->start_room)].dist == -1)
 		return (INVALID);
 	ant->escape = ant->room[!(ant->start_room)].space + 1;
-//	for (int m = 0; m < ant->nb_room; m++)
-//		ft_printf("-- d1 %d: %d: %d\n", m, ant->room[m].dist, ant->room[m].space);
 	return (VALID);
 }

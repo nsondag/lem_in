@@ -54,7 +54,7 @@ int		path(t_room *room, t_path *curr, int i)
 	if (!(curr->chain))
 	{
 		ft_printf("len_path %d\n", i+1);
-		if (!(curr->chain = malloc(sizeof(int) * (i + 1))))
+		if (!(curr->chain = malloc(sizeof(int) * (i + 2))))
 			return (MERROR);
 		curr->len_path = i + 1;
 		curr->chain[0] = 0;
@@ -98,7 +98,7 @@ t_path	*duplicate(t_path *dup, t_room *room)
 	return (new_path);
 }
 
-t_path	**start_searching(t_a *ant, t_path **previous, int i)
+t_path	**start_searching(t_a *ant, t_path ***previous, int i)
 {
 	t_path	**tab;
 	int		j;
@@ -106,26 +106,19 @@ t_path	**start_searching(t_a *ant, t_path **previous, int i)
 
 	if (!(tab = malloc(sizeof(t_path*) * (i + 1))))
 		return (NULL);
-	ft_printf("tab created\n");
-	if (previous)
+	if (i)
 	{
 		j = -1;
 		while (++j < i)
-			tab[j] = duplicate(previous[j], ant->room);
+			tab[j] = duplicate(previous[i - 1][j], ant->room);
 	}
-	ft_printf("previous copied\n");
 	if (!(tab[i] = ft_memalloc(sizeof(t_path))))
 	{
 		free(tab);
 		return (NULL);
 	}
-	ft_printf("new path allocated\n");
 	if ((ret = path(ant->room, tab[i], ant->escape)) == 0) //a changer
-	{
-		ft_printf("path not found\n");
 		return (NULL);
-	}
-	ft_printf("path found\n");
 	return (tab);
 }
 

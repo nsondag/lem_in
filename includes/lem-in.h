@@ -66,8 +66,9 @@ typedef struct	s_a
 	char	*buf;
 	int		escape;
 	int		nb_path;
+	int		nb_used;
 	t_path	***path;
-	int		nb_move;
+	int		*nb_move;
 	char	*data;
 }				t_a;
 
@@ -95,12 +96,13 @@ int		sending_ants(t_a *ants);
 int		racc_path2(t_a *ant, int **path);
 int		modify_tubes_first(t_a *ant);
 int		path(t_room *room, t_path *current, int i);
-t_path	**start_searching(t_a *ant, t_path **previous, int i);
+t_path	**start_searching(t_a *ant, t_path ***previous, int i);
 int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path);
 int		print_sol(t_a *all, t_path **path, int nb_path);
 int		calculate_start(t_a *all, t_path **path, int nb_path);
 int		calculate_move(t_a *all, t_path **path, int nb_path);
 int		crossing_path(t_path ***path, int f);
 char	*rea(char *s1, char *s2);
+int		moves(t_a *all, t_path **path, int nb_path);
 
 #endif

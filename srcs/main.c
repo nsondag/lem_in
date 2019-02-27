@@ -11,16 +11,39 @@
 /* ************************************************************************** */
 
 #include "lem-in.h"
-#include <time.h>
 
-//void	racc_path(t_a *ant, int l, int offset, int len)
-//{
-//	for (int m = offset + len; m < ant->len_path[l]; m++)
-//	{
-//		ant->path[l][m - len] = ant->path[l][m];
-//	}
-//	ant->len_path[l] -= len;
-//}
+int		find(t_a *all)
+{
+	int f;
+	int i;
+	int min;
+
+	f = 0;
+	while ((all->path[f] = start_searching(all, all->path, f)))
+	{
+		ft_printf("path[%d] ok\n", f);
+		change_all_len(all, all->room, all->path[f], f);
+		ft_printf("1\n");
+		crossing_path(all->path, f);
+		ft_printf("2\n");
+		moves(all, all->path[f], f);
+		ft_printf("3\n");
+		if (smallest2(all))
+			exit_func(INVALID, all);
+		ft_printf("4\n");
+		f++;
+	}
+	i = 0;
+	min = 0;
+	while (++i < f)
+	{
+		if (all->nb_move[min] > all->nb_move[i])
+			min = i;
+	}
+	ft_printf("move : %d, nb_path : %d\n", all->nb_move[min], min + 1);
+	all->nb_used = min;
+	return (0);
+}
 
 int		main()
 {
@@ -34,34 +57,16 @@ int		main()
 	if ((ret = parse(&ant)))
 		exit_func(ret, &ant);
 	ft_printf("-----\n%s\n-----\n", ant.data);
-	//ft_printf("nb_ant %d\n", ant.nb_ant);
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);
 	ant.start_room = 0;
-	clock_t i = clock();
 	if (smallest(&ant))
 		exit_func(INVALID, &ant);
-	clock_t j = clock();
-	ft_printf("ici %f\n", ((float)j - i)/CLOCKS_PER_SEC);
 	int c = 0;
 	for (int m = 0; m < ant.nb_room; m++)
-	{
-		ft_printf("-- nb_tubes %d : %d --\n", m, ant.room[m].nb_tubes);
 		if (ant.room[m].nb_tubes > 2)
 			c++;
-		for (int l = 0; l < ant.room[m].nb_tubes; l++)
-			ft_printf("-- dest %2d: len %2d\n", ant.room[m].tubes[l].dest, ant.room[m].tubes[l].len);
-		ft_printf("\n");
-	}
 	modify_tubes_first(&ant);
-	ft_printf("---after_modif---\n");
-	for (int m = 0; m < ant.nb_room; m++)
-	{
-		ft_printf("-- %d --\n", m);
-		for (int l = 0; l < ant.room[m].nb_tubes; l++)
-			ft_printf("-- dest %2d: tmp_len %2d: tree %2d\n", ant.room[m].tubes[l].dest, ant.room[m].tubes[l].tmp_len, ant.room[m].tubes[l].tree);
-		ft_printf("\n");
-	}
 	int m = 0;
 	for (int l = 0; l < ant.nb_room; l++)
 		if (ant.room[l].dist != -1)
@@ -71,45 +76,9 @@ int		main()
 	ft_printf("nb room(s) connected : %d / %d\n", m, ant.nb_room);
 
 	ant.path = malloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
-	int f = 0;
-	ant.path[f] = start_searching(&ant, NULL, f);
-	ft_printf("%d\n", ant.path[f][0]->len_path);
-	for (int j=0;j<f+1;j++)
-		for (int d=0;d<ant.path[f][j]->len_path;d++)
-			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
-	clock_t i1 = clock();
-	change_all_len(&ant, ant.room, ant.path[f], 1);
-	for (int m = 0; m < ant.nb_room; m++)
-	{
-		ft_printf("-- is_passed %d : %d --\n", m, ant.room[m].is_passed);
-		for (int l = 0; l < ant.room[m].nb_tubes; l++)
-			ft_printf("-- %d: %d: %d: %d\n", m, ant.room[m].tubes[l].len, ant.room[m].tubes[l].dest, ant.room[m].tubes[l].tree);
-		ft_printf("\n");
-	}
-	f++;
-	if (smallest2(&ant))
-		exit_func(INVALID, &ant);
-	ant.path[f] = start_searching(&ant, ant.path[f-1], f);
-	if (!(ant.path[f]))
-	{
-		ft_printf("path not found\n");
-		return (0);
-	}
-	for (int j=0;j<f+1&&ft_printf("\n");j++)
-		for (int d=0;d<ant.path[f][j]->len_path;d++)
-			ft_printf("---- %d\n", ant.path[f][j]->chain[d]);
-	clock_t j1 = clock();
-	ft_printf("ici %lf\n", ((double)j1 - i1)/CLOCKS_PER_SEC);
-	crossing_path(ant.path, f);
-	calculate_move(&ant, ant.path[f], 2);
-	for (int r=0;r<f+1;r++)
-	{
-	ft_printf("%d %d %d\n", ant.path[f][r]->chain[r], ant.path[f][r]->nb_ant_in_path, ant.path[f][r]->len_path);
-	if (ant.path[f][r]->nb_ant_in_path)
-		ant.nb_move = ft_max(ant.nb_move, ant.path[f][r]->nb_ant_in_path + ant.path[f][r]->len_path - 1);
-	}
-	ft_printf("move : %d\n", ant.nb_move);
-	calculate_start(&ant, ant.path[f], 2);
-	print_sol(&ant, ant.path[f], 2);
+	ant.nb_move = ft_memalloc(sizeof(int) * ant.room[ant.start_room].nb_tubes);
+	find(&ant);
+	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
+	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
 	return (0);
 }
