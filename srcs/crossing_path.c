@@ -74,8 +74,8 @@ int crossing_path(t_path ***path, int f)
 	i--;
 	while (++i < size2)
 		path2[i] = path[f][0]->chain[index1 + j++];
-	ft_memcpy(path[f][0]->chain, path1, size1);	
-	ft_memcpy(path[f][1]->chain, path2, size2);	
+	ft_memcpy(path[f][0]->chain, path1, 4 * size1);	
+	ft_memcpy(path[f][1]->chain, path2, 4 * size2);	
 	//print new paths
 	i = 0;
 	while (i < size1)
