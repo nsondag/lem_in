@@ -91,55 +91,52 @@ int		search_for_deadend(t_room *room, int nb_room)
 	return (0);
 }
 
-int		search_for_mult_path(t_a *all, int start)
+int		search_for_mult_path2(t_a *all, int g[9])
 {
-	int		i;
-	int		size_of_path;
-	int		first_side;
-	int		second_side;
-	int		room_first_side;
-	int		j;
-	int		k;
-	int		tmp_path_size;
-	int		l;
-
-	i = start;
-	while (i < all->nb_room && all->room[i].nb_tubes != 2)
-		i++;
-	if (i == all->nb_room)
-		return (NONE_LEFT);
-	size_of_path = 1;
-	room_first_side = 0;
-	second_side = search_for_side(all->room, i, &room_first_side, &size_of_path);
-	room_first_side = 1;
-	first_side = search_for_side(all->room, i, &room_first_side, &size_of_path);
-	if (first_side + second_side == 1)
-		return (search_for_mult_path(all, i + 1));
-	if (first_side == second_side)
+	g[5] = 0;
+	while (g[5] < all->room[g[2]].nb_tubes)
 	{
-		supp_chained(all->room, room_first_side);
-		return (search_for_mult_path(all, i + 1));
-	}
-	j = 0;
-	while (j < all->room[first_side].nb_tubes)
-	{
-		k = all->room[first_side].tubes[j].dest;
-		if (k == second_side)
+		g[5] = all->room[g[2]].tubes[g[5]].dest;
+		if (g[5] == g[3])
 		{
-			supp_chained(all->room, room_first_side);
+			supp_chained(all->room, g[4]);
 			return (search_for_mult_path(all, 2));
 		}
-		else if (k != room_first_side && all->room[k].nb_tubes == 2)
+		else if (g[5] != g[4] && all->room[g[5]].nb_tubes == 2)
 		{
-			tmp_path_size = 1;
-			l = all->room[k].tubes[0].dest == j;
-			if (search_for_side(all->room, k, &l, &tmp_path_size) == second_side)
+			g[7] = 1;
+			g[8] = all->room[g[5]].tubes[0].dest == g[5];
+			if (search_for_side(all->room, g[5], &(g[8]), &g[7]) == g[3])
 			{
-				supp_chained(all->room, size_of_path < tmp_path_size ? k : room_first_side);
+				supp_chained(all->room, g[1] < g[7] ? g[5] : g[4]);
 				return (search_for_mult_path(all, 2));
 			}
 		}
-		j++;
+		g[5]++;
 	}
-	return (search_for_mult_path(all, i + 1));
+	return (search_for_mult_path(all, g[0] + 1));
+}
+
+int		search_for_mult_path(t_a *all, int start)
+{
+	int		g[9];
+
+	g[0] = start;
+	while (g[0] < all->nb_room && all->room[g[0]].nb_tubes != 2)
+		g[0]++;
+	if (g[0] == all->nb_room)
+		return (NONE_LEFT);
+	g[1] = 1;
+	g[4] = 0;
+	g[3] = search_for_side(all->room, g[0], &g[4], &g[1]);
+	g[4] = 1;
+	g[2] = search_for_side(all->room, g[0], &g[4], &g[1]);
+	if (g[2] + g[3] == 1)
+		return (search_for_mult_path(all, g[0] + 1));
+	if (g[2] == g[3])
+	{
+		supp_chained(all->room, g[4]);
+		return (search_for_mult_path(all, g[0] + 1));
+	}
+	return (search_for_mult_path2(all, g));
 }
