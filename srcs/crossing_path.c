@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 15:58:39 by nsondag           #+#    #+#             */
-/*   Updated: 2019/03/02 18:05:15 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/02 20:02:52 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int crossing_path(t_path ***path, int f)
 	int index2;
 	int *path1;
 	int *path2;
+	int	size1;
+	int	size2;
 
 	p1 = 1;
 	while (path[f][0]->chain[p1] != 1)
@@ -46,14 +48,11 @@ int crossing_path(t_path ***path, int f)
 		p2++;
 		count++;
 	}
-	ft_printf("count %d\n", count);
 	if (count == 1)
 		return (INVALID);
 	if (count == 0)
 		return (VALID);
 	ft_printf("------------new_path----------------\n");
-	int size1;
-	int size2;
 	size1 = index1 - index2 + path[f][1]->len_path - (2 * count) + 2;
 	size2 = index2 - index1 + path[f][0]->len_path;
 	if (!(path1 = malloc(sizeof(int) * size1)))
@@ -74,6 +73,12 @@ int crossing_path(t_path ***path, int f)
 		path2[i++] = path[f][0]->chain[index1 + j++];
 	path[f][0]->len_path = size1;
 	path[f][1]->len_path = size2;
+	free(path[f][0]->chain);
+	free(path[f][1]->chain);
+	if (!(path[f][0]->chain = malloc(sizeof(int) * size1)))
+		return (MERROR);
+	if (!(path[f][1]->chain = malloc(sizeof(int) * size2)))
+		return (MERROR);
 	ft_memcpy(path[f][0]->chain, path1, 4 * size1);	
 	ft_memcpy(path[f][1]->chain, path2, 4 * size2);	
 	//print new paths
