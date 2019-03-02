@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 15:58:39 by nsondag           #+#    #+#             */
-/*   Updated: 2019/02/20 15:47:27 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/02 17:09:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int crossing_path(t_path ***path, int f)
 	i--;
 	while (++i < size2)
 		path2[i] = path[f][0]->chain[index1 + j++];
+	path[f][0]->len_path = size1;
+	path[f][1]->len_path = size2;
 	ft_memcpy(path[f][0]->chain, path1, 4 * size1);	
 	ft_memcpy(path[f][1]->chain, path2, 4 * size2);	
 	//print new paths
