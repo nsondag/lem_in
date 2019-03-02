@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:16:54 by hvromman          #+#    #+#             */
-/*   Updated: 2019/02/21 10:16:56 by hvromman         ###   ########.fr       */
+/*   Updated: 2019/03/02 18:27:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		print_sol(t_a *all, t_path **path, int nb_path)
 	while (++i < all->nb_move[nb_path] && (j = -1))
 	{
 		first = 1;
-		while (++j < nb_path)
+		while (++j < nb_path + 1)
 		{
 			first_ant = cut_negative(i - path[j]->len_path + 1);
 			last_ant = ft_min(i, path[j]->nb_ant_in_path);
