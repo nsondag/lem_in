@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-int		read_comment(char *line)
+inline int		read_comment(char *line)
 {
 	int		len;
 
@@ -101,21 +101,15 @@ int		read_nb_ant(t_a *all, t_var *for_this)
 	all->nb_room = 2;
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
+		all->data = rea(all, all->data, all->buf);
 		if (read_comment(all->buf) != COMMENT)
 		{
 			all->nb_ant = ft_atoi(all->buf);
 			if (all->nb_ant <= 0)
-			{
-				ft_strdel(&(all->buf));
 				return (INVALID);
-			}
-			all->data = rea(all->data, all->buf);
 			break ;
 		}
-		all->data = rea(all->data, all->buf);
-		ft_strdel(&(all->buf));
 	}
-	ft_strdel(&(all->buf));
 	return (VALID);
 }
 
@@ -129,7 +123,7 @@ int		read_room(t_a *all)
 		return (for_this.ret);
 	while (get_next_line(0, &(all->buf)) > 0)
 	{
-		all->data = rea(all->data, all->buf);
+		all->data = rea(all, all->data, all->buf);
 		if ((for_this.ret = read_comment(all->buf)) == VALID)
 		{
 			if ((for_this.ret = add_entry(&for_this, all)) == ENDFUNCTION)
@@ -143,7 +137,6 @@ int		read_room(t_a *all)
 			for_this.is_end = 1;
 		else if (for_this.ret == INVALID)
 			exit_func(INVALID, all);
-		ft_strdel(&(all->buf));
 	}
 	return (for_this.ret);
 }

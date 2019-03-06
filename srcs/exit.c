@@ -25,7 +25,6 @@ void	free_all(t_a *all)
 				free(all->room[count].name);
 			}
 		free(all->room);
-		free(all->buf);
 	}
 }
 

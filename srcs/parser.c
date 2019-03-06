@@ -12,22 +12,21 @@
 
 #include "lem_in.h"
 
-char	*rea(char *s1, char *s2)
+char	**rea(t_a *ant, char **s1, char *s2)
 {
-	char		*to_return;
-	char		*tmp;
+	char		**to_return;
 	static int	start = 0;
 
-	if (start)
-	{
-		tmp = ft_strjoin(s1, "\n");
-		to_return = ft_strjoin(tmp, s2);
-		free(tmp);
-	}
+	to_return = malloc(sizeof(char*) * (ant->nb_data + 1));
+	if (!start)
+		start++;
 	else
-		to_return = ft_strdup(s2);
-	free(s1);
-	start++;
+	{
+		memcpy(to_return, s1, sizeof(char*) * ant->nb_data);
+		free(s1);
+	}
+	to_return[ant->nb_data] = s2;
+	ant->nb_data++;
 	return (to_return);
 }
 
@@ -36,20 +35,21 @@ int		realloc_tab(t_room *room)
 	t_tube	*tmp;
 
 	tmp = room->tubes;
-	room->nb_tubes++;
-	if (!(room->tubes = (t_tube*)malloc(sizeof(t_tube) * (room->nb_tubes))))
+	if (!(room->tubes = (t_tube*)malloc(sizeof(t_tube) * (room->nb_tubes + 1))))
 	{
 		free(tmp);
 		return (MERROR);
 	}
-	memcpy(room->tubes, tmp, sizeof(t_tube) * (room->nb_tubes - 1));
+	memcpy(room->tubes, tmp, sizeof(t_tube) * room->nb_tubes);
 	free(tmp);
+	room->nb_tubes++;
 	return (0);
 }
 
 int		link_room(t_a *ant, int i, int j)
 {
 	int		k;
+	int		tmp;
 
 	k = -1;
 	while (++k < ant->room[i].nb_tubes)
@@ -57,14 +57,16 @@ int		link_room(t_a *ant, int i, int j)
 			return (0);
 	if (realloc_tab(&(ant->room[i])))
 		return (MERROR);
-	bzero(&ant->room[i].tubes[ant->room[i].nb_tubes - 1], sizeof(t_tube));
-	ant->room[i].tubes[ant->room[i].nb_tubes - 1].dest = j;
-	ant->room[i].tubes[ant->room[i].nb_tubes - 1].len = 1;
+	tmp = ant->room[i].nb_tubes - 1;
+	ft_bzero(&ant->room[i].tubes[tmp], sizeof(t_tube));
+	ant->room[i].tubes[tmp].dest = j;
+	ant->room[i].tubes[tmp].len = 1;
 	if (realloc_tab(&(ant->room[j])))
 		return (MERROR);
-	bzero(&ant->room[j].tubes[ant->room[j].nb_tubes - 1], sizeof(t_tube));
-	ant->room[j].tubes[ant->room[j].nb_tubes - 1].dest = i;
-	ant->room[j].tubes[ant->room[j].nb_tubes - 1].len = 1;
+	tmp = ant->room[j].nb_tubes - 1;
+	ft_bzero(&ant->room[j].tubes[tmp], sizeof(t_tube));
+	ant->room[j].tubes[tmp].dest = i;
+	ant->room[j].tubes[tmp].len = 1;
 	return (0);
 }
 
@@ -108,13 +110,9 @@ int		parse(t_a *ant)
 		return (INVALID);
 	while ((ret = get_next_line(0, &ant->buf)) > 0)
 	{
-		ant->data = rea(ant->data, ant->buf);
+		ant->data = rea(ant, ant->data, ant->buf);
 		if ((ret = get_tube(ant)) < 0)
-		{
-			ft_strdel(&(ant->buf));
 			return (ret);
-		}
-		ft_strdel(&(ant->buf));
 	}
 	return (ret == -1 ? MERROR : VALID);
 }

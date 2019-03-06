@@ -21,7 +21,7 @@ int		find(t_a *all)
 	int k;
 
 	f = 0;
-	ft_printf("__ %d\n", all->room[0].nb_tubes);
+	ft_printf("__ %d, %d %>\n", all->room[0].nb_tubes, all->nb_room, 2);
 	while (f < all->room[0].nb_tubes && (all->path[f] = start_searching(all, all->path, f)))
 	{
 		for (int l = 0; ft_printf("\n") && l <= f; l++)
@@ -83,7 +83,9 @@ int		main(void)
 	clock_t v = clock();
 	ft_printf("find %f\n%>", (v-u) / (double) CLOCKS_PER_SEC, 2);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
-	ft_printf("-----\n%s\n-----\n", ant.data);
+	ft_printf("%d\n", ant.nb_data);
+	for (int l = 0; l < ant.nb_data; l++)
+		ft_printf("%s\n", ant.data[l]);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
 	exit_func(0, &ant);
 }

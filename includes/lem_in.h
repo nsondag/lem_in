@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define REALLOC_SIZE 10000
+# define REALLOC_SIZE 5000
 # define NONE_LEFT 6
 # define ENDPROG 5
 # define ENDFUNCTION 4
@@ -69,7 +69,8 @@ typedef struct	s_a
 	int		nb_used;
 	t_path	***path;
 	int		*nb_move;
-	char	*data;
+	int		nb_data;
+	char	**data;
 }				t_a;
 
 typedef struct	s_var
@@ -103,7 +104,7 @@ int				print_all(int nb_ant);
 int				calculate_start(t_a *all, t_path **path, int nb_path);
 int				calculate_move(t_a *all, t_path **path, int nb_path);
 int				crossing_path(t_path ***path, int p2, int p1);
-char			*rea(char *s1, char *s2);
+char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);
 
 #endif
