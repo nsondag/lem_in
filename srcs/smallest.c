@@ -12,6 +12,14 @@
 
 #include "lem_in.h"
 
+/*
+** i = g[0]
+** j = g[1]
+** k = g[2]
+** dist = g[3]
+** room_discovered = g[4]
+*/
+
 int		smallest(t_a *ant)
 {
 	int		g[5];
@@ -59,6 +67,16 @@ int		instanciate_smallest(t_a *ant)
 	ant->room[ant->start_room].space = 0;
 	return (0);
 }
+
+/*
+** i = g[1]
+** j = g[2]
+** k = g[3]
+** len = g[4]
+** dist = g[5]
+** discovered = g[6]
+** discoverable = g[7]
+*/
 
 int		block_central(t_a *ant, int g[8])
 {

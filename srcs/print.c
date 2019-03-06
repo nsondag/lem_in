@@ -12,6 +12,14 @@
 
 #include "lem_in.h"
 
+/*
+** i = g[0]
+** j = g[1]
+** max = g[2]
+** max_index = g[3]
+** sum_diff = g[4]
+*/
+
 int		calculate_move(t_a *all, t_path **path, int nb_path)
 {
 	int		g[5];
