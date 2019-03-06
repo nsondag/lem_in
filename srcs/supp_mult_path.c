@@ -117,6 +117,18 @@ int		search_for_mult_path2(t_a *all, int g[9])
 	return (search_for_mult_path(all, g[0] + 1));
 }
 
+/*
+** i = g[0]
+** size_of_path = g[1]
+** first_side = g[2]
+** second_side = g[3]
+** room_first_side = g[4]
+** j = g[5]
+** k = g[6]
+** tmp_path_size = g[7]
+** l = g[8]
+*/
+
 int		search_for_mult_path(t_a *all, int start)
 {
 	int		g[9];
