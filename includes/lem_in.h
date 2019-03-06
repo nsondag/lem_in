@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/06 14:35:55 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/06 15:15:06 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int				path(t_room *room, t_path *current, int i);
 t_path			**start_searching(t_a *ant, t_path ***previous, int i);
 int				change_all_len(t_a *ant, t_room *room, t_path **path, int nb);
 int				print_sol(t_a *all, t_path **path, int nb_path);
+int				print_all(int nb_ant);
 int				calculate_start(t_a *all, t_path **path, int nb_path);
 int				calculate_move(t_a *all, t_path **path, int nb_path);
 int				crossing_path(t_path ***path, int p2, int p1);
