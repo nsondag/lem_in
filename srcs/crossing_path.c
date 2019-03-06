@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 15:58:39 by nsondag           #+#    #+#             */
-/*   Updated: 2019/03/03 16:08:30 by event            ###   ########.fr       */
+/*   Updated: 2019/03/06 13:29:25 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ int		crossing_path(t_path ***path, int f)
 		ft_memcpy(path[f][0]->chain, path1, 4 * path[f][0]->len_path);
 		ft_memcpy(path[f][1]->chain, path2, 4 * path[f][1]->len_path);
 	}
+	if (count > 1)
+		return (crossing_path(path, f));
 	return (count == 1 ? INVALID : VALID);
 }
