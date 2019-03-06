@@ -18,13 +18,15 @@ int		find(t_a *all)
 	int f;
 	int i;
 	int min;
+	int k;
 
 	f = 0;
 	while (f < 2 && (all->path[f] = start_searching(all, all->path, f)))
 	{
 		change_all_len(all, all->room, all->path[f], f + 1);
-		if (f > 0)
-			crossing_path(all->path, f);
+		k = f;
+		while (--k > -1)
+			crossing_path(all->path, f, k);
 		moves(all, all->path[f], f);
 		if (smallest2(all))
 			exit_func(INVALID, all);
