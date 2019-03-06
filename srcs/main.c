@@ -21,15 +21,18 @@ int		find(t_a *all)
 	int k;
 
 	f = 0;
-	while (f < 2 && (all->path[f] = start_searching(all, all->path, f)))
+	ft_printf("__ %d\n", all->room[0].nb_tubes);
+	while (f < all->room[0].nb_tubes && (all->path[f] = start_searching(all, all->path, f)))
 	{
+		for (int l = 0; ft_printf("\n") && l <= f; l++)
+			for (int m = 0; m < all->path[f][l]->len_path; m++)
+				ft_printf("%d ", all->path[f][l]->chain[m]);
 		change_all_len(all, all->room, all->path[f], f + 1);
 		k = f;
 		while (--k > -1)
 			crossing_path(all->path, f, k);
 		moves(all, all->path[f], f);
-		if (smallest2(all))
-			exit_func(INVALID, all);
+		smallest2(all);
 		f++;
 	}
 	i = 0;
@@ -60,7 +63,6 @@ int		main(void)
 	ft_printf("read_room %f\n%>", (f-e) / (double) CLOCKS_PER_SEC, 2);
 	if ((ret = parse(&ant)))
 		exit_func(ret, &ant);
-	ft_printf("-----\n%s\n-----\n", ant.data);
 	if (ant.direct == 1)
 	{
 		print_all(ant.nb_ant);
@@ -81,6 +83,7 @@ int		main(void)
 	clock_t v = clock();
 	ft_printf("find %f\n%>", (v-u) / (double) CLOCKS_PER_SEC, 2);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
+	ft_printf("-----\n%s\n-----\n", ant.data);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
-	return (0);
+	exit_func(0, &ant);
 }

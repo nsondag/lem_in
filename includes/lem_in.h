@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define REALLOC_SIZE 10
+# define REALLOC_SIZE 10000
 # define NONE_LEFT 6
 # define ENDPROG 5
 # define ENDFUNCTION 4

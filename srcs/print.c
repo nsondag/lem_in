@@ -59,7 +59,7 @@ int		moves(t_a *all, t_path **path, int nb_path)
 	i = -1;
 	while (++i <= nb_path)
 	{
-		ft_printf("%d %d %d\n", path[i]->chain[1], path[i]->nb_ant_in_path, path[i]->len_path);
+		ft_printf("-- %d %d %d\n", path[i]->chain[1], path[i]->nb_ant_in_path, path[i]->len_path);
 		if (path[i]->nb_ant_in_path)
 			all->nb_move[nb_path] = ft_max(all->nb_move[nb_path],
 			path[i]->nb_ant_in_path + path[i]->len_path - 1);
@@ -102,8 +102,8 @@ int		print_sol(t_a *all, t_path **path, int nb_path)
 			last_ant = ft_min(i, path[j]->nb_ant_in_path);
 			while (first_ant < last_ant)
 			{
-				ft_printf(first ? "L%d-%d" : " L%d-%d", path[j]->start +
-						first_ant + 1, path[j]->chain[i - first_ant]);
+				ft_printf(first ? "L%d-%s" : " L%d-%s", path[j]->start +
+						first_ant + 1, all->room[path[j]->chain[i - first_ant]].name);
 				first = 0;
 				first_ant++;
 			}

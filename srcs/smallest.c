@@ -104,7 +104,7 @@ int		smallest2(t_a *ant)
 	instanciate_smallest(ant);
 	g[5] = -1;
 	g[7] = 1;
-	while (g[7] && ant->room[!(ant->start_room)].dist == -1)
+	while (g[7] && g[5] < 1000 && ant->room[!(ant->start_room)].dist == -1)
 	{
 		g[6] = 0;
 		g[7] = 0;

@@ -80,14 +80,14 @@ int		add_entry(t_var *for_this, t_a *all)
 		!is_digit_str(split[2]) || (for_this->is_start && for_this->is_end))
 		return (end_add_entry(&split, INVALID));
 	else if (for_this->is_start)
-		all->room[0].name = ft_strdup(*split);
+		all->room[0].name = ft_strdup(split[0]);
 	else if (for_this->is_end)
-		all->room[1].name = ft_strdup(*split);
+		all->room[1].name = ft_strdup(split[0]);
 	else
 	{
 		if (!(all->nb_room % REALLOC_SIZE) && realloc_adj(all->nb_room, all))
 			return (end_add_entry(&split, MERROR));
-		all->room[all->nb_room].name = ft_strdup(*split);
+		all->room[all->nb_room].name = ft_strdup(split[0]);
 		all->nb_room++;
 	}
 	for_this->is_start = 0;
