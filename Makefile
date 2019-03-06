@@ -13,7 +13,7 @@
 NAME = lem-in
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 SRCS = srcs/
 HEAD = includes/
 LIB = libft/

@@ -12,13 +12,13 @@
 
 #include "lem_in.h"
 
-int print_all(int nb_ant)
+int print_all(int nb_ant, char *dest)
 {
-	int i;
+	int		i;
 
 	i = 1;
 	while (i < nb_ant)
-		ft_printf("L%d-1 ", i++);
-	ft_printf("L%d-1\n", i);
+		ft_printf("L%d-%s ", i++, dest);
+	ft_printf("L%d-%s\n", i, dest);
 	return (0);
 }

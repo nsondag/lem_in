@@ -63,13 +63,10 @@ int		main(void)
 	ft_printf("read_room %f\n%>", (f-e) / (double) CLOCKS_PER_SEC, 2);
 	if ((ret = parse(&ant)))
 		exit_func(ret, &ant);
-	if (ant.direct == 1)
-	{
-		print_all(ant.nb_ant);
-		return (0);
-	}
 	clock_t g = clock();
 	ft_printf("parse %f\n%>", (g-f) / (double) CLOCKS_PER_SEC, 2);
+	if (ant.direct == 1)
+		exit_func(print_all(ant.nb_ant, ant.room[1].name), &ant);
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);
 	ant.start_room = 0;
