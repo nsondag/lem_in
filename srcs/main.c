@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/02 20:02:54 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/06 15:34:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ int		main(void)
 	ft_printf("read_room %f\n%>", (f-e) / (double) CLOCKS_PER_SEC, 2);
 	if ((ret = parse(&ant)))
 		exit_func(ret, &ant);
+	ft_printf("-----\n%s\n-----\n", ant.data);
+	if (ant.direct == 1)
+	{
+		print_all(ant.nb_ant);
+		return (0);
+	}
 	clock_t g = clock();
 	ft_printf("parse %f\n%>", (g-f) / (double) CLOCKS_PER_SEC, 2);
 	search_for_deadend(ant.room, ant.nb_room);
@@ -75,7 +81,6 @@ int		main(void)
 	clock_t v = clock();
 	ft_printf("find %f\n%>", (v-u) / (double) CLOCKS_PER_SEC, 2);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
-	ft_printf("-----\n%s\n-----\n", ant.data);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
 	return (0);
 }

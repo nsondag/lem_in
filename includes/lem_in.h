@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/06 15:15:06 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/06 15:34:39 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_a
 {
 	int		nb_ant;
 	int		nb_room;
+	int		direct;
 	t_room	*room;
 	int		start_room;
 	char	*buf;
