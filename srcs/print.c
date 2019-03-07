@@ -59,7 +59,6 @@ int		moves(t_a *all, t_path **path, int nb_path)
 	i = -1;
 	while (++i <= nb_path)
 	{
-		ft_printf("-- %d %d %d\n", path[i]->chain[1], path[i]->nb_ant_in_path, path[i]->len_path);
 		if (path[i]->nb_ant_in_path)
 			all->nb_move[nb_path] = ft_max(all->nb_move[nb_path],
 			path[i]->nb_ant_in_path + path[i]->len_path - 1);

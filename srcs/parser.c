@@ -17,16 +17,18 @@ char	**rea(t_a *ant, char **s1, char *s2)
 	char		**to_return;
 	static int	start = 0;
 
-	to_return = malloc(sizeof(char*) * (ant->nb_data + 1));
-	if (!start)
-		start++;
-	else
+	if (!(to_return = malloc(sizeof(char*) * (ant->nb_data + 1))))
+		return (NULL);
+	if (start)
 	{
 		memcpy(to_return, s1, sizeof(char*) * ant->nb_data);
 		free(s1);
 	}
+	else
+		start++;
 	to_return[ant->nb_data] = s2;
-	ant->nb_data++;
+	if (s2)
+		ant->nb_data++;
 	return (to_return);
 }
 
@@ -67,6 +69,7 @@ int		link_room(t_a *ant, int i, int j)
 	ft_bzero(&ant->room[j].tubes[tmp], sizeof(t_tube));
 	ant->room[j].tubes[tmp].dest = i;
 	ant->room[j].tubes[tmp].len = 1;
+	ant->buf[ft_strlen(ant->buf)] = '-';
 	return (0);
 }
 
@@ -94,7 +97,6 @@ int		get_tube(t_a *ant)
 		j++;
 	if (i == ant->nb_room || j == ant->nb_room)
 		return (INVALID);
-	//ft_printf("test\n");
 	if (i + j == 1)
 		ant->direct = 1;
 	if (i == j)
@@ -114,5 +116,6 @@ int		parse(t_a *ant)
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 	}
+	ant->data = rea(ant, ant->data, NULL);
 	return (ret == -1 ? MERROR : VALID);
 }

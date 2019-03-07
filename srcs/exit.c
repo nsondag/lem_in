@@ -24,6 +24,7 @@ void	free_all(t_a *all)
 			{
 				free(all->room[count].name);
 			}
+//		ft_free_tab((void***)all->data);
 		free(all->room);
 	}
 }

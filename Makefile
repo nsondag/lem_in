@@ -20,7 +20,7 @@ LIB = libft/
 FILE = lem_in.h
 H = $(addprefix $(HEAD), $(FILE))
 FILES = main.o parser.o parser2.o exit.o smallest.o supp_mult_path.o\
-dead_ends.o path2.o print.o crossing_path.o print2.o
+dead_ends.o path2.o print.o print2.o cross.o #crossing_path.o 
 OBJ = $(addprefix $(SRCS), $(FILES))
 SANITIZE = -fsanitize=address
 

@@ -21,31 +21,28 @@ int		find(t_a *all)
 	int k;
 
 	f = 0;
-	ft_printf("__ %d, %d %>\n", all->room[0].nb_tubes, all->nb_room, 2);
 	while (f < all->room[0].nb_tubes && (all->path[f] = start_searching(all, all->path, f)))
 	{
-		for (int l = 0; ft_printf("\n") && l <= f; l++)
-			for (int m = 0; m < all->path[f][l]->len_path; m++)
-				ft_printf("%d ", all->path[f][l]->chain[m]);
+//		for (int l = 0; ft_printf("\n") && l <= f; l++)
+//			for (int m = 0; m < all->path[f][l]->len_path; m++)
+//				ft_printf("%d ", all->path[f][l]->chain[m]);
 		change_all_len(all, all->room, all->path[f], f + 1);
 		k = f;
 		while (--k > -1)
-			crossing_path(all->path, f, k);
+			cross(all->path[f][f], all->path[f][k]);
 		moves(all, all->path[f], f);
 		smallest2(all);
 		f++;
 	}
 	i = 0;
 	min = 0;
-	ft_printf("move[%d] : %d\n", 0, all->nb_move[0]);
 	while (++i < f)
 	{
 		if (all->nb_move[min] > all->nb_move[i])
 			min = i;
-		ft_printf("move[%d] : %d\n", i, all->nb_move[i]);
 	}
-	ft_printf("move : %d, nb_path : %d\n", all->nb_move[min], min + 1);
 	all->nb_used = min;
+	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
 }
 
@@ -80,7 +77,6 @@ int		main(void)
 	clock_t v = clock();
 	ft_printf("find %f\n%>", (v-u) / (double) CLOCKS_PER_SEC, 2);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
-	ft_printf("%d\n", ant.nb_data);
 	for (int l = 0; l < ant.nb_data; l++)
 		ft_printf("%s\n", ant.data[l]);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
