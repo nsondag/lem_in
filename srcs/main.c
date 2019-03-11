@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/06 15:34:37 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/11 14:06:11 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		find(t_a *all)
 			min = i;
 	}
 	all->nb_used = min;
-	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
+	//ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
 }
 
@@ -62,6 +62,8 @@ int		main(void)
 		exit_func(ret, &ant);
 	clock_t g = clock();
 	ft_printf("parse %f\n%>", (g-f) / (double) CLOCKS_PER_SEC, 2);
+	for (int l = 0; l < ant.nb_data; l++)
+		ft_printf("%s\n", ant.data[l]);
 	if (ant.direct == 1)
 		exit_func(print_all(ant.nb_ant, ant.room[1].name), &ant);
 	search_for_deadend(ant.room, ant.nb_room);
@@ -77,8 +79,6 @@ int		main(void)
 	clock_t v = clock();
 	ft_printf("find %f\n%>", (v-u) / (double) CLOCKS_PER_SEC, 2);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
-	for (int l = 0; l < ant.nb_data; l++)
-		ft_printf("%s\n", ant.data[l]);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
 	exit_func(0, &ant);
 }
