@@ -56,7 +56,10 @@ int		link_room(t_a *ant, int i, int j)
 	k = -1;
 	while (++k < ant->room[i].nb_tubes)
 		if (j == ant->room[i].tubes[k].dest)
+		{
+		 	ant->buf[ft_strlen(ant->buf)] = '-';
 			return (0);
+		}
 	if (realloc_tab(&(ant->room[i])))
 		return (MERROR);
 	tmp = ant->room[i].nb_tubes - 1;
@@ -100,7 +103,10 @@ int		get_tube(t_a *ant)
 	if (i + j == 1)
 		ant->direct = 1;
 	if (i == j)
+	{
+		ant->buf[ft_strlen(ant->buf)] = '-';
 		return (0);
+	}
 	return (link_room(ant, i, j));
 }
 
