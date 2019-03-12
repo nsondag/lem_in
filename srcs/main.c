@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 18:47:37 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/12 19:39:30 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		find(t_a *all)
 	int k;
 
 	f = 0;
-	while (f < all->room[0].nb_tubes && (all->path[f] = start_searching(all, all->path, f)))
+	while (f < all->room[0].nb_tubes &&
+			(all->path[f] = start_searching(all, all->path, f)))
 	{
 		change_all_len(all, all->room, all->path[f], f + 1);
 		k = f;
@@ -33,10 +34,7 @@ int		find(t_a *all)
 	i = 0;
 	min = 0;
 	while (++i < f)
-	{
-		if (all->nb_move[min] > all->nb_move[i])
-			min = i;
-	}
+		(all->nb_move[min] > all->nb_move[i]) ? min = i : 0;
 	all->nb_used = min;
 	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
@@ -46,26 +44,24 @@ int		main(void)
 {
 	t_a		ant;
 	int		ret;
-	int		i;
 
 	ft_bzero(&ant, sizeof(ant));
 	read_room(&ant);
 	if (!(ant.room) || !(ant.room + 1) || !(ant.buf))
 		exit_func(INVALID, &ant);
-	if ((ret = parse(&ant)))
-		exit_func(ret, &ant);
+	(ret = parse(&ant)) ? exit_func(ret, &ant) : 0;
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);
 	ant.start_room = 0;
 	if (smallest(&ant) && ant.direct != 1)
 		exit_func(INVALID, &ant);
-	i = -1;
-	while (++i < ant.nb_data)
-		ft_printf("%s\n", ant.data[i]);
+	ret = -1;
+	while (++ret < ant.nb_data)
+		ft_printf("%s\n", ant.data[ret]);
 	if (ant.direct == 1)
 		exit_func(print_all(ant.nb_ant, ant.room[1].name), &ant);
 	modify_tubes_first(&ant);
-	ant.path = malloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
+	ant.path = ft_memalloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
 	ant.nb_move = ft_memalloc(sizeof(int) * ant.room[ant.start_room].nb_tubes);
 	find(&ant);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
