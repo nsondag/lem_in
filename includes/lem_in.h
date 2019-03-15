@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/15 21:10:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:22:48 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int				smallest(t_a *ant);
 int				smallest2(t_a *ant);
 int				dead_ends(t_a *ant);
 
+int				add_entry(t_var *for_this, t_a *all);
 int				supp_1comp_room(t_room *room, int index);
 int				supp_2comp_room(t_room *room, int index);
 int				supp_room_from_other(int index_to_supp, t_room *other);
