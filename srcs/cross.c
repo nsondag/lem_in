@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 16:35:19 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/07 16:35:23 by hvromman         ###   ########.fr       */
+/*   Updated: 2019/03/15 20:51:58 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int		delete(t_path *path1, int i, t_path *path2, int j)
 	offset = 0;
 	while (path1->chain[i + offset + 1] == path2->chain[j - offset + 1])
 		offset++;
-	if (offset == 0) // a supprimer
-		return (INVALID);
 	len1 = path1->len_path;
 	len2 = path2->len_path;
 	tmp1 = malloc(sizeof(int) * (i + len2 - j));

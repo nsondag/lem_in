@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:31:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 17:41:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:51:42 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_all(t_a *all)
 				free(all->room[count].name);
 				free(all->room[count].tubes);
 			}
-//		ft_free_tab((void***)all->data);
 		free(all->room);
 	}
 }
