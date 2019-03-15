@@ -1,2 +1,0 @@
-read S
-grep -c -i $S
