@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 19:39:30 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/15 20:31:25 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ int		main(void)
 	search_for_deadend(ant.room, ant.nb_room);
 	search_for_mult_path(&ant, 2);
 	ant.start_room = 0;
-	if (smallest(&ant) && ant.direct != 1)
-		exit_func(INVALID, &ant);
+	(smallest(&ant) && ant.direct != 1) ? exit_func(INVALID, &ant) : 0;
 	ret = -1;
 	while (++ret < ant.nb_data)
 		ft_printf("%s\n", ant.data[ret]);
 	if (ant.direct == 1)
 		exit_func(print_all(ant.nb_ant, ant.room[1].name), &ant);
 	modify_tubes_first(&ant);
-	ant.path = ft_memalloc(sizeof(t_path**) * ant.room[ant.start_room].nb_tubes);
+	ant.path = ft_memalloc(sizeof(t_path**) *
+			ant.room[ant.start_room].nb_tubes);
 	ant.nb_move = ft_memalloc(sizeof(int) * ant.room[ant.start_room].nb_tubes);
 	find(&ant);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
