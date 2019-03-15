@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/15 20:32:12 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:03:52 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,6 @@ int		get_tube(t_a *ant)
 	if (i == ant->nb_room || j == ant->nb_room)
 		return (INVALID);
 	(i + j == 1) ? ant->direct = 1 : 0;
-	if (i == j)
-	{
-		ant->buf[ft_strlen(ant->buf)] = '-';
-		return (0);
-	}
 	return (link_room(ant, i, j));
 }
 

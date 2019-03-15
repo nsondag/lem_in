@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/15 20:31:25 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/15 21:03:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		find(t_a *all)
 	while (++i < f)
 		(all->nb_move[min] > all->nb_move[i]) ? min = i : 0;
 	all->nb_used = min;
-	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
 }
 
