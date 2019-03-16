@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 15:58:39 by nsondag           #+#    #+#             */
-/*   Updated: 2019/03/06 14:53:17 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/16 02:57:07 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		*copy_path1(t_path **path, int count, int *index, int p1, int p2)
 	j = 0;
 	while (i < path[0]->len_path)
 		new_path[i++] = path[p2]->chain[index[1] + j++ + count];
-	free(path[p1]->chain);
 	return (new_path);
 }
 
@@ -84,6 +83,7 @@ int		*copy_path2(t_path **path, int *index, int p1, int p2)
 	j = 0;
 	while (i < path[p2]->len_path)
 		new_path[i++] = path[p1]->chain[index[0] + j++];
+	free(path[p1]->chain);
 	free(path[p2]->chain);
 	return (new_path);
 }
@@ -112,7 +112,10 @@ int		crossing_path(t_path ***path, int p2, int p1)
 			return (MERROR);
 		ft_memcpy(path[p2][p1]->chain, path1, 4 * path[p2][p1]->len_path);
 		ft_memcpy(path[p2][p2]->chain, path2, 4 * path[p2][p2]->len_path);
+		free(path1);
+		free(path2);
 	}
+	free(index);
 	if (count > 1)
 		return (crossing_path(path, p2, p1));
 	return (count == 1 ? INVALID : VALID);

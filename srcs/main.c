@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/15 20:31:25 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/16 02:40:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		find(t_a *all)
 		change_all_len(all, all->room, all->path[f], f + 1);
 		k = f;
 		while (--k > -1)
-			cross(all->path[f][f], all->path[f][k]);
+			crossing_path(all->path, f, k);
 		moves(all, all->path[f], f);
 		smallest2(all);
 		f++;
