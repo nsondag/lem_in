@@ -87,12 +87,12 @@ t_path	*duplicate(t_path *dup, t_room *room)
 		free(new_path);
 		return (NULL);
 	}
-	i = -1;
-	while (++i < dup->len_path)
-		room[dup->chain[i]].is_passed = -1;
 	ft_memcpy(new_path->chain, dup->chain, sizeof(int) * dup->len_path);
 	new_path->len_path = dup->len_path;
 	new_path->nb_ant_in_path = 0;
+	i = -1;
+	while (++i < dup->len_path)
+		room[new_path->chain[i]].is_passed = -1;
 	return (new_path);
 }
 

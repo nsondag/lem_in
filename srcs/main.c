@@ -25,8 +25,26 @@ int		find(t_a *all)
 	{
 		change_all_len(all, all->room, all->path[f], f + 1);
 		k = f;
-		while (--k > -1)
-			crossing_path(all->path, f, k);
+		while (--k > -1 && ft_printf("%d %d \n", f, k))
+			if (crossing_path(all->path, f, k))
+			{
+				ft_printf("%>fail\n", 2);
+			}
+		for (int l = 0; l <= f; l++)
+		{
+			for (int m = 0; m <= l; m++)
+			{
+				for (int n = 0; n < all->path[l][m]->len_path; n++)
+					ft_printf("%d ", all->path[l][m]->chain[n]);
+				ft_printf("\n");
+			}
+			ft_printf("\n");
+		}
+		ft_printf("\n");
+//		for (int l = 0; l <= f && ft_printf("\n"); l++)
+//			for (int m = 0; m <= l && ft_printf("\n"); m++)
+//				for (int n = 0; n < all->path[l][m]->len_path; n++)
+//					ft_printf("%d ", all->path[l][m]->chain[n]);
 		moves(all, all->path[f], f);
 		smallest2(all);
 		f++;

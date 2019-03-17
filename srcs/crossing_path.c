@@ -15,22 +15,27 @@
 int		*find_crossing(t_path **path, int p1, int p2)
 {
 	int *i;
+	int found = 0;
 
 	if (!(i = (int*)malloc(sizeof(int) * 2)))
 		return (NULL);
-	i[0] = 1;
-	while (path[p1]->chain[i[0]] != 1)
+	i[0] = path[p1]->len_path - 2;
+	while (i[0])
 	{
-		i[1] = path[p2]->len_path - 2;
-		while (i[1])
+		i[1] = 1;
+		while (path[p2]->chain[i[1]] != 1)
 		{
 			if (path[p1]->chain[i[0]] == path[p2]->chain[i[1]])
+			{
+				found = 1;
 				break ;
-			i[1]--;
+			}
+			i[1]++;
 		}
-		i[0]++;
+		if (found)
+			break;
+		i[0]--;
 	}
-	i[0]--;
 	return (i);
 }
 
@@ -64,7 +69,7 @@ int		*copy_path1(t_path **path, int count, int *index, int p1, int p2)
 	while (++i < index[0] - count + 2)
 		new_path[i] = path[p1]->chain[i];
 	j = 0;
-	while (i < path[0]->len_path)
+	while (i < path[p1]->len_path)
 		new_path[i++] = path[p2]->chain[index[1] + j++ + count];
 	return (new_path);
 }
