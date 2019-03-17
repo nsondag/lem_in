@@ -66,8 +66,8 @@ int		*copy_path1(t_path **path, int count, int *index, int *p)
 	int	p1;
 	int	p2;
 
-	p1 = p[0];
-	p2 = p[1];
+	p1 = p[1];
+	p2 = p[0];
 	if (!(new_path = malloc(sizeof(int) * path[p1]->len_path)))
 		return (NULL);
 	i = -1;
@@ -98,6 +98,14 @@ int		*copy_path2(t_path **path, int *index, int p1, int p2)
 	return (new_path);
 }
 
+/*
+ ** g[0] = r;
+ ** g[1] = k;
+ ** g[2] = f;
+ ** g[3] = i;
+ ** g[4] = min;
+ */
+
 int		crossing_path(t_path ***p, int *g)
 {
 	int *i;
@@ -107,10 +115,12 @@ int		crossing_path(t_path ***p, int *g)
 	int tmp;
 
 	i = find_crossing(p[g[0]], g[1], g[0]);
+	ft_printf("%d, %d\n", i[0], i[1]);
 	c = count_crossing_len(p[g[0]], i, g[1], g[0]);
+	ft_printf("count %d\n", c);
 	if (c > 1)
 	{
-		tmp = p[g[0]][g[1]]->len_path;
+		tmp = p[g[2]][g[1]]->len_path;
 		p[g[2]][g[1]]->len_path = i[0] - i[1] +
 			p[g[2]][g[0]]->len_path - (2 * c) + 2;
 		p[g[2]][g[0]]->len_path = i[1] - i[0] + tmp;
@@ -122,7 +132,7 @@ int		crossing_path(t_path ***p, int *g)
 		if (!(p[g[2]][g[0]]->chain =
 					malloc(sizeof(int) * p[g[2]][g[0]]->len_path)))
 			return (MERROR);
-		ft_memcpy(p[g[2]][g[1]]->chain, path1, 4 * p[g[2]][g[0]]->len_path);
+		ft_memcpy(p[g[2]][g[1]]->chain, path1, 4 * p[g[2]][g[1]]->len_path);
 		ft_memcpy(p[g[2]][g[0]]->chain, path2, 4 * p[g[2]][g[0]]->len_path);
 		free(path1);
 		free(path2);

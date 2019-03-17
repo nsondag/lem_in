@@ -87,7 +87,7 @@ int		block_central(t_a *ant, int g[8])
 	if (ant->room[g[3]].dist == -1 && ant->room[g[1]].dist + g[4] < g[5] &&
 		(ant->room[g[1]].is_passed == ant->room[g[3]].is_passed
 	|| ant->room[g[1]].is_passed == ant->room[g[1]].coming_from))
-	{
+	{\
 		ant->room[g[3]].dist = ant->room[g[1]].dist + g[4];
 		ant->room[g[3]].space = ant->room[g[1]].space + 1;
 		ant->room[g[1]].tubes[g[2]].tree = 1;
