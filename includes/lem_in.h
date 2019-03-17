@@ -106,6 +106,5 @@ int				calculate_move(t_a *all, t_path **path, int nb_path);
 int				crossing_path(t_path ***path, int g[3]);
 char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);
-//int				cross(t_path *path1, t_path *path2);
 
 #endif
