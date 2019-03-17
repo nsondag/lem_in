@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/17 16:47:23 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 20:48:37 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,18 @@ typedef struct	s_var
 	int		ret;
 }				t_var;
 
-int				read_comment(char *line);
 int				read_room(t_a *all);
 void			exit_func(int exit_code, t_a *all);
-void			free_all(t_a *all);
 int				parse(t_a *ant);
 int				smallest(t_a *ant);
 int				smallest2(t_a *ant);
-int				dead_ends(t_a *ant);
 
-int				supp_room_from_other(int index_to_supp, t_room *other);
-int				free_one_room(t_a *all, int index);
-int				search_for_mult_path(t_a *all, int start);
-int				search_for_deadend(t_room *adj, int tab_size);
-int				sending_ants(t_a *ants);
-int				racc_path2(t_a *ant, int **path);
 int				modify_tubes_first(t_a *ant);
-int				path(t_room *room, t_path *current, int i);
 t_path			**start_searching(t_a *ant, t_path ***previous, int i);
 int				change_all_len(t_a *ant, t_room *room, t_path **path, int nb);
 int				print_sol(t_a *all, t_path **path, int nb_path);
 int				print_all(int nb_ant, char *dest);
 int				calculate_start(t_a *all, t_path **path, int nb_path);
-int				calculate_move(t_a *all, t_path **path, int nb_path);
 int				crossing_path(t_path ***path, int g[3]);
 char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);

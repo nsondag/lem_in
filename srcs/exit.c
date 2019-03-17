@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 16:31:16 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 17:41:49 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 21:23:27 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ void	free_all(t_a *all)
 		free(all->room);
 		count = -1;
 		if (all->path)
-		while (++count < all->nb_path && (c2 = -1))
 		{
-			while (++c2 <= count)
+			while (++count < all->nb_path && (c2 = -1))
 			{
-				free(all->path[count][c2]->chain);
-				free(all->path[count][c2]);
+				while (++c2 <= count)
+				{
+					free(all->path[count][c2]->chain);
+					free(all->path[count][c2]);
+				}
+				free(all->path[count]);
 			}
-			free(all->path[count]);
 		}
 		free(all->path);
 		free(all->nb_move);

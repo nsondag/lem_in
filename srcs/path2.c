@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 01:50:37 by hvromman          #+#    #+#             */
-/*   Updated: 2019/02/12 01:50:38 by hvromman         ###   ########.fr       */
+/*   Updated: 2019/03/17 21:16:35 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		path(t_room *room, t_path *curr, int i)
 	return (0);
 }
 
-t_path	*duplicate(t_path *dup)//, t_room *room)
+t_path	*duplicate(t_path *dup)
 {
 	t_path	*new_path;
 
@@ -106,7 +106,7 @@ t_path	**start_searching(t_a *ant, t_path ***previous, int i)
 	{
 		j = -1;
 		while (++j < i)
-			tab[j] = duplicate(previous[i - 1][j]);//, ant->room);
+			tab[j] = duplicate(previous[i - 1][j]);
 	}
 	if (!(tab[i] = ft_memalloc(sizeof(t_path))))
 	{
@@ -141,6 +141,7 @@ int		change_all_len(t_a *ant, t_room *room, t_path **path, int nb_path)
 {
 	int		i;
 
+	ant->nb_path = nb_path;
 	restore_initial_len(ant);
 	while (--nb_path > -1)
 	{

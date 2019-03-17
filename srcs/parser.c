@@ -6,13 +6,13 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:19:13 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/15 20:32:12 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 20:24:55 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-char	**rea(t_a *ant, char **s1, char *s2)
+char		**rea(t_a *ant, char **s1, char *s2)
 {
 	char		**to_return;
 	static int	start = 0;
@@ -32,7 +32,7 @@ char	**rea(t_a *ant, char **s1, char *s2)
 	return (to_return);
 }
 
-int		realloc_tab(t_room *room)
+static int	realloc_tab(t_room *room)
 {
 	t_tube	*tmp;
 
@@ -48,7 +48,7 @@ int		realloc_tab(t_room *room)
 	return (0);
 }
 
-int		link_room(t_a *ant, int i, int j)
+static int	link_room(t_a *ant, int i, int j)
 {
 	int		k;
 	int		tmp;
@@ -76,7 +76,7 @@ int		link_room(t_a *ant, int i, int j)
 	return (0);
 }
 
-int		get_tube(t_a *ant)
+static int	get_tube(t_a *ant)
 {
 	char	*room1;
 	char	*room2;
@@ -101,15 +101,10 @@ int		get_tube(t_a *ant)
 	if (i == ant->nb_room || j == ant->nb_room)
 		return (INVALID);
 	(i + j == 1) ? ant->direct = 1 : 0;
-	if (i == j)
-	{
-		ant->buf[ft_strlen(ant->buf)] = '-';
-		return (0);
-	}
 	return (link_room(ant, i, j));
 }
 
-int		parse(t_a *ant)
+int			parse(t_a *ant)
 {
 	int		ret;
 

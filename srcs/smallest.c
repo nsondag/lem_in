@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/01/08 12:46:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 20:31:31 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** room_discovered = g[4]
 */
 
-int		smallest(t_a *ant)
+int			smallest(t_a *ant)
 {
 	int		g[5];
 
@@ -48,7 +48,7 @@ int		smallest(t_a *ant)
 	return (ant->room[!(ant->start_room)].dist == -1 ? INVALID : VALID);
 }
 
-int		instanciate_smallest(t_a *ant)
+static int	instanciate_smallest(t_a *ant)
 {
 	int		i;
 	int		j;
@@ -78,7 +78,7 @@ int		instanciate_smallest(t_a *ant)
 ** discoverable = g[7]
 */
 
-int		block_central(t_a *ant, int g[8])
+static int	block_central(t_a *ant, int g[8])
 {
 	g[4] = ant->room[g[1]].tubes[g[2]].len;
 	g[3] = ant->room[g[1]].tubes[g[2]].dest;
@@ -97,7 +97,7 @@ int		block_central(t_a *ant, int g[8])
 	return (0);
 }
 
-int		smallest2(t_a *ant)
+int			smallest2(t_a *ant)
 {
 	int		g[8];
 

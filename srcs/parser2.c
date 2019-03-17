@@ -6,13 +6,13 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:21:23 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 19:50:38 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 20:28:32 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-inline int		read_comment(char *line)
+inline int	read_comment(char *line)
 {
 	int		len;
 
@@ -34,7 +34,7 @@ inline int		read_comment(char *line)
 		return (VALID);
 }
 
-int		is_digit_str(char *str)
+static int	is_digit_str(char *str)
 {
 	int		ok;
 
@@ -49,13 +49,13 @@ int		is_digit_str(char *str)
 	return (ok && !(*str));
 }
 
-int		end_add_entry(char ***split, int to_return)
+static int	end_add_entry(char ***split, int to_return)
 {
 	ft_free_tab((void***)split);
 	return (to_return);
 }
 
-int		realloc_adj(int index, t_a *all)
+static int	realloc_adj(int index, t_a *all)
 {
 	t_room	*tmp;
 
@@ -67,7 +67,7 @@ int		realloc_adj(int index, t_a *all)
 	return (VALID);
 }
 
-int		add_entry(t_var *for_this, t_a *all)
+static int	add_entry(t_var *for_this, t_a *all)
 {
 	char	**split;
 
@@ -95,7 +95,7 @@ int		add_entry(t_var *for_this, t_a *all)
 	return (end_add_entry(&split, VALID));
 }
 
-int		read_nb_ant(t_a *all, t_var *for_this)
+static int	read_nb_ant(t_a *all, t_var *for_this)
 {
 	bzero(for_this, sizeof(t_var));
 	all->nb_room = 2;
@@ -113,7 +113,7 @@ int		read_nb_ant(t_a *all, t_var *for_this)
 	return (VALID);
 }
 
-int		read_room(t_a *all)
+int			read_room(t_a *all)
 {
 	t_var	for_this;
 
