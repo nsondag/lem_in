@@ -121,6 +121,5 @@ int		parse(t_a *ant)
 		if ((ret = get_tube(ant)) < 0)
 			return (ret);
 	}
-	ant->data = rea(ant, ant->data, NULL);
 	return (ret == -1 ? MERROR : VALID);
 }

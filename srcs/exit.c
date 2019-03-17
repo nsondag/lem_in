@@ -15,6 +15,7 @@
 void	free_all(t_a *all)
 {
 	int		count;
+	int		c2;
 
 	if (all)
 	{
@@ -25,8 +26,23 @@ void	free_all(t_a *all)
 				free(all->room[count].name);
 				free(all->room[count].tubes);
 			}
-//		ft_free_tab((void***)all->data);
+		all->data = rea(all, all->data, NULL);
+		if (all->data)
+			ft_free_tab((void***)&all->data);
 		free(all->room);
+		count = -1;
+		if (all->path)
+		while (++count < all->nb_path && (c2 = -1))
+		{
+			while (++c2 <= count)
+			{
+				free(all->path[count][c2]->chain);
+				free(all->path[count][c2]);
+			}
+			free(all->path[count]);
+		}
+		free(all->path);
+		free(all->nb_move);
 	}
 }
 

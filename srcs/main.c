@@ -28,41 +28,14 @@ int		find(t_a *all)
 	while (g[2] < all->room[0].nb_tubes &&
 			(all->path[g[2]] = start_searching(all, all->path, g[2])))
 	{
-		for (int l = 0; l <= g[2]; l++)
-		{
-			for (int m = 0; m <= l; m++)
-			{
-				for (int n = 0; n < all->path[l][m]->len_path; n++)
-					ft_printf("%d %d  ", n, all->path[l][m]->chain[n]);
-				ft_printf("\n");
-			}
-			ft_printf("\n");
-		}
-		ft_printf("\n");
-
 		g[0] = g[2] + 1;
 		while (--g[0] > -1)
 		{
 			g[1] = g[0];
-			while (--g[1] > -1 && ft_printf("%d %d \n", g[0], g[1]))
+			while (--g[1] > -1)
 				if (crossing_path(all->path, g))
-				{
 					ft_printf("%>fail\n", 2);
-					ft_printf("fail\n", 2);
-				}
-			for (int l = 0; l <= g[2]; l++)
-			{
-				for (int m = 0; m <= l; m++)
-				{
-					for (int n = 0; n < all->path[l][m]->len_path; n++)
-						ft_printf("%d %d  ", n, all->path[l][m]->chain[n]);
-					ft_printf("\n");
-				}
-				ft_printf("\n");
-			}
 		}
-
-		ft_printf("\n");
 		change_all_len(all, all->room, all->path[g[2]], g[2] + 1);
 		moves(all, all->path[g[2]], g[2]);
 		smallest2(all);
@@ -73,7 +46,6 @@ int		find(t_a *all)
 	while (++g[3] < g[2])
 		(all->nb_move[g[4]] > all->nb_move[g[3]]) ? g[4] = g[3] : 0;
 	all->nb_used = g[4];
-	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
 }
 
