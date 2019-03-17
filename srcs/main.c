@@ -12,48 +12,67 @@
 
 #include "lem_in.h"
 
+/*
+** g[0] = r;
+** g[1] = k;
+** g[2] = f;
+** g[3] = i;
+** g[4] = min;
+*/
+
 int		find(t_a *all)
 {
-	int f;
-	int i;
-	int min;
-	int k;
+	int g[5];
 
-	f = 0;
-	while (f < all->room[0].nb_tubes &&
-			(all->path[f] = start_searching(all, all->path, f)))
+	g[2] = 0;
+	while (g[2] < all->room[0].nb_tubes &&
+			(all->path[g[2]] = start_searching(all, all->path, g[2])))
 	{
-		change_all_len(all, all->room, all->path[f], f + 1);
-		k = f;
-		while (--k > -1 && ft_printf("%d %d \n", f, k))
-			if (crossing_path(all->path, f, k))
-			{
-				ft_printf("%>fail\n", 2);
-			}
-		for (int l = 0; l <= f; l++)
+		for (int l = 0; l <= g[2]; l++)
 		{
 			for (int m = 0; m <= l; m++)
 			{
 				for (int n = 0; n < all->path[l][m]->len_path; n++)
-					ft_printf("%d ", all->path[l][m]->chain[n]);
+					ft_printf("%d %d  ", n, all->path[l][m]->chain[n]);
 				ft_printf("\n");
 			}
 			ft_printf("\n");
 		}
 		ft_printf("\n");
-//		for (int l = 0; l <= f && ft_printf("\n"); l++)
-//			for (int m = 0; m <= l && ft_printf("\n"); m++)
-//				for (int n = 0; n < all->path[l][m]->len_path; n++)
-//					ft_printf("%d ", all->path[l][m]->chain[n]);
-		moves(all, all->path[f], f);
+
+		g[0] = g[2] + 1;
+		while (--g[0] > -1)
+		{
+			g[1] = g[0];
+			while (--g[1] > -1 && ft_printf("%d %d \n", g[0], g[1]))
+				if (crossing_path(all->path, g))
+				{
+					ft_printf("%>fail\n", 2);
+					ft_printf("fail\n", 2);
+				}
+			for (int l = 0; l <= g[2]; l++)
+			{
+				for (int m = 0; m <= l; m++)
+				{
+					for (int n = 0; n < all->path[l][m]->len_path; n++)
+						ft_printf("%d %d  ", n, all->path[l][m]->chain[n]);
+					ft_printf("\n");
+				}
+				ft_printf("\n");
+			}
+		}
+
+		ft_printf("\n");
+		change_all_len(all, all->room, all->path[g[2]], g[2] + 1);
+		moves(all, all->path[g[2]], g[2]);
 		smallest2(all);
-		f++;
+		g[2]++;
 	}
-	i = 0;
-	min = 0;
-	while (++i < f)
-		(all->nb_move[min] > all->nb_move[i]) ? min = i : 0;
-	all->nb_used = min;
+	g[3] = 0;
+	g[4] = 0;
+	while (++g[3] < g[2])
+		(all->nb_move[g[4]] > all->nb_move[g[3]]) ? g[4] = g[3] : 0;
+	all->nb_used = g[4];
 	ft_printf("__ move:%d\n", all->nb_move[all->nb_used]);
 	return (0);
 }

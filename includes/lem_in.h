@@ -103,7 +103,7 @@ int				print_sol(t_a *all, t_path **path, int nb_path);
 int				print_all(int nb_ant, char *dest);
 int				calculate_start(t_a *all, t_path **path, int nb_path);
 int				calculate_move(t_a *all, t_path **path, int nb_path);
-int				crossing_path(t_path ***path, int p2, int p1);
+int				crossing_path(t_path ***path, int g[3]);
 char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);
 //int				cross(t_path *path1, t_path *path2);
