@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/16 02:40:37 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 16:50:58 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int		main(void)
 	if (!(ant.room) || !(ant.room + 1) || !(ant.buf))
 		exit_func(INVALID, &ant);
 	(ret = parse(&ant)) ? exit_func(ret, &ant) : 0;
-	search_for_deadend(ant.room, ant.nb_room);
-	search_for_mult_path(&ant, 2);
+	//search_for_deadend(ant.room, ant.nb_room);
+	//search_for_mult_path(&ant, 2);
 	ant.start_room = 0;
 	(smallest(&ant) && ant.direct != 1) ? exit_func(INVALID, &ant) : 0;
 	ret = -1;
