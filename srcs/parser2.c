@@ -12,43 +12,6 @@
 
 #include "lem_in.h"
 
-inline int	read_comment(char *line)
-{
-	int		len;
-
-	len = ft_strlen(line);
-	if (!len)
-		return (INVALID);
-	else if (*line == '#')
-	{
-		if (len == 5 && !ft_strcmp(line, "##end"))
-			return (END);
-		else if (len == 7 && !ft_strcmp(line, "##start"))
-			return (START);
-		else
-			return (COMMENT);
-	}
-	else if (*line == 'L')
-		return (INVALID);
-	else
-		return (VALID);
-}
-
-static int	is_digit_str(char *str)
-{
-	int		ok;
-
-	ok = 0;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		ok = 1;
-		str++;
-	}
-	return (ok && !(*str));
-}
-
 static int	end_add_entry(char ***split, int to_return)
 {
 	ft_free_tab((void***)split);

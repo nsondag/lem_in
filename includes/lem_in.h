@@ -95,5 +95,7 @@ int				calculate_start(t_a *all, t_path **path, int nb_path);
 int				crossing_path(t_path ***path, int g[3]);
 char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);
+int				is_digit_str(char *str);
+int				read_comment(char *line);
 
 #endif
