@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 15:22:31 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/17 21:16:36 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/04/02 16:34:03 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int			main(void)
 	if (!(ant.room) || !(ant.room + 1) || !(ant.buf))
 		exit_func(INVALID, &ant);
 	(ret = parse(&ant)) ? exit_func(ret, &ant) : 0;
-	ant.start_room = 0;
 	(smallest(&ant) && ant.direct != 1) ? exit_func(INVALID, &ant) : 0;
 	ret = -1;
 	while (++ret < ant.nb_data)
@@ -67,9 +66,8 @@ int			main(void)
 	if (ant.direct == 1)
 		exit_func(print_all(ant.nb_ant, ant.room[1].name), &ant);
 	modify_tubes_first(&ant);
-	ant.path = ft_memalloc(sizeof(t_path**) *
-			ant.room[ant.start_room].nb_tubes);
-	ant.nb_move = ft_memalloc(sizeof(int) * ant.room[ant.start_room].nb_tubes);
+	ant.path = ft_memalloc(sizeof(t_path**) * ant.room[0].nb_tubes);
+	ant.nb_move = ft_memalloc(sizeof(int) * ant.room[0].nb_tubes);
 	find(&ant);
 	calculate_start(&ant, ant.path[ant.nb_used], ant.nb_used + 1);
 	print_sol(&ant, ant.path[ant.nb_used], ant.nb_used);
