@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/04/02 16:31:56 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/04/05 19:09:31 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			smallest2(t_a *ant)
 
 	instanciate_smallest(ant);
 	g[5] = -1;
-	while (g[5] < 1000 && ant->room[!(ant->start_room)].dist == -1)
+	while (g[5] < 1000 && ant->room[1].dist == -1)
 	{
 		g[6] = 0;
 		g[5]++;
