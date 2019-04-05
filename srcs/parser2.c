@@ -60,7 +60,7 @@ static int	add_entry(t_var *for_this, t_a *all)
 
 static int	read_nb_ant(t_a *all, t_var *for_this)
 {
-	bzero(for_this, sizeof(t_var));
+	ft_bzero(for_this, sizeof(t_var));
 	all->nb_room = 2;
 	while (get_next_line(0, &(all->buf)) > 0)
 	{

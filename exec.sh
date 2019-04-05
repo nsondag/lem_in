@@ -1,9 +1,14 @@
 #!/bin/bash
+if [ -z "$1" ]; then
+nb=20
+else
+nb=$1
+fi
 c=0
 r=0
 h=0
-for ((i=1; i <= $1; i++)); do
-./generator --big > b$i
+for ((i=1; i <= $nb; i++)); do
+./generator --big-superposition > b$i
 cat b$i | ./lem-in > f$i
 if ((`echo $?` != 0)); then
 exit
@@ -26,6 +31,6 @@ fi
 echo $i
 sleep 1
 done
-echo "nbr of high : $h/$1"
-echo "nbr of too high : $c/$1"
-echo "nbr of way too high : $r/$1"
+echo "nbr of high : $h/$nb"
+echo "nbr of too high : $c/$nb"
+echo "nbr of way too high : $r/$nb"

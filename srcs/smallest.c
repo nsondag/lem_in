@@ -71,23 +71,20 @@ static int	instanciate_smallest(t_a *ant)
 /*
 ** i = g[1]
 ** j = g[2]
-** k = g[3]
+** dest = g[3]
 ** len = g[4]
 ** dist = g[5]
 ** discovered = g[6]
-** discoverable = g[7]
 */
 
 static int	block_central(t_a *ant, int g[8])
 {
 	g[4] = ant->room[g[1]].tubes[g[2]].len;
 	g[3] = ant->room[g[1]].tubes[g[2]].dest;
-	if (g[4] != 2000000)
-		g[7] = 1;
 	if (ant->room[g[3]].dist == -1 && ant->room[g[1]].dist + g[4] < g[5] &&
 		(ant->room[g[1]].is_passed == ant->room[g[3]].is_passed
 	|| ant->room[g[1]].is_passed == ant->room[g[1]].coming_from))
-	{\
+	{
 		ant->room[g[3]].dist = ant->room[g[1]].dist + g[4];
 		ant->room[g[3]].space = ant->room[g[1]].space + 1;
 		ant->room[g[1]].tubes[g[2]].tree = 1;
@@ -99,15 +96,13 @@ static int	block_central(t_a *ant, int g[8])
 
 int			smallest2(t_a *ant)
 {
-	int		g[8];
+	int		g[7];
 
 	instanciate_smallest(ant);
 	g[5] = -1;
-	g[7] = 1;
-	while (g[7] && g[5] < 1000 && ant->room[!(ant->start_room)].dist == -1)
+	while (g[5] < 1000 && ant->room[!(ant->start_room)].dist == -1)
 	{
 		g[6] = 0;
-		g[7] = 0;
 		g[5]++;
 		g[1] = -1;
 		while (++g[1] < ant->nb_room)

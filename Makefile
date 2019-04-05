@@ -19,8 +19,8 @@ HEAD = includes/
 LIB = libft/
 FILE = lem_in.h
 H = $(addprefix $(HEAD), $(FILE))
-FILES = main.o parser.o parser2.o exit.o smallest.o\
-		path2.o print.o print2.o crossing_path.o 
+FILES = main.o parser.o parser2.o parser3.o exit.o smallest.o\
+		path.o path2.o print.o print2.o crossing_path.o 
 OBJ = $(addprefix $(SRCS), $(FILES))
 SANITIZE = -fsanitize=address
 
