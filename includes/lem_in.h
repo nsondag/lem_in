@@ -6,7 +6,11 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:15:16 by hvromman          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/03/15 21:50:42 by nsondag          ###   ########.fr       */
+=======
+/*   Updated: 2019/04/02 16:30:15 by nsondag          ###   ########.fr       */
+>>>>>>> Hubert
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +66,7 @@ typedef struct	s_a
 	int		nb_room;
 	int		direct;
 	t_room	*room;
-	int		start_room;
+	//int		start_room;
 	char	*buf;
 	int		escape;
 	int		nb_path;
@@ -80,15 +84,13 @@ typedef struct	s_var
 	int		ret;
 }				t_var;
 
-int				read_comment(char *line);
 int				read_room(t_a *all);
 void			exit_func(int exit_code, t_a *all);
-void			free_all(t_a *all);
 int				parse(t_a *ant);
 int				smallest(t_a *ant);
 int				smallest2(t_a *ant);
-int				dead_ends(t_a *ant);
 
+<<<<<<< HEAD
 int				read_nb_ant(t_a *all, t_var *for_this);
 int				add_entry(t_var *for_this, t_a *all);
 int				supp_1comp_room(t_room *room, int index);
@@ -99,16 +101,22 @@ int				search_for_mult_path(t_a *all, int start);
 int				search_for_deadend(t_room *adj, int tab_size);
 int				sending_ants(t_a *ants);
 int				racc_path2(t_a *ant, int **path);
+=======
+>>>>>>> Hubert
 int				modify_tubes_first(t_a *ant);
-int				path(t_room *room, t_path *current, int i);
 t_path			**start_searching(t_a *ant, t_path ***previous, int i);
 int				change_all_len(t_a *ant, t_room *room, t_path **path, int nb);
 int				print_sol(t_a *all, t_path **path, int nb_path);
 int				print_all(int nb_ant, char *dest);
 int				calculate_start(t_a *all, t_path **path, int nb_path);
+<<<<<<< HEAD
 int				calculate_move(t_a *all, t_path **path, int nb_path);
+=======
+int				crossing_path(t_path ***path, int g[3]);
+>>>>>>> Hubert
 char			**rea(t_a *ant, char **s1, char *s2);
 int				moves(t_a *all, t_path **path, int nb_path);
-int				cross(t_path *path1, t_path *path2);
+int				is_digit_str(char *str);
+int				read_comment(char *line);
 
 #endif

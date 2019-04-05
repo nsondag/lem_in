@@ -6,7 +6,7 @@
 /*   By: hvromman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 10:16:54 by hvromman          #+#    #+#             */
-/*   Updated: 2019/03/12 19:53:05 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/03/17 21:08:41 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** sum_diff = g[4]
 */
 
-int		calculate_move(t_a *all, t_path **path, int nb_path)
+static int	calculate_move(t_a *all, t_path **path, int nb_path)
 {
 	int		g[5];
 
@@ -48,7 +48,7 @@ int		calculate_move(t_a *all, t_path **path, int nb_path)
 	return (0);
 }
 
-int		moves(t_a *all, t_path **path, int nb_path)
+int			moves(t_a *all, t_path **path, int nb_path)
 {
 	int		i;
 
@@ -66,24 +66,24 @@ int		moves(t_a *all, t_path **path, int nb_path)
 	return (0);
 }
 
-int		calculate_start(t_a *all, t_path **path, int nb_path)
+int			calculate_start(t_a *all, t_path **path, int nb_path)
 {
 	int		i;
 
 	all = NULL;
-	path[0]->start = 0;
+	path[0]->start = 1;
 	i = 0;
 	while (++i < nb_path)
 		path[i]->start = path[i - 1]->start + path[i - 1]->nb_ant_in_path;
 	return (0);
 }
 
-int		cut_negative(int nb)
+static int	cut_negative(int nb)
 {
 	return (nb > 0 ? nb : 0);
 }
 
-int		print_sol(t_a *all, t_path **path, int nb_path)
+int			print_sol(t_a *all, t_path **path, int nb_path)
 {
 	int		i;
 	int		j;
@@ -102,7 +102,7 @@ int		print_sol(t_a *all, t_path **path, int nb_path)
 			while (++first_ant < last_ant)
 			{
 				ft_printf(first ? "L%d-%s" : " L%d-%s", path[j]->start +
-						first_ant + 1,
+						first_ant,
 						all->room[path[j]->chain[i - first_ant]].name);
 				first = 0;
 			}
