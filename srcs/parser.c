@@ -21,7 +21,7 @@ char		**rea(t_a *ant, char **s1, char *s2)
 		return (NULL);
 	if (start)
 	{
-		memcpy(to_return, s1, sizeof(char*) * ant->nb_data);
+		ft_memcpy(to_return, s1, sizeof(char*) * ant->nb_data);
 		free(s1);
 	}
 	else
@@ -42,7 +42,7 @@ static int	realloc_tab(t_room *room)
 		free(tmp);
 		return (MERROR);
 	}
-	memcpy(room->tubes, tmp, sizeof(t_tube) * room->nb_tubes);
+	ft_memcpy(room->tubes, tmp, sizeof(t_tube) * room->nb_tubes);
 	free(tmp);
 	room->nb_tubes++;
 	return (0);
