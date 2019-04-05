@@ -6,7 +6,7 @@
 /*   By: nsondag <nsondag@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/05 15:35:57 by nsondag           #+#    #+#             */
-/*   Updated: 2019/03/17 20:31:31 by nsondag          ###   ########.fr       */
+/*   Updated: 2019/04/02 16:31:56 by nsondag          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			smallest(t_a *ant)
 	g[0] = -1;
 	while (++g[0] < ant->nb_room)
 		ant->room[g[0]].dist = -1;
-	ant->room[ant->start_room].dist = 0;
+	ant->room[0].dist = 0;
 	g[3] = -1;
 	g[4] = 1;
 	while (g[4] && (g[0] = -1)
@@ -44,8 +44,8 @@ int			smallest(t_a *ant)
 						g[4] = 1;
 					}
 				}
-	ant->escape = ant->room[!(ant->start_room)].dist + 1;
-	return (ant->room[!(ant->start_room)].dist == -1 ? INVALID : VALID);
+	ant->escape = ant->room[1].dist + 1;
+	return (ant->room[1].dist == -1 ? INVALID : VALID);
 }
 
 static int	instanciate_smallest(t_a *ant)
@@ -63,8 +63,8 @@ static int	instanciate_smallest(t_a *ant)
 		ant->room[i].coming_from = -1;
 		i++;
 	}
-	ant->room[ant->start_room].dist = 0;
-	ant->room[ant->start_room].space = 0;
+	ant->room[0].dist = 0;
+	ant->room[0].space = 0;
 	return (0);
 }
 
@@ -112,6 +112,6 @@ int			smallest2(t_a *ant)
 		if (g[6])
 			g[5]--;
 	}
-	ant->escape = ant->room[!(ant->start_room)].space + 1;
+	ant->escape = ant->room[1].space + 1;
 	return (VALID);
 }
